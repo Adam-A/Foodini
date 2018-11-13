@@ -1,29 +1,29 @@
 # Can I Graduate Already, LLC
 __Contents__
-1. Group Information
-2. Design
-3. Libraries & APIs
-3.1 Third Party Libraries
-3.2 Native Libraries
-4. Server Support
-5. Models
-5.1 List Model
-5.2 Pantry Model
-6. View Controllers
-6.1 ShoppingListViewController
-6.2 IndividualListViewController
-6.3 AddItemViewController
-6.4 PantryViewController
-6.5 RecipesViewController
-6.6 SettingsViewController
-7. Week Long Tasks
-7.1 Week 1
-7.2 Week 2
-7.3 Week 3
-7.4 Week 4
-8. Trello Board
-9. Github Classroom
-10. Testing Plan 
+1. Group Information  
+2. Design  
+3. Libraries & APIs  
+    3.1 Third Party Libraries  
+    3.2 Native Libraries  
+4. Server Support  
+5. Models  
+    5.1 List Model  
+    5.2 Pantry Model  
+6. View Controllers  
+    6.1 ShoppingListViewController  
+    6.2 IndividualListViewController  
+    6.3 AddItemViewController  
+    6.4 PantryViewController  
+    6.5 RecipesViewController  
+    6.6 SettingsViewController  
+7. Week Long Tasks  
+    7.1 Week 1  
+    7.2 Week 2  
+    7.3 Week 3  
+    7.4 Week 4  
+8. Trello Board  
+9. Github Classroom  
+10. Testing Plan   
 
 
 ## 1. Group Information
