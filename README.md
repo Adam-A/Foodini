@@ -45,6 +45,7 @@ The following are the planned designs of the various screens/views:
 - Settings view
 
 ![](https://i.imgur.com/ChM6wKS.png)
+![](https://i.imgur.com/AnzO9eM.png)
 
 ## 3. Libraries & APIs
 ### 3.1 Third Party Libraries
