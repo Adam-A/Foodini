@@ -44,6 +44,8 @@ The following are the planned designs of the various screens/views:
 - Random recipe view
 - Settings view
 
+![](https://i.imgur.com/ChM6wKS.png)
+
 ## 3. Libraries & APIs
 ### 3.1 Third Party Libraries
 Most of the third party libraries and APIs we'll be relying on revolve around
