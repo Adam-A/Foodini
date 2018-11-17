@@ -6,6 +6,5 @@ target 'App' do
   use_frameworks!
 
   # Pods for App
-  pod 'ChameleonFramework/Swift'
 
 end
