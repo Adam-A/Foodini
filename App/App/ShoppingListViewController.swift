@@ -7,15 +7,8 @@
 //
 // TODO:
 // [] Serilization
-// [x] Add list button:
-//      [x] Name prompt
-//      [x] Add to list, update table view
-// [] Edit lists:
-//      [] delete
-// [] Navigation buttons to other views
 // [] Update to use model
-// [] Click on list opens new view
-// [] Add error checking
+// [] Clean up temp struct stuff
 
 import UIKit
 
@@ -44,22 +37,33 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource {
 
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            // Delete cell at position
+            shoppingLists.remove(at: indexPath.row)
+            listCount = shoppingLists.count
+            tableView.reloadData()
+        }
+    }
+    
     // If a user selects a cell open the list view for that cell
-    /* func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Deselect row
         tableView.deselectRow(at: indexPath, animated: true)
+        /*
         // Create the wallet VC
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "accountViewController") as! AccountViewController
-        viewController.accountName = "\(myWallet.accounts[indexPath.row].name)"
-        viewController.rowIndex = indexPath.row
-        viewController.delegate = self
+        let viewController = storyboard.instantiateViewController(withIdentifier: "individualListViewController") as! IndividualListViewController
+        //viewController.delegate = self
         // Push current VC onto backstack
         self.navigationController?.pushViewController(viewController, animated: true)
-    } */
+        */
+        
+    }
     
     // Begin outlet definitions
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var listButton: UIButton!
     
     // REMOVE
     var listCount: Int = 0
@@ -74,21 +78,15 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view
+        // Disable button for current view
+        listButton.isEnabled = false
         tableView.dataSource = self
-        CreateEditButton()
+        
+        navigationItem.leftBarButtonItem = editButtonItem
         CreateNewListButton()
         
         //REMOVE
         listCount = shoppingLists.count
-    }
-    
-    func CreateEditButton(){
-        // Hide back button
-        self.navigationItem.hidesBackButton = true;
-        // Create edit button using EditLists as a selector
-        let editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(EditLists(sender:)))
-        
-        self.navigationItem.leftBarButtonItem = editButton
     }
     
     func CreateNewListButton(){
@@ -97,17 +95,15 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource {
         self.navigationItem.rightBarButtonItem = addNewListButton
     }
     
-    @objc func EditLists(sender: UIBarButtonItem){
-        
-    }
-    
     @objc func AddNewList(sender: UIBarButtonItem){
         // Uses alert with text field to create a named list
-        // Start alert
         let popup = UIAlertController(title: "New list", message: "Add a name", preferredStyle: .alert)
+        
+        // Add text field to alert and autofill with "List"
         popup.addTextField { (textField) in
             textField.text = "List"
         }
+        // Add "create" button to alert
         popup.addAction(UIAlertAction(title: "Create", style: .default, handler: { (action) in
             if let text = popup.textFields?[0].text{
                 // Create new list
@@ -117,12 +113,66 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource {
                 self.tableView.reloadData()
             } else {
                 // Error occured
-                print("==============ERROR==============")
+                print("An error has occurred when trying to add a new list")
             }
             
         }))
         
+        popup.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in }))
+        
         self.present(popup, animated: true, completion: nil)
     }
+    
+    // Need to override setEditing in order to actually edit cells in tableView
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        // If the edit button title is "Done"
+        if navigationItem.leftBarButtonItem?.title == "Done"{
+            // tableView is not being edited
+            tableView.isEditing = false
+            // Switch done button to "Edit"
+            navigationItem.leftBarButtonItem?.title = "Edit"
+        } else { // If the edit button title is "Edit"
+            // tableView is being edited
+            tableView.isEditing = true
+            // Switch edit button to "Done"
+            navigationItem.leftBarButtonItem?.title = "Done"
+        }
+    }
 
+    @IBAction func onPantryPress(_ sender: Any) {
+        // Save data before transferring
+        /*
+        // Create the pantry VC
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "pantryViewController") as! PantryViewController
+        //viewController.delegate = self
+        // Push current VC onto backstack
+        self.navigationController?.pushViewController(viewController, animated: true)
+         */
+    }
+    
+    @IBAction func onRecipePress(_ sender: Any) {
+        // Save data before transferring
+        /*
+         // Create the pantry VC
+         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+         let viewController = storyboard.instantiateViewController(withIdentifier: "recipeViewController") as! RecipeViewController
+         //viewController.delegate = self
+         // Push current VC onto backstack
+         self.navigationController?.pushViewController(viewController, animated: true)
+         */
+    }
+    
+    @IBAction func onSettingsPress(_ sender: Any) {
+        // Save data before transferring
+        /*
+         // Create the pantry VC
+         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+         let viewController = storyboard.instantiateViewController(withIdentifier: "settingsViewController") as! SettingsViewController
+         //viewController.delegate = self
+         // Push current VC onto backstack
+         self.navigationController?.pushViewController(viewController, animated: true)
+         */
+    }
+    
 }
