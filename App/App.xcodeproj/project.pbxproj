@@ -50,6 +50,40 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B27AC0A521A0FFC400B7AB94 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B2AE2DC721A0DA0300ECC3E2 /* PantryViewController.swift */,
+				E4124CCF21A0BC7C007EB2EF /* ShoppingListViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B27AC0A621A1004F00B7AB94 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B27AC0A721A1005900B7AB94 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E4767F2421A0B44100C665D8 /* LaunchScreen.storyboard */,
+				E4767F1F21A0B44000C665D8 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B27AC0A821A1007E00B7AB94 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				E4767F2221A0B44100C665D8 /* Assets.xcassets */,
+				E4767F1B21A0B44000C665D8 /* AppDelegate.swift */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
 		DFC0D9F1EA1129EF66AC02FD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -80,13 +114,11 @@
 		E4767F1A21A0B44000C665D8 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				E4767F1B21A0B44000C665D8 /* AppDelegate.swift */,
-				E4767F1F21A0B44000C665D8 /* Main.storyboard */,
-				B2AE2DC721A0DA0300ECC3E2 /* PantryViewController.swift */,
-				E4767F2221A0B44100C665D8 /* Assets.xcassets */,
-				E4767F2421A0B44100C665D8 /* LaunchScreen.storyboard */,
+				B27AC0A521A0FFC400B7AB94 /* Controllers */,
+				B27AC0A721A1005900B7AB94 /* View */,
+				B27AC0A621A1004F00B7AB94 /* Models */,
 				E4767F2721A0B44100C665D8 /* Info.plist */,
-				E4124CCF21A0BC7C007EB2EF /* ShoppingListViewController.swift */,
+				B27AC0A821A1007E00B7AB94 /* SupportFiles */,
 			);
 			path = App;
 			sourceTree = "<group>";

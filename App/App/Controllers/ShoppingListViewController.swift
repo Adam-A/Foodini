@@ -18,7 +18,7 @@ struct ShoppingList{
     var listItems: [String] = []
 }
 
-class ShoppingListViewController: UIViewController, UITableViewDataSource {
+class ShoppingListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // How many cells to create
         // return number of lists user has
@@ -81,6 +81,7 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource {
         // Disable button for current view
         listButton.isEnabled = false
         tableView.dataSource = self
+        tableView.delegate = self
         
         navigationItem.leftBarButtonItem = editButtonItem
         CreateNewListButton()
@@ -141,14 +142,14 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource {
 
     @IBAction func onPantryPress(_ sender: Any) {
         // Save data before transferring
-        /*
+        
         // Create the pantry VC
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "pantryViewController") as! PantryViewController
+        let viewController = storyboard.instantiateViewController(withIdentifier: "PantryViewController") as! PantryViewController
         //viewController.delegate = self
         // Push current VC onto backstack
-        self.navigationController?.pushViewController(viewController, animated: true)
-         */
+        self.navigationController?.pushViewController(viewController, animated: false)
+ 
     }
     
     @IBAction func onRecipePress(_ sender: Any) {
