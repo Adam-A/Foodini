@@ -15,7 +15,7 @@ struct GroceryItem{
     //var expDate: String = ""
 }
 
-class PantryViewController: UIViewController, UITableViewDataSource {
+class PantryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     //Shows the Appropriate amound of Cells
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -32,6 +32,10 @@ class PantryViewController: UIViewController, UITableViewDataSource {
         cell.textLabel?.text = "\(pantryItems[indexPath.row].item)"
         // Set detail label to the items in the list
         cell.detailTextLabel?.text = "\(pantryItems[indexPath.row].quantity)"
+        
+//        let cells = PantryTableView.visibleCells(in: 1)
+//        UIView.animate(views: cells, animations: [rotateAnimation, fadeAnimation])
+        
         return cell
     }
     
@@ -39,6 +43,15 @@ class PantryViewController: UIViewController, UITableViewDataSource {
         PantryTableView.deselectRow(at: indexPath, animated: true)
         
         //INSERT CODE TO VIEW ITEM DETAILS VIEW CONTROLLER
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            // Delete cell at position
+            pantryItems.remove(at: indexPath.row)
+            itemCount = pantryItems.count
+            PantryTableView.reloadData()
+        }
     }
     
 
@@ -57,7 +70,9 @@ class PantryViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.leftBarButtonItem = editButtonItem
         PantryTableView.dataSource = self
+        PantryTableView.delegate = self
         itemCount = pantryItems.count
         CreateNewItemButton()
     }
@@ -73,6 +88,58 @@ class PantryViewController: UIViewController, UITableViewDataSource {
         // INSERT CODE TO SWITCH TO ADD ITEM VIEW CONTROLLER
     }
     
+    // Need to override setEditing in order to actually edit cells in tableView
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        // If the edit button title is "Done"
+        if navigationItem.leftBarButtonItem?.title == "Done"{
+            // tableView is not being edited
+            PantryTableView.isEditing = false
+            // Switch done button to "Edit"
+            navigationItem.leftBarButtonItem?.title = "Edit"
+        } else { // If the edit button title is "Edit"
+            // tableView is being edited
+            PantryTableView.isEditing = true
+            // Switch edit button to "Done"
+            navigationItem.leftBarButtonItem?.title = "Done"
+        }
+    }
+    
+    
+    @IBAction func onListsPress(_ sender: Any) {
+        // Save data before transferring
+        
+         // Create the pantry VC
+         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+         let viewController = storyboard.instantiateViewController(withIdentifier: "shoppingListViewController") as! ShoppingListViewController
+         //viewController.delegate = self
+          //Push current VC onto backstack
+         self.navigationController?.pushViewController(viewController, animated: false)
+ 
+    }
+    
+    
+    @IBAction func onRecipePress(_ sender: Any) {
+        // Save data before transferring
+        /*
+         // Create the pantry VC
+         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+         let viewController = storyboard.instantiateViewController(withIdentifier: "recipeViewController") as! RecipeViewController
+         //viewController.delegate = self
+         // Push current VC onto backstack
+         self.navigationController?.pushViewController(viewController, animated: true)
+         */
+    }
+    
 
-
+    @IBAction func onSettingsPress(_ sender: Any) {
+        // Save data before transferring
+        /*
+         // Create the pantry VC
+         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+         let viewController = storyboard.instantiateViewController(withIdentifier: "settingsViewController") as! SettingsViewController
+         //viewController.delegate = self
+         // Push current VC onto backstack
+         self.navigationController?.pushViewController(viewController, animated: true)
+         */
+    }
 }
