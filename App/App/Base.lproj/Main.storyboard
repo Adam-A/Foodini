@@ -19,12 +19,43 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="UW9-Bh-GGw" kind="relationship" relationship="rootViewController" id="IRr-Qd-6cZ"/>
+                        <segue destination="BvI-fq-fJK" kind="relationship" relationship="rootViewController" id="kDI-SP-2X4"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y3h-yt-DJ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="146" y="822"/>
+        </scene>
+        <!--Pantry-->
+        <scene sceneID="Gqx-j5-rEY">
+            <objects>
+                <viewController storyboardIdentifier="PantryViewController" id="BvI-fq-fJK" customClass="PantryViewController" customModule="App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WFH-QE-CbD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9YE-Fp-bvF">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="9YE-Fp-bvF" firstAttribute="bottom" secondItem="Pt4-0r-7lx" secondAttribute="bottom" id="3b5-Is-wZv"/>
+                            <constraint firstItem="9YE-Fp-bvF" firstAttribute="leading" secondItem="Pt4-0r-7lx" secondAttribute="leading" id="7ue-7j-pHc"/>
+                            <constraint firstItem="9YE-Fp-bvF" firstAttribute="trailing" secondItem="Pt4-0r-7lx" secondAttribute="trailing" id="8Xe-Ey-Qnd"/>
+                            <constraint firstItem="9YE-Fp-bvF" firstAttribute="top" secondItem="Pt4-0r-7lx" secondAttribute="top" id="NvK-bd-7kB"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Pt4-0r-7lx"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Pantry" id="aux-qL-dRr"/>
+                    <connections>
+                        <outlet property="PantryTableView" destination="9YE-Fp-bvF" id="9BF-fI-MbN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fI8-gg-csa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1124" y="120.98950524737631"/>
         </scene>
         <!--Shopping Lists-->
         <scene sceneID="umW-PT-euf">
