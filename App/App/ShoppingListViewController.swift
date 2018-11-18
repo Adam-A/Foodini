@@ -7,10 +7,7 @@
 //
 // TODO:
 // [] Serilization
-// [x] Navigation buttons to other views
 // [] Update to use model
-// [x] Click on list opens new view
-// [x] Add error checking
 // [] Clean up temp struct stuff
 
 import UIKit
