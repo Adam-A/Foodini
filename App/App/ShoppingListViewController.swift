@@ -7,15 +7,11 @@
 //
 // TODO:
 // [] Serilization
-// [x] Add list button:
-//      [x] Name prompt
-//      [x] Add to list, update table view
-// [] Edit lists:
-//      [] delete
 // [] Navigation buttons to other views
 // [] Update to use model
 // [] Click on list opens new view
 // [] Add error checking
+// [] Clean up temp struct stuff
 
 import UIKit
 
@@ -42,6 +38,15 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource {
         cell.detailTextLabel?.text = "\(shoppingLists[indexPath.row].listItems)"
         return cell
 
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            // Delete at position
+            shoppingLists.remove(at: indexPath.row)
+            listCount = shoppingLists.count
+            tableView.reloadData()
+        }
     }
     
     // If a user selects a cell open the list view for that cell
@@ -75,20 +80,11 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource {
 
         // Do any additional setup after loading the view
         tableView.dataSource = self
-        CreateEditButton()
+        navigationItem.leftBarButtonItem = editButtonItem
         CreateNewListButton()
         
         //REMOVE
         listCount = shoppingLists.count
-    }
-    
-    func CreateEditButton(){
-        // Hide back button
-        self.navigationItem.hidesBackButton = true;
-        // Create edit button using EditLists as a selector
-        let editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(EditLists(sender:)))
-        
-        self.navigationItem.leftBarButtonItem = editButton
     }
     
     func CreateNewListButton(){
@@ -97,17 +93,15 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource {
         self.navigationItem.rightBarButtonItem = addNewListButton
     }
     
-    @objc func EditLists(sender: UIBarButtonItem){
-        
-    }
-    
     @objc func AddNewList(sender: UIBarButtonItem){
         // Uses alert with text field to create a named list
-        // Start alert
         let popup = UIAlertController(title: "New list", message: "Add a name", preferredStyle: .alert)
+        
+        // Add text field to alert and autofill with "List"
         popup.addTextField { (textField) in
             textField.text = "List"
         }
+        // Add "create" button to alert
         popup.addAction(UIAlertAction(title: "Create", style: .default, handler: { (action) in
             if let text = popup.textFields?[0].text{
                 // Create new list
@@ -122,7 +116,24 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource {
             
         }))
         
+        popup.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in }))
+        
         self.present(popup, animated: true, completion: nil)
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        // If the edit button title is "Done"
+        if navigationItem.leftBarButtonItem?.title == "Done"{
+            // tableView is not being edited
+            tableView.isEditing = false
+            // Switch done button to "Edit"
+            navigationItem.leftBarButtonItem?.title = "Edit"
+        } else { // If the edit button title is "Edit"
+            // tableView is being edited
+            tableView.isEditing = true
+            // Switch edit button to "Done"
+            navigationItem.leftBarButtonItem?.title = "Done"
+        }
     }
 
 }
