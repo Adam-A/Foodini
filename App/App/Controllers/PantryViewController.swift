@@ -56,6 +56,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
     
 
     @IBOutlet weak var PantryTableView: UITableView!
+    @IBOutlet weak var pantryButton: UIButton!
     
     var itemCount: Int = 0
     
@@ -69,7 +70,8 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        pantryButton.isEnabled = false
         navigationItem.leftBarButtonItem = editButtonItem
         PantryTableView.dataSource = self
         PantryTableView.delegate = self

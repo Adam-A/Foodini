@@ -97,6 +97,7 @@
                     <navigationItem key="navigationItem" title="Pantry" id="aux-qL-dRr"/>
                     <connections>
                         <outlet property="PantryTableView" destination="9YE-Fp-bvF" id="9BF-fI-MbN"/>
+                        <outlet property="pantryButton" destination="X1W-dh-KOf" id="jH5-pO-3Th"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fI8-gg-csa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -111,39 +112,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gGP-V1-1b0">
-                                <rect key="frame" x="0.0" y="64" width="375" height="542"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gGP-V1-1b0">
+                                <rect key="frame" x="0.0" y="64" width="375" height="537"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <sections/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7aP-bZ-gmG">
-                                <rect key="frame" x="16" y="614" width="46" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7aP-bZ-gmG">
+                                <rect key="frame" x="23" y="617" width="32" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="rCs-0j-f38"/>
+                                </constraints>
                                 <state key="normal" title="Lists"/>
                                 <connections>
                                     <action selector="onListPress:" destination="UW9-Bh-GGw" eventType="touchUpInside" id="hp4-ax-O0R"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Fv-5V-oyj">
-                                <rect key="frame" x="114" y="614" width="46" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Fv-5V-oyj">
+                                <rect key="frame" x="99" y="617" width="45" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="fZW-Am-zId"/>
+                                </constraints>
                                 <state key="normal" title="Pantry"/>
                                 <connections>
                                     <action selector="onPantryPress:" destination="UW9-Bh-GGw" eventType="touchUpInside" id="TLg-X2-eEX"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhD-Mw-DqQ">
-                                <rect key="frame" x="300" y="614" width="59" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhD-Mw-DqQ">
+                                <rect key="frame" x="296" y="617" width="57" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="N8n-MA-XWl"/>
+                                </constraints>
                                 <state key="normal" title="Settings"/>
                                 <connections>
                                     <action selector="onSettingsPress:" destination="UW9-Bh-GGw" eventType="touchUpInside" id="le8-Hm-fer"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCA-hU-43k">
-                                <rect key="frame" x="210" y="614" width="59" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCA-hU-43k">
+                                <rect key="frame" x="196" y="617" width="55" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="v78-6j-A3a"/>
+                                </constraints>
                                 <state key="normal" title="Recipes"/>
                                 <connections>
                                     <action selector="onRecipePress:" destination="UW9-Bh-GGw" eventType="touchUpInside" id="PVD-eS-54J"/>
@@ -151,6 +159,27 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bCA-hU-43k" firstAttribute="leading" secondItem="0Fv-5V-oyj" secondAttribute="trailing" constant="52" id="9eD-ZQ-L0r"/>
+                            <constraint firstItem="dhD-Mw-DqQ" firstAttribute="top" secondItem="gGP-V1-1b0" secondAttribute="bottom" constant="16" id="ALL-ep-ciw"/>
+                            <constraint firstItem="7aP-bZ-gmG" firstAttribute="leading" secondItem="FwO-GG-fIw" secondAttribute="leading" constant="23" id="BmZ-tE-BDx"/>
+                            <constraint firstItem="FwO-GG-fIw" firstAttribute="bottom" secondItem="7aP-bZ-gmG" secondAttribute="bottom" constant="20" id="Jfy-DG-2LI"/>
+                            <constraint firstItem="FwO-GG-fIw" firstAttribute="trailing" secondItem="dhD-Mw-DqQ" secondAttribute="trailing" constant="22" id="Lu0-Hf-xcZ"/>
+                            <constraint firstItem="7aP-bZ-gmG" firstAttribute="top" secondItem="gGP-V1-1b0" secondAttribute="bottom" constant="16" id="NgQ-6m-Ht1"/>
+                            <constraint firstItem="FwO-GG-fIw" firstAttribute="bottom" secondItem="dhD-Mw-DqQ" secondAttribute="bottom" constant="20" id="OHl-WI-nYc"/>
+                            <constraint firstItem="FwO-GG-fIw" firstAttribute="bottom" secondItem="bCA-hU-43k" secondAttribute="bottom" constant="20" id="PaW-VB-nlA"/>
+                            <constraint firstItem="0Fv-5V-oyj" firstAttribute="leading" secondItem="7aP-bZ-gmG" secondAttribute="trailing" constant="44" id="Qw5-mQ-xvp"/>
+                            <constraint firstItem="bCA-hU-43k" firstAttribute="top" secondItem="gGP-V1-1b0" secondAttribute="bottom" constant="16" id="SUk-Zm-E0b"/>
+                            <constraint firstItem="gGP-V1-1b0" firstAttribute="trailing" secondItem="FwO-GG-fIw" secondAttribute="trailing" id="VFd-se-c6w"/>
+                            <constraint firstItem="0Fv-5V-oyj" firstAttribute="leading" secondItem="7aP-bZ-gmG" secondAttribute="trailing" constant="44" id="b4J-2v-MLj"/>
+                            <constraint firstItem="0Fv-5V-oyj" firstAttribute="top" secondItem="gGP-V1-1b0" secondAttribute="bottom" constant="16" id="btM-Tv-ERy"/>
+                            <constraint firstItem="dhD-Mw-DqQ" firstAttribute="leading" secondItem="bCA-hU-43k" secondAttribute="trailing" constant="45" id="dFQ-uq-Gj5"/>
+                            <constraint firstItem="gGP-V1-1b0" firstAttribute="leading" secondItem="FwO-GG-fIw" secondAttribute="leading" id="fhF-c2-cYv"/>
+                            <constraint firstItem="gGP-V1-1b0" firstAttribute="top" secondItem="FwO-GG-fIw" secondAttribute="top" id="lGU-X3-bYt"/>
+                            <constraint firstItem="FwO-GG-fIw" firstAttribute="bottom" secondItem="0Fv-5V-oyj" secondAttribute="bottom" constant="20" id="ots-Tn-IIf"/>
+                            <constraint firstItem="dhD-Mw-DqQ" firstAttribute="leading" secondItem="bCA-hU-43k" secondAttribute="trailing" constant="45" id="tUX-7o-wXc"/>
+                            <constraint firstItem="bCA-hU-43k" firstAttribute="leading" secondItem="0Fv-5V-oyj" secondAttribute="trailing" constant="52" id="wot-mA-mrN"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="FwO-GG-fIw"/>
                     </view>
                     <navigationItem key="navigationItem" title="Shopping Lists" id="neU-CY-ceE"/>
