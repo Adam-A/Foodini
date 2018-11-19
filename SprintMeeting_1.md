@@ -59,7 +59,7 @@ model.
 ## Sydney Schiller
 ### Accomplishments
 Completed most of the pantry view controller, had encountered an issue with
-ingredients stacking which needs to be addressed.
+ingredients stacking which needs to be addressed. Set up project organization.
 
 ### Planned
 For the upcoming week, plans on finishing the pantry view controller, the pantry
@@ -70,4 +70,5 @@ Ingredients bought on two different dates may be able to stack into the same
 pantry object, so is devising a solution.
 
 ### Links
-_Please add links here!_
+- [Pantry View Controller PR](https://github.com/ECS189E/Can-I-graduate-already-LLC/pull/2)
+- [File Organization for Project](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/dd69943ac7aad926bebb258d7282a7c36abdf19f)
