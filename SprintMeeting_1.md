@@ -23,7 +23,14 @@ For the upcoming week, plans on finishing the recipe view controller and the
 settings view controller. If finished early, will lend a hand where needed.
 
 ### Links
-_Please add links here!_
+Found some resources we could use:
+
+- [Resource 1](https://www.sketchappsources.com/free-source/2669-sample-recipes-desserts-app-sketch-freebie-resource.html)
+- [Resource 2](https://www.sketchappsources.com/free-source/3222-caterfood-app-sample-sketch-freebie-resource.html)
+- [Resource 3](https://www.sketchappsources.com/free-source/3148-to-do-app-template-sketch-freebie-resource.html)
+- [Resource 4 (Our most relevant resource)](https://www.sketchappsources.com/free-source/3222-caterfood-app-sample-sketch-freebie-resource.html)
+
+
 
 ## Will Chilcote
 ### Accomplishments
