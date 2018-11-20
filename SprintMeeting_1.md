@@ -41,7 +41,7 @@ For the upcoming week, I am planning on looking into iCloud support for saving u
 
 
 ### Links
-Commit link coming soon...
+- [Individual List View Controller](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/66d704d8caae14a2946d68fba427e960995151e5)
 
 ## Mark Nickerson
 ### Accomplishments
