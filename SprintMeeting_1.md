@@ -34,15 +34,14 @@ Found some resources we could use:
 
 ## Will Chilcote
 ### Accomplishments
-Completed the individual list view controller and the add item view controller.
+Completed the IndividualListViewController, which contains embedded functionality to create a new item and append it to the current list, as well as swipe-to-delete on individual list items. The View has also been linked to the table cells in ShoppingListViewController.
 
 ### Planned
-For the upcoming week, plans on looking into iCloud support for saving user
-information.
+For the upcoming week, I am planning on looking into iCloud support for saving user information.
 
 
 ### Links
-_Please add links here!_
+Commit link coming soon...
 
 ## Mark Nickerson
 ### Accomplishments
