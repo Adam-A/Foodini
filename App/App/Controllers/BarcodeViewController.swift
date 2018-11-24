@@ -5,16 +5,21 @@
 //  Created by Mark Nickerson on 11/23/18.
 //  Copyright © 2018 Can I Graduate Already, LLC. All rights reserved.
 //
+<<<<<<< HEAD
 // Referenced: https://www.appcoda.com/simple-barcode-reader-app-swift/
 //
 // AVCaptureMetadataOutputObjectsDelegate is included
 //     because "self" is the delegate for setMetadataObjectsDelegate and this class must conform to
 //     AVCaptureMetadataOutputObjectsDelegate protocol
+=======
+// Referenced https://www.appcoda.com/simple-barcode-reader-app-swift/
+>>>>>>> Added realtime camera display to barcode view
 //
 
 import UIKit
 import AVFoundation
 
+<<<<<<< HEAD
 class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     // The current capture session,
@@ -26,6 +31,13 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     var cameraPreview: AVCaptureVideoPreviewLayer?
     
     // "Window" for displaying output from the capture device
+=======
+class BarcodeViewController: UIViewController {
+    
+    var avSession: AVCaptureSession?
+    var cameraPreview: AVCaptureVideoPreviewLayer?
+    
+>>>>>>> Added realtime camera display to barcode view
     @IBOutlet weak var cameraDisplay: UIView!
     
     override func viewDidLoad() {
@@ -34,6 +46,7 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         // Create an av capture session
         avSession = AVCaptureSession()
         
+<<<<<<< HEAD
         // Establish a video capture device
         let captureDevice = AVCaptureDevice.default(for: .video)
         
@@ -58,10 +71,33 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         // If we can add input from the device, add it to the av session
         if let deviceInput = deviceInput{
+=======
+        // Establish a capture device
+        let captureDevice = AVCaptureDevice.default(for: .video)
+        
+        let deviceInput: AVCaptureDeviceInput?
+        
+        do{
+            if let captureDevice = captureDevice{
+                deviceInput = try AVCaptureDeviceInput(device: captureDevice)
+            } else {
+                print("No device input")
+                return
+            }
+            
+        } catch {
+            print("Capture unavaliable")
+            return
+        }
+        
+        // If we can add input from the device, add it to the session
+        if let avSession = avSession, let deviceInput = deviceInput{
+>>>>>>> Added realtime camera display to barcode view
             if avSession.canAddInput(deviceInput){
                 avSession.addInput(deviceInput)
             } else {
                 print("Cannot add input")
+<<<<<<< HEAD
                 return
             }
         }
@@ -134,4 +170,30 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
     
     
+=======
+            }
+        }
+        
+        if let avSession = avSession{
+            cameraPreview = AVCaptureVideoPreviewLayer(session: avSession)
+            cameraPreview?.frame = cameraDisplay.layer.bounds
+            cameraPreview?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+            if let cameraPreview = cameraPreview{
+                cameraDisplay.layer.addSublayer(cameraPreview)
+                avSession.startRunning()
+            } else {
+                print("Cannot display camera preview")
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+
+>>>>>>> Added realtime camera display to barcode view
 }
