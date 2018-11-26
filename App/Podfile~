@@ -7,6 +7,6 @@ target 'App' do
 
   # Pods for App
 	pod "ViewAnimator"
-	pod 'DropDown', '2.3.4'
+	pod 'DropDown', '2.3.2'
 
 end

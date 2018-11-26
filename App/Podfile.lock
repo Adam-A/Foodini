@@ -1,16 +1,20 @@
 PODS:
+  - DropDown (2.3.4)
   - ViewAnimator (2.2.0)
 
 DEPENDENCIES:
+  - DropDown (= 2.3.4)
   - ViewAnimator
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - DropDown
     - ViewAnimator
 
 SPEC CHECKSUMS:
+  DropDown: f225ff0fd09dde064d17aa03db7e4d4e4ff40b6b
   ViewAnimator: a849844cc3698620e1a562b510ed0c28aeafcdc5
 
-PODFILE CHECKSUM: 9af76403c8d930ed97c638d06d6e1c7ab7e4af4a
+PODFILE CHECKSUM: 11b575e0753627f0487930693df362380af6b54f
 
 COCOAPODS: 1.5.3

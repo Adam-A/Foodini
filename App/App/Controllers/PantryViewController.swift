@@ -122,14 +122,14 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBAction func onRecipePress(_ sender: Any) {
         // Save data before transferring
-        /*
+        
          // Create the pantry VC
          let storyboard = UIStoryboard(name: "Main", bundle: nil)
-         let viewController = storyboard.instantiateViewController(withIdentifier: "recipeViewController") as! RecipeViewController
+         let viewController = storyboard.instantiateViewController(withIdentifier: "RecipesViewController") as! RecipesViewController
          //viewController.delegate = self
          // Push current VC onto backstack
-         self.navigationController?.pushViewController(viewController, animated: true)
-         */
+         self.navigationController?.pushViewController(viewController, animated: false)
+        
     }
     
 
@@ -141,7 +141,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
          let viewController = storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
          //viewController.delegate = self
          // Push current VC onto backstack
-         self.navigationController?.pushViewController(viewController, animated: true)
+         self.navigationController?.pushViewController(viewController, animated: false)
         
     }
 }
