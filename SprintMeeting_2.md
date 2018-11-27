@@ -42,11 +42,13 @@ And the views for Settings and Recipes in Main.Storyboard.
 Worked on adding the table list for the individual list controller. Looked into
 using iCloud, however it requires a published app/about to be published app. If
 we publish the app, we would use __key value pairs__ for things like settings
-and would save our actual grocery/pantry lists as a __document__.
+and would save our actual grocery/pantry lists as a __document__. Switched the bottom tab bar to use Tab Bar Controller and integrated independent Navigation Controllers as necessary. Also added constraints to various views, primarily in Settings.
 
 ### Planned
-For the upcoming week, plans on implementing a tab controller on each of the
-view controllers for a more streamlined navigation.
+For the upcoming week, will resolve bugs (such as the Recipes view) and refine inter-application navigation, as the Tab Bar is somewhat rudimentary currently.
+
+### Issues
+The Recipes view crashes whenever it is loaded, likely from a missing outlet or misnamed class. This seems to be the result of attempting to resolve the merge conflict. For now it has been omitted from the Tab Bar Controller.
 
 
 ### Links

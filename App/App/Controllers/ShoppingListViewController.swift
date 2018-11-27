@@ -64,7 +64,7 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
     
     // Begin outlet definitions
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var listButton: UIButton!
+//    @IBOutlet weak var listButton: UIButton!
     
     // REMOVE
     var listCount: Int = 0
@@ -80,7 +80,7 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
 
         // Do any additional setup after loading the view
         // Disable button for current view
-        listButton.isEnabled = false
+//        listButton.isEnabled = false
         tableView.dataSource = self
         tableView.delegate = self
         

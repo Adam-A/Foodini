@@ -15,16 +15,16 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var largeFontToggle: UISwitch!
     @IBOutlet weak var pushNotificationToggle: UISwitch!
     @IBOutlet weak var syncToCloudButton: UIButton!
-    @IBOutlet weak var listsViewButton: UIButton!
-    @IBOutlet weak var pantryViewButton: UIButton!
-    @IBOutlet weak var RecipesViewButton: UIButton!
-    @IBOutlet weak var settingsViewButton: UIButton!
+//    @IBOutlet weak var listsViewButton: UIButton!
+//    @IBOutlet weak var pantryViewButton: UIButton!
+//    @IBOutlet weak var RecipesViewButton: UIButton!
+//    @IBOutlet weak var settingsViewButton: UIButton!
     @IBOutlet weak var contactUsButton: UIButton!
     @IBOutlet weak var feedbackButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true;
-         settingsViewButton.isEnabled = false
+//         settingsViewButton.isEnabled = false
 
     }
     
@@ -32,7 +32,7 @@ class SettingsViewController: UIViewController {
     @IBAction func onPantryPress(_ sender: Any) {
         // Save data before transferring
         self.navigationItem.hidesBackButton = false;
-        settingsViewButton.isEnabled = true
+//        settingsViewButton.isEnabled = true
         // Create the pantry VC
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "PantryViewController") as! PantryViewController
@@ -57,7 +57,7 @@ class SettingsViewController: UIViewController {
     @IBAction func onListsPress(_ sender: Any) {
         // Save data before transferring
         self.navigationItem.hidesBackButton = false;
-        settingsViewButton.isEnabled = true
+//        settingsViewButton.isEnabled = true
         // Create the pantry VC
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "shoppingListViewController") as! ShoppingListViewController

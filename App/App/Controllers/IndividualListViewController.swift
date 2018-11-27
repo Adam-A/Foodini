@@ -15,7 +15,6 @@ class IndividualListViewController: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Loading table: ", list?.listItems.count)
         table.reloadData()
         
         // Generate the "Add" button in the top right
@@ -47,7 +46,6 @@ class IndividualListViewController: UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Number of cells to generate
-        print("Count: ", list?.listItems.count)
         return list?.listItems.count ?? 0
     }
     
@@ -56,7 +54,6 @@ class IndividualListViewController: UIViewController, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell") ?? UITableViewCell(style: .default, reuseIdentifier: "itemCell")
         // Set text to item name
         cell.textLabel?.text = list?.listItems[indexPath.row]
-        print(list?.listItems[indexPath.row])
         return cell
         
     }
