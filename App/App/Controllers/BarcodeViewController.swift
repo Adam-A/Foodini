@@ -268,7 +268,7 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         var trimmedBarcode = unprocessedBarcode
         
-        // If the barcode is in EAN13 format, process it
+        // If the barcode is in EAN13 format, process it into a UPC format
         if (unprocessedBarcode.count == 13 && unprocessedBarcode.hasPrefix("0")){
             trimmedBarcode = String(unprocessedBarcode.suffix(12))
         }
