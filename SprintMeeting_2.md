@@ -29,8 +29,6 @@ and implementing the contact us and feedback function on the settings view
 controller.
 
 ### Links
-_Please add links here!_
-
 - [RecipesViewController](https://github.com/ECS189E/Can-I-graduate-already-LLC/blob/master/App/App/Controllers/RecipesViewController.swift)
 
 - [SettingsViewController](https://github.com/ECS189E/Can-I-graduate-already-LLC/blob/master/App/App/Controllers/SettingsViewController.swift)
@@ -58,7 +56,9 @@ _Please add links here!_
 ### Accomplishments
 Worked on the barcode scanner view and understanding the [Edamam](https://www.edamam.com/)
 barcode functionality. The barcode view currently displays video of what the
-camera is capturing on screen. Also worked on understanding how to use the
+camera is capturing on screen, outputs metadata from the capture device, and
+processes the metadata as an EAN13 barcode number. This number is then processed
+ to be used as a UPC number. Also worked on understanding how to use the
 [Edamam](https://www.edamam.com/) API to make a call for a barcode. Noted that Edamam uses cUrl 
 notation in its documentation, so I researched how to use cUrl syntax with
 swift.
@@ -78,7 +78,8 @@ _Resources:_
 - [Barcode tutorial](https://www.appcoda.com/simple-barcode-reader-app-swift/)
 - [AVFoundation documentation](https://developer.apple.com/documentation/avfoundation/avmetadatamachinereadablecodeobject/machine_readable_object_types)
 
-_Commits & PRs:_
+_Commits:_
+- [Barcode View Controller](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/fdf7c3eaa54cd88897bcbeb1e2e806cca263bbd1)
 
 
 
@@ -88,10 +89,16 @@ Worked on understanding ingredient search API using [Edamam](https://www.edamam.
 we have a 25 calls per minute limit for ingredient search. Worked on setting up
 a view controller for adding items to the pantry via a delegate.
 
+## Issues
+currently, I am having trouble getting my prototype cells to appear in the editItemView. I will need to 
+follow a tutorial to fix this issue, or possibly switch to a tableViewController rather than the standard 
+view controller.
+
 ### Planned
 For the upcoming week, plans on finishing the pantry view controller, work on
 the pantry model (determined we may just need a “food” model), and finish up
 [Edamam](https://www.edamam.com/) API work.
 
 ### Links
-_Please add links here!_
+- [Product Model Work](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/cca08a97bf491962e06e4e97d8199e9c229b9e89)
+- [Set up edit item view controller](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/a33b1a1f36549f0ec2332fde1659ef057c32c900)
