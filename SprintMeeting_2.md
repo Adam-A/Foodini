@@ -87,10 +87,16 @@ Worked on understanding ingredient search API using [Edamam](https://www.edamam.
 we have a 25 calls per minute limit for ingredient search. Worked on setting up
 a view controller for adding items to the pantry via a delegate.
 
+## Issues
+currently, I am having trouble getting my prototype cells to appear in the editItemView. I will need to 
+follow a tutorial to fix this issue, or possibly switch to a tableViewController rather than the standard 
+view controller.
+
 ### Planned
 For the upcoming week, plans on finishing the pantry view controller, work on
 the pantry model (determined we may just need a “food” model), and finish up
 [Edamam](https://www.edamam.com/) API work.
 
 ### Links
-_Please add links here!_
+- [Product Model Work](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/cca08a97bf491962e06e4e97d8199e9c229b9e89)
+- [Set up edit item view controller](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/a33b1a1f36549f0ec2332fde1659ef057c32c900)
