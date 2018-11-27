@@ -50,14 +50,15 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Deselect row
         tableView.deselectRow(at: indexPath, animated: true)
-        /*
-        // Create the wallet VC
+        
+        // Instantiate instance of IndividualListViewController
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "individualListViewController") as! IndividualListViewController
-        //viewController.delegate = self
+        // Assign the relevent ShoppingList to the next VC
+        viewController.list = shoppingLists[indexPath.item]
+        viewController.title = viewController.list?.name
         // Push current VC onto backstack
         self.navigationController?.pushViewController(viewController, animated: true)
-        */
         
     }
     
