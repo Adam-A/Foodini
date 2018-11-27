@@ -5,21 +5,16 @@
 //  Created by Mark Nickerson on 11/23/18.
 //  Copyright © 2018 Can I Graduate Already, LLC. All rights reserved.
 //
-<<<<<<< HEAD
 // Referenced: https://www.appcoda.com/simple-barcode-reader-app-swift/
 //
 // AVCaptureMetadataOutputObjectsDelegate is included
 //     because "self" is the delegate for setMetadataObjectsDelegate and this class must conform to
 //     AVCaptureMetadataOutputObjectsDelegate protocol
-=======
-// Referenced https://www.appcoda.com/simple-barcode-reader-app-swift/
->>>>>>> d5d3161df803b637ef474e9a0e324210bf969f0d
 //
 
 import UIKit
 import AVFoundation
 
-<<<<<<< HEAD
 class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     // The current capture session,
@@ -31,13 +26,6 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     var cameraPreview: AVCaptureVideoPreviewLayer?
     
     // "Window" for displaying output from the capture device
-=======
-class BarcodeViewController: UIViewController {
-    
-    var avSession: AVCaptureSession?
-    var cameraPreview: AVCaptureVideoPreviewLayer?
-    
->>>>>>> d5d3161df803b637ef474e9a0e324210bf969f0d
     @IBOutlet weak var cameraDisplay: UIView!
     
     override func viewDidLoad() {
@@ -46,7 +34,6 @@ class BarcodeViewController: UIViewController {
         // Create an av capture session
         avSession = AVCaptureSession()
         
-<<<<<<< HEAD
         // Establish a video capture device
         let captureDevice = AVCaptureDevice.default(for: .video)
         
@@ -71,33 +58,10 @@ class BarcodeViewController: UIViewController {
         
         // If we can add input from the device, add it to the av session
         if let deviceInput = deviceInput{
-=======
-        // Establish a capture device
-        let captureDevice = AVCaptureDevice.default(for: .video)
-        
-        let deviceInput: AVCaptureDeviceInput?
-        
-        do{
-            if let captureDevice = captureDevice{
-                deviceInput = try AVCaptureDeviceInput(device: captureDevice)
-            } else {
-                print("No device input")
-                return
-            }
-            
-        } catch {
-            print("Capture unavaliable")
-            return
-        }
-        
-        // If we can add input from the device, add it to the session
-        if let avSession = avSession, let deviceInput = deviceInput{
->>>>>>> d5d3161df803b637ef474e9a0e324210bf969f0d
             if avSession.canAddInput(deviceInput){
                 avSession.addInput(deviceInput)
             } else {
                 print("Cannot add input")
-<<<<<<< HEAD
                 return
             }
         }
@@ -144,8 +108,8 @@ class BarcodeViewController: UIViewController {
         avSession?.stopRunning()
         
         // The first element of the collection output will contain the barcode information
-            // we're looking for, but it must be cast as an AVMetadataMachineReadableCodeObject
-            // in order for us to access the contents of the barcode image in machine readable code
+        // we're looking for, but it must be cast as an AVMetadataMachineReadableCodeObject
+        // in order for us to access the contents of the barcode image in machine readable code
         let barcode = metadataObjects.first as? AVMetadataMachineReadableCodeObject
         
         processBarcode(unprocessedBarcode: barcode?.stringValue ?? "error")
@@ -168,32 +132,4 @@ class BarcodeViewController: UIViewController {
         // Make API call here
         print("Found a barcode: \(trimmedBarcode)!")
     }
-
-
-=======
-            }
-        }
-        
-        if let avSession = avSession{
-            cameraPreview = AVCaptureVideoPreviewLayer(session: avSession)
-            cameraPreview?.frame = cameraDisplay.layer.bounds
-            cameraPreview?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-            if let cameraPreview = cameraPreview{
-                cameraDisplay.layer.addSublayer(cameraPreview)
-                avSession.startRunning()
-            } else {
-                print("Cannot display camera preview")
-            }
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-    }
-
->>>>>>> d5d3161df803b637ef474e9a0e324210bf969f0d
 }
