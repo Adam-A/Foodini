@@ -56,7 +56,9 @@ _Please add links here!_
 ### Accomplishments
 Worked on the barcode scanner view and understanding the [Edamam](https://www.edamam.com/)
 barcode functionality. The barcode view currently displays video of what the
-camera is capturing on screen. Also worked on understanding how to use the
+camera is capturing on screen, outputs metadata from the capture device, and
+processes the metadata as an EAN13 barcode number. This number is then processed
+ to be used as a UPC number. Also worked on understanding how to use the
 [Edamam](https://www.edamam.com/) API to make a call for a barcode. Noted that Edamam uses cUrl 
 notation in its documentation, so I researched how to use cUrl syntax with
 swift.
@@ -76,7 +78,8 @@ _Resources:_
 - [Barcode tutorial](https://www.appcoda.com/simple-barcode-reader-app-swift/)
 - [AVFoundation documentation](https://developer.apple.com/documentation/avfoundation/avmetadatamachinereadablecodeobject/machine_readable_object_types)
 
-_Commits & PRs:_
+_Commits:_
+- [Barcode View Controller](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/fdf7c3eaa54cd88897bcbeb1e2e806cca263bbd1)
 
 
 
