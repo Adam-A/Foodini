@@ -300,9 +300,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="gI9-BI-A2p">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <items>
+                                <navigationItem title="Recipes" id="j0e-Da-nw9">
+                                    <barButtonItem key="leftBarButtonItem" title="Edit" id="Joa-3i-cI6">
+                                        <connections>
+                                            <action selector="editingCells" destination="H3d-en-KKj" id="LWe-Vb-NpO"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem key="rightBarButtonItem" title="Roulette" id="stf-PQ-D3d">
+                                        <connections>
+                                            <action selector="recipeRoulette" destination="H3d-en-KKj" id="q8w-mz-Gzh"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="fIH-L6-7I4" imageView="zjM-aP-6oY" style="IBUITableViewCellStyleDefault" id="dRb-nU-NRN">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="72" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dRb-nU-NRN" id="5J5-EN-kES">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
@@ -330,10 +349,10 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Recipes" id="15o-tU-Chb"/>
-                    <navigationItem key="navigationItem" title="Recipes" id="eEK-xV-oSy">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="WNA-Uo-DKt"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="lcf-eL-kkn"/>
-                    </navigationItem>
+                    <connections>
+                        <outlet property="editButton" destination="Joa-3i-cI6" id="wm6-nu-Fvi"/>
+                        <outlet property="rouletteButton" destination="stf-PQ-D3d" id="8hb-Fm-ylL"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nqu-Ta-fjj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
