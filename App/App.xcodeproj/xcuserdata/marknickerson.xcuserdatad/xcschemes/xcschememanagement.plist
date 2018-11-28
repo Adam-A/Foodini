@@ -7,7 +7,11 @@
 		<key>App.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
+<<<<<<< HEAD
 			<integer>3</integer>
+=======
+			<integer>2</integer>
+>>>>>>> aadffd188a86135ca94591d8fd7fc67b1bc91b68
 		</dict>
 	</dict>
 </dict>

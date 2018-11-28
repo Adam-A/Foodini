@@ -40,7 +40,11 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
+<<<<<<< HEAD
                         <segue destination="UW9-Bh-GGw" kind="relationship" relationship="rootViewController" id="k0B-EF-eKC"/>
+=======
+                        <segue destination="eLW-5t-Tmq" kind="relationship" relationship="rootViewController" id="VMe-fD-07Q"/>
+>>>>>>> aadffd188a86135ca94591d8fd7fc67b1bc91b68
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y3h-yt-DJ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -56,7 +60,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9YE-Fp-bvF">
+<<<<<<< HEAD
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+=======
+                                <rect key="frame" x="0.0" y="44" width="414" height="752"/>
+>>>>>>> aadffd188a86135ca94591d8fd7fc67b1bc91b68
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -443,6 +451,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rt5-Yx-yk4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1035" y="2029"/>
+        </scene>
+        <!--Barcode Scanner-->
+        <scene sceneID="cex-Nn-WCG">
+            <objects>
+                <viewController storyboardIdentifier="BarcodeViewController" id="eLW-5t-Tmq" customClass="BarcodeViewController" customModule="App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zTj-Va-jpE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oVv-Cn-bWa">
+                                <rect key="frame" x="0.0" y="128" width="414" height="233"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="QlF-57-Zbw"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Barcode Scanner" id="I35-Ig-wiN"/>
+                    <connections>
+                        <outlet property="cameraDisplay" destination="oVv-Cn-bWa" id="ncA-kt-Jv5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rt5-Yx-yk4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1121.7391304347827" y="1549.5535714285713"/>
         </scene>
     </scenes>
 </document>

@@ -129,6 +129,7 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             trimmedBarcode = String(unprocessedBarcode.suffix(12))
         }
         
+<<<<<<< HEAD
         // Make API call
         let appID = "9ca52e0d"
         let appKey = "7dade37c47154913ca172a01f0e48921"
@@ -169,4 +170,9 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
         task.resume()
     }*/
+=======
+        // Make API call here
+        print("Found a barcode: \(trimmedBarcode)!")
+    }
+>>>>>>> aadffd188a86135ca94591d8fd7fc67b1bc91b68
 }
