@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sbk-1X-sZL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sbk-1X-sZL">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,6 +23,7 @@
                         <segue destination="eV8-fa-0RL" kind="relationship" relationship="viewControllers" id="r3M-PL-cdT"/>
                         <segue destination="iZh-lZ-PWn" kind="relationship" relationship="viewControllers" id="8O8-ER-aqp"/>
                         <segue destination="Sag-Ps-esZ" kind="relationship" relationship="viewControllers" id="zxD-xV-8SB"/>
+                        <segue destination="H3d-en-KKj" kind="relationship" relationship="viewControllers" id="wTr-FL-F2X"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rfD-0X-Ish" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -328,16 +329,11 @@
                             <outlet property="delegate" destination="H3d-en-KKj" id="WhF-nd-LgL"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="15o-tU-Chb"/>
+                    <tabBarItem key="tabBarItem" title="Recipes" id="15o-tU-Chb"/>
                     <navigationItem key="navigationItem" title="Recipes" id="eEK-xV-oSy">
                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="WNA-Uo-DKt"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="lcf-eL-kkn"/>
                     </navigationItem>
-                    <connections>
-                        <outlet property="addButton" destination="lcf-eL-kkn" id="flD-jR-l5z"/>
-                        <outlet property="editButton" destination="WNA-Uo-DKt" id="xc5-Jf-sGo"/>
-                        <outlet property="recipesNavigationBar" destination="eEK-xV-oSy" id="Qqh-XV-uxJ"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nqu-Ta-fjj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

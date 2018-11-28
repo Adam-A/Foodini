@@ -36,8 +36,6 @@ class RecipesViewController: UITableViewController {
         }
     }
     
-
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let dataIndex = indexPath.row - 1
@@ -68,47 +66,4 @@ class RecipesViewController: UITableViewController {
             //dont close cells
         }
     }
-    
-    
-    /*
-    @IBAction func onPantryPress(_ sender: Any) {
-        // Save data before transferring
-        self.navigationItem.hidesBackButton = false;
-        recipesViewButton.isEnabled = true
-        // Create the pantry VC
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "PantryViewController") as! PantryViewController
-        //viewController.delegate = self
-        // Push current VC onto backstack
-        self.navigationController?.pushViewController(viewController, animated: false)
-        
-    }
-    
-    @IBAction func onSettingsPress(_ sender: Any) {
-        // Save data before transferring
-        
-        // Create the pantry VC
-        self.navigationItem.hidesBackButton = false;
-        recipesViewButton.isEnabled = true
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
-        //viewController.delegate = self
-        // Push current VC onto backstack
-        self.navigationController?.pushViewController(viewController, animated: false)
-        
-    }
-    
-    @IBAction func onListsPress(_ sender: Any) {
-        // Save data before transferring
-        self.navigationItem.hidesBackButton = false;
-        recipesViewButton.isEnabled = true
-        // Create the pantry VC
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "shoppingListViewController") as! ShoppingListViewController
-        //viewController.delegate = self
-        //Push current VC onto backstack
-        self.navigationController?.pushViewController(viewController, animated: false)
-        
-    }
- */
 }
