@@ -14,8 +14,46 @@
 
 import UIKit
 import AVFoundation
+import Alamofire
 
 class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+    
+    // Food Product structure (put into API.swift)
+    struct FoodProduct: Codable {
+        struct Hints: Codable {
+            var food: Food
+        }
+        
+        struct Food : Codable{
+            var foodId: String
+            var uri: String
+            var label: String
+            var nutrients: Nutrients
+            var brand: String
+            var category: String
+            var categoryLabel: String
+            var foodContentsLabel: String
+        }
+        
+        struct Nutrients: Codable{
+            var ENERC_KCAL: Double
+        }
+        
+        var text: String
+        var parsed: [String]
+        var hints: [Hints]
+        
+        func getLabel() -> String{
+            return hints[0].food.label
+        }
+    }
+    
+    struct APIerror: Codable {
+        var error: String
+        var message: String
+    }
+    
+
     
     // The current capture session,
     //     used to manage flow of data from input
@@ -129,31 +167,32 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             trimmedBarcode = String(unprocessedBarcode.suffix(12))
         }
         
-        // Make API call
-        
-        // TO BE REPLACED WITH ALAMOFIRE
-        // REFRENCE: https://stackoverflow.com/questions/44929740/convert-curl-command-to-http-request-in-swift
+        // Make API call (put into API.swift)
         let appID = "9ca52e0d"
         let appKey = "7dade37c47154913ca172a01f0e48921"
         
-        let url = URL.init(string: "https://api.edamam.com/api/food-database/parser?upc=\(trimmedBarcode)&app_id=\(appID)&app_key=\(appKey)")
-        
-        if let url = url {
-            let task = URLSession.shared.dataTask(with: url) { data, response, error in
-                if error != nil {
-                    print(error as Any)
-                    return
-                }
-                if let data = data{
-                    let json = try! JSONSerialization.jsonObject(with: data, options: [])
+        Alamofire.request("https://api.edamam.com/api/food-database/parser?upc=\(trimmedBarcode)&app_id=\(appID)&app_key=\(appKey)").responseJSON { response in
+            
+            guard let data = response.data else { return }
+            
+            do {
+                let product = try JSONDecoder().decode(FoodProduct.self, from: data)
+                print(product.getLabel())
+                
+            } catch {
+                // Make into a function
+                do{
+                    let error = try JSONDecoder().decode(APIerror.self, from: data)
+                    print(error.message)
                     
-                    print(json)
-                } else {
-                    print("No data")
+                } catch {
+                    print("An unknown error has occured")
                     return
                 }
+                
             }
-            task.resume()
-         }
+            
+            
+        }
     }
 }
