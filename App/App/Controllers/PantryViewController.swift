@@ -110,7 +110,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
                 //viewController.delegate = self
                 //Push current VC onto backstack
                 viewController.product.productName = text
-                self.navigationController?.pushViewController(viewController, animated: false)
+                self.navigationController?.pushViewController(viewController, animated: true)
                 
             } else {
                 // Error occured
@@ -121,18 +121,18 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         
         // Add "Barcode" button to alert
         popup.addAction(UIAlertAction(title: "Barcode", style: .default, handler: { (action) in
-            if let text = popup.textFields?[0].text{
+            //if let text = popup.textFields?[0].text{
                 
                 // SEND TEXT TO NEXT VIEW
                 //                self.product = Product.init(productName: text)
-                //                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                //                let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
-                //             self.navigationController?.pushViewController(viewController, animated: false)
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let viewController = storyboard.instantiateViewController(withIdentifier: "barcodeViewController") as! BarcodeViewController
+                self.navigationController?.pushViewController(viewController, animated: true)
                 
-            } else {
+            //} else {
                 // Error occured
-                print("An error has occurred when trying to add a new item")
-            }
+             //   print("An error has occurred when trying to add a new item")
+            //}
             
         }))
         
