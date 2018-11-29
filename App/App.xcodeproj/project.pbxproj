@@ -11,6 +11,8 @@
 		661C0D9521A2987600787382 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661C0D9421A2987600787382 /* RecipesViewController.swift */; };
 		661C0D9721A2988000787382 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661C0D9621A2988000787382 /* SettingsViewController.swift */; };
 		9C076867FCB15D543125888E /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6808E00D042A315B0AFFF865 /* Pods_App.framework */; };
+		B28A14B521AF877000D5291D /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A14B421AF877000D5291D /* EditItemViewController.swift */; };
+		B28A14B721AF87AF00D5291D /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A14B621AF87AF00D5291D /* ProductModel.swift */; };
 		B2AE2DC821A0DA0300ECC3E2 /* PantryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AE2DC721A0DA0300ECC3E2 /* PantryViewController.swift */; };
 		E4124CD021A0BC7C007EB2EF /* ShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4124CCF21A0BC7C007EB2EF /* ShoppingListViewController.swift */; };
 		E4767F1C21A0B44000C665D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4767F1B21A0B44000C665D8 /* AppDelegate.swift */; };
@@ -26,6 +28,8 @@
 		661C0D9621A2988000787382 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6808E00D042A315B0AFFF865 /* Pods_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78F2B372CD27FB99408D381F /* Pods-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.release.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.release.xcconfig"; sourceTree = "<group>"; };
+		B28A14B421AF877000D5291D /* EditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
+		B28A14B621AF87AF00D5291D /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProductModel.swift; path = App/Controllers/ProductModel.swift; sourceTree = SOURCE_ROOT; };
 		B2AE2DC721A0DA0300ECC3E2 /* PantryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryViewController.swift; sourceTree = "<group>"; };
 		E4124CCF21A0BC7C007EB2EF /* ShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
 		E4767F1821A0B44000C665D8 /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +68,7 @@
 				E4124CCF21A0BC7C007EB2EF /* ShoppingListViewController.swift */,
 				661C0D9421A2987600787382 /* RecipesViewController.swift */,
 				661C0D9621A2988000787382 /* SettingsViewController.swift */,
+				B28A14B421AF877000D5291D /* EditItemViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -71,6 +76,7 @@
 		B27AC0A621A1004F00B7AB94 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B28A14B621AF87AF00D5291D /* ProductModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -255,11 +261,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				661C0D9521A2987600787382 /* RecipesViewController.swift in Sources */,
+				B28A14B521AF877000D5291D /* EditItemViewController.swift in Sources */,
 				B2AE2DC821A0DA0300ECC3E2 /* PantryViewController.swift in Sources */,
 				E4124CD021A0BC7C007EB2EF /* ShoppingListViewController.swift in Sources */,
 				3D7E46FE21A3E06B00DD20F3 /* IndividualListViewController.swift in Sources */,
 				661C0D9721A2988000787382 /* SettingsViewController.swift in Sources */,
 				E4767F1C21A0B44000C665D8 /* AppDelegate.swift in Sources */,
+				B28A14B721AF87AF00D5291D /* ProductModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

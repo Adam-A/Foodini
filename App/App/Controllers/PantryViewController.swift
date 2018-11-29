@@ -8,16 +8,12 @@
 
 import UIKit
 
-// REPLACE WITH MODEL
-struct GroceryItem{
-    var item: String = ""
-    var quantity: Int = 0
-    //var expDate: String = ""
-}
-
 class PantryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    //Shows the Appropriate amound of Cells
+    var product = Product()
+    var list = List()
+    
+    //Shows the Appropriate amount of Cells
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return itemCount
@@ -29,9 +25,9 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         // Populate cells as list cells
         let cell = PantryTableView.dequeueReusableCell(withIdentifier: "listCell") ?? UITableViewCell(style: .subtitle, reuseIdentifier: "listCell")
         // Set text label to list name
-        cell.textLabel?.text = "\(pantryItems[indexPath.row].item)"
+        cell.textLabel?.text = "\(list.products[indexPath.row].productName)"
         // Set detail label to the items in the list
-        cell.detailTextLabel?.text = "\(pantryItems[indexPath.row].quantity)"
+        cell.detailTextLabel?.text = "\(list.products[indexPath.row].quantity)"
         
 //        let cells = PantryTableView.visibleCells(in: 1)
 //        UIView.animate(views: cells, animations: [rotateAnimation, fadeAnimation])
@@ -48,8 +44,8 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
             // Delete cell at position
-            pantryItems.remove(at: indexPath.row)
-            itemCount = pantryItems.count
+            list.products.remove(at: indexPath.row)
+            itemCount = list.products.count
             PantryTableView.reloadData()
         }
     }
@@ -60,14 +56,6 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
     
     var itemCount: Int = 0
     
-    // ------- REMOVE LATER --------------
-    var pantryItems: [GroceryItem] =
-        [GroceryItem.init(item: "Apple", quantity: 5),
-         GroceryItem.init(item: "Oranges", quantity: 4),
-         GroceryItem.init(item: "Milk", quantity: 1),
-         GroceryItem.init(item: "Tuna", quantity: 1),
-         GroceryItem.init(item: "Sugar", quantity: 2)]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -75,7 +63,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         navigationItem.leftBarButtonItem = editButtonItem
         PantryTableView.dataSource = self
         PantryTableView.delegate = self
-        itemCount = pantryItems.count
+        itemCount = list.products.count
         CreateNewItemButton()
     }
     
@@ -87,23 +75,71 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     @objc func AddNewItem(sender: UIBarButtonItem){
-        // INSERT CODE TO SWITCH TO ADD ITEM VIEW CONTROLLER
-    }
-    
-    // Need to override setEditing in order to actually edit cells in tableView
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        // If the edit button title is "Done"
-        if navigationItem.leftBarButtonItem?.title == "Done"{
-            // tableView is not being edited
-            PantryTableView.isEditing = false
-            // Switch done button to "Edit"
-            navigationItem.leftBarButtonItem?.title = "Edit"
-        } else { // If the edit button title is "Edit"
-            // tableView is being edited
-            PantryTableView.isEditing = true
-            // Switch edit button to "Done"
-            navigationItem.leftBarButtonItem?.title = "Done"
+        // Uses alert with text field to create a named list
+        let popup = UIAlertController(title: "New Item", message: "Add an item", preferredStyle: .alert)
+        
+        // Add text field to alert and autofill with "List"
+        popup.addTextField { (textField) in
+            textField.text = "List"
         }
+        // Add "Quick Add" button to alert
+        popup.addAction(UIAlertAction(title: "Quick Add", style: .default, handler: { (action) in
+            if let text = popup.textFields?[0].text{
+                // Create new list
+                self.product = Product.init(productName: text)
+                self.list.products.append(self.product)
+                self.itemCount = self.list.products.count
+                //self.pantryItems.append(self.product)
+                //self.itemCount = self.pantryItems.count
+                self.PantryTableView.reloadData()
+            } else {
+                // Error occured
+                print("An error has occurred when trying to add a new item")
+            }
+            
+        }))
+        
+        // Add "Item Details" button to alert
+        popup.addAction(UIAlertAction(title: "Item Details", style: .default, handler: { (action) in
+            if let text = popup.textFields?[0].text{
+                
+                // SEND TEXT TO NEXT VIEW
+                self.product = Product.init(productName: text)
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
+                //viewController.delegate = self
+                //Push current VC onto backstack
+                viewController.product.productName = text
+                self.navigationController?.pushViewController(viewController, animated: false)
+                
+            } else {
+                // Error occured
+                print("An error has occurred when trying to add a new item")
+            }
+            
+        }))
+        
+        // Add "Barcode" button to alert
+        popup.addAction(UIAlertAction(title: "Barcode", style: .default, handler: { (action) in
+            if let text = popup.textFields?[0].text{
+                
+                // SEND TEXT TO NEXT VIEW
+                //                self.product = Product.init(productName: text)
+                //                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                //                let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
+                //             self.navigationController?.pushViewController(viewController, animated: false)
+                
+            } else {
+                // Error occured
+                print("An error has occurred when trying to add a new item")
+            }
+            
+        }))
+        
+        popup.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in }))
+        
+        self.present(popup, animated: true, completion: nil)
+
     }
     
     
@@ -116,7 +152,6 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
          //viewController.delegate = self
           //Push current VC onto backstack
          self.navigationController?.pushViewController(viewController, animated: false)
- 
     }
     
     
