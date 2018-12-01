@@ -15,6 +15,25 @@ protocol AddProduct {
     
 }
 
+// FOR USE IN ShoppingListViewController
+class ListStorage {
+    var ListName: String
+    var Lists: [List]
+    
+    // Standard Init
+    init(){
+        self.ListName = "List"
+        self.Lists = [List]()
+    }
+    
+    // for creating customized list name
+    init(ListName: String){
+        self.ListName = ListName
+        self.Lists = [List]()
+    }
+}
+
+// FOR USE IN IndividualListViewController AND PantryViewController
 class List {
     var name: String
     var totalProducts: Int
@@ -32,9 +51,13 @@ class List {
         self.totalProducts = 0
         self.products = [Product]()
     }
+    
+    //------------ EXPIRATION -------------
+    // Need function to see how close product is to expiration date
+    // if it is past expiration date, change text to red or something
 }
 
-
+// FOR USE IN EditItemViewController
 class Product {
     // Entered by the user
     var productName: String
@@ -44,7 +67,7 @@ class Product {
     // current date that will be used to see if product is close to expiring
     var currentDate: Date
     // Amount stored
-    var quantity: Double
+    var quantity: Int
     var price: Double
     var daysLeft: Int
     // ------ enter more to hold response from Edamam-----
@@ -65,10 +88,5 @@ class Product {
         self.daysLeft = 0
         self.currentDate = Date()
     }
-    
-    //------------ EXPIRATION -------------
-    // Need function to see how close product is to expiration date
-    // if it is past expiration date, change text to red or something
-    
     
 }

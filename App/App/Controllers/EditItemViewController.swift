@@ -8,18 +8,31 @@
 
 import UIKit
 
+protocol UpdateListDelegate{
+    func ListUpdate(finishedProduct: Product)
+}
+
+
 class EditItemViewController: UIViewController {
     
     @IBOutlet weak var expDateTextField: UITextField!
     @IBOutlet weak var itemNameTextField: UITextField!
+    @IBOutlet weak var quantityTextField: UITextField!
+    @IBOutlet weak var priceTextField: UITextField!
+    
+    var delegate: UpdateListDelegate?
     
     var product = Product()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        DoneButton()
         
-        
+        // Fill Text Fields with Info
         itemNameTextField.text = product.productName
+        quantityTextField.text = String(product.quantity)
+        priceTextField.text = String(product.price)
+        //expDateTextField.text = FillDate(product.expDate)
         // create a date picker
         let datePicker = UIDatePicker()
         // set date picker mode to date
@@ -32,6 +45,19 @@ class EditItemViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+//    @objc func FillDate(sender: product.expDate){
+//
+//        let formatter = DateFormatter()
+//
+//        //show only date, not time
+//        formatter.dateStyle = DateFormatter.Style.medium
+//        formatter.timeStyle = DateFormatter.Style.none
+//
+//        //show chosen date in text field
+//        product.expDate = sender.date
+//        expDateTextField.text = formatter.string(from: sender.date)
+//    }
+    
     @objc func datePickerValueChanged(sender: UIDatePicker){
         
         let formatter = DateFormatter()
@@ -41,6 +67,7 @@ class EditItemViewController: UIViewController {
         formatter.timeStyle = DateFormatter.Style.none
         
         //show chosen date in text field
+        product.expDate = sender.date
         expDateTextField.text = formatter.string(from: sender.date)
     }
     
@@ -50,5 +77,22 @@ class EditItemViewController: UIViewController {
     
     //Save Items when done
     
+    // Used for Saving Items
+    func DoneButton(){
+        // Create new list button using AddNewList as a selector
+        let addDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(Done(sender:)))
+        self.navigationItem.rightBarButtonItem = addDoneButton
+    }
+    
+    @objc func Done(sender: UIBarButtonItem){
+        // Save Info from Text Fields
+        product.productName = itemNameTextField.text ?? "No Product Name"
+        product.quantity = Int(quantityTextField.text ?? "1") ?? 1
+        product.price = Double(priceTextField.text ?? "0.00") ?? 0.00
+        
+        // Switch to Previous View Controller
+        self.delegate?.ListUpdate(finishedProduct: product)
+        self.navigationController?.popViewController(animated: true)
+    }
     
 }

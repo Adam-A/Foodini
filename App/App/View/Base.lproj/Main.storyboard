@@ -132,13 +132,13 @@
                                 <rect key="frame" x="152.66666666666663" y="96" width="241.33333333333337" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="$0.00" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tVI-sr-JHT">
                                 <rect key="frame" x="153" y="158" width="241" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l2h-og-2li">
                                 <rect key="frame" x="153" y="219" width="241" height="30"/>
@@ -176,6 +176,8 @@
                     <connections>
                         <outlet property="expDateTextField" destination="l2h-og-2li" id="VTk-Dr-Kqu"/>
                         <outlet property="itemNameTextField" destination="bbd-Wg-Qng" id="8hG-qH-Yvp"/>
+                        <outlet property="priceTextField" destination="tVI-sr-JHT" id="vyV-1e-YoU"/>
+                        <outlet property="quantityTextField" destination="hlI-qK-L23" id="3Gy-Wl-Pwm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sdb-lJ-mlN" userLabel="First Responder" sceneMemberID="firstResponder"/>

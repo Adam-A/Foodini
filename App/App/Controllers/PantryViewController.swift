@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PantryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class PantryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdateListDelegate {
     
     var product = Product()
     var list = List()
@@ -39,6 +39,12 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         PantryTableView.deselectRow(at: indexPath, animated: true)
         
         //INSERT CODE TO VIEW ITEM DETAILS VIEW CONTROLLER
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
+        viewController.delegate = self
+        //Push current VC onto backstack
+        viewController.product = self.product
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -52,19 +58,24 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
     
 
     @IBOutlet weak var PantryTableView: UITableView!
-//    @IBOutlet weak var pantryButton: UIButton!
     
     var itemCount: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        pantryButton.isEnabled = false
         navigationItem.leftBarButtonItem = editButtonItem
         PantryTableView.dataSource = self
         PantryTableView.delegate = self
         itemCount = list.products.count
         CreateNewItemButton()
+    }
+    
+    // Save Items from EditItemViewController
+    func ListUpdate(finishedProduct: Product) {
+        //self.list.products.append(finishedProduct)
+        self.itemCount = self.list.products.count
+        self.PantryTableView.reloadData()
     }
     
     // Used for adding additional items to Pantry
@@ -105,11 +116,13 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
                 
                 // SEND TEXT TO NEXT VIEW
                 self.product = Product.init(productName: text)
+                self.list.products.append(self.product)
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
-                //viewController.delegate = self
+                viewController.delegate = self
                 //Push current VC onto backstack
                 viewController.product.productName = text
+                viewController.product = self.product
                 self.navigationController?.pushViewController(viewController, animated: true)
                 
             } else {
