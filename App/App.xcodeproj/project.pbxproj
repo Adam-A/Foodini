@@ -15,6 +15,7 @@
 		B28A14B721AF87AF00D5291D /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A14B621AF87AF00D5291D /* ProductModel.swift */; };
 		B2AE2DC821A0DA0300ECC3E2 /* PantryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AE2DC721A0DA0300ECC3E2 /* PantryViewController.swift */; };
 		E4124CD021A0BC7C007EB2EF /* ShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4124CCF21A0BC7C007EB2EF /* ShoppingListViewController.swift */; };
+		E43D32AC21B34138008B8E85 /* EdamamAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43D32AB21B34138008B8E85 /* EdamamAPI.swift */; };
 		E4767F1C21A0B44000C665D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4767F1B21A0B44000C665D8 /* AppDelegate.swift */; };
 		E4767F2121A0B44000C665D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4767F1F21A0B44000C665D8 /* Main.storyboard */; };
 		E4767F2321A0B44100C665D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4767F2221A0B44100C665D8 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 		B28A14B621AF87AF00D5291D /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProductModel.swift; path = App/Models/ProductModel.swift; sourceTree = SOURCE_ROOT; };
 		B2AE2DC721A0DA0300ECC3E2 /* PantryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryViewController.swift; sourceTree = "<group>"; };
 		E4124CCF21A0BC7C007EB2EF /* ShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
+		E43D32AB21B34138008B8E85 /* EdamamAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdamamAPI.swift; sourceTree = "<group>"; };
 		E4767F1821A0B44000C665D8 /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4767F1B21A0B44000C665D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4767F2021A0B44000C665D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			children = (
 				E4767F2221A0B44100C665D8 /* Assets.xcassets */,
 				E4767F1B21A0B44000C665D8 /* AppDelegate.swift */,
+				E43D32AB21B34138008B8E85 /* EdamamAPI.swift */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				661C0D9521A2987600787382 /* RecipesViewController.swift in Sources */,
+				E43D32AC21B34138008B8E85 /* EdamamAPI.swift in Sources */,
 				B28A14B521AF877000D5291D /* EditItemViewController.swift in Sources */,
 				E496706821AF8FB000C047C5 /* BarcodeViewController.swift in Sources */,
 				B2AE2DC821A0DA0300ECC3E2 /* PantryViewController.swift in Sources */,

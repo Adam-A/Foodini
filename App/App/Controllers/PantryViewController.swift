@@ -44,6 +44,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         viewController.delegate = self
         //Push current VC onto backstack
         viewController.product = self.list.products[indexPath.row]
+        viewController.isEditing = true
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -72,8 +73,10 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     // Save Items from EditItemViewController
-    func ListUpdate(finishedProduct: Product) {
-        //self.list.products.append(finishedProduct)
+    func ListUpdate(finishedProduct: Product, isEditing: Bool) {
+        if isEditing == false{
+            self.list.products.append(finishedProduct)
+        }
         self.itemCount = self.list.products.count
         self.PantryTableView.reloadData()
     }
@@ -98,7 +101,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
             if let text = popup.textFields?[0].text{
                 // Create new list
                 self.product = Product.init(productName: text)
-                self.list.products.append(self.product)
+                //self.list.products.append(self.product)
                 self.itemCount = self.list.products.count
                 //self.pantryItems.append(self.product)
                 //self.itemCount = self.pantryItems.count
@@ -114,15 +117,21 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         popup.addAction(UIAlertAction(title: "Item Details", style: .default, handler: { (action) in
             if let text = popup.textFields?[0].text{
                 
-                // SEND TEXT TO NEXT VIEW
+                // Init product using text field as name
                 self.product = Product.init(productName: text)
-                self.list.products.append(self.product)
+                // Add product to table view
+                //self.list.products.append(self.product)
+                
+                // Create and push EditItemViewController
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
+                
+                // Set EditItemViewController vars
                 viewController.delegate = self
-                //Push current VC onto backstack
                 viewController.product.productName = text
                 viewController.product = self.product
+                viewController.isEditing = false
+                
                 self.navigationController?.pushViewController(viewController, animated: true)
                 
             } else {
@@ -134,18 +143,21 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         
         // Add "Barcode" button to alert
         popup.addAction(UIAlertAction(title: "Barcode", style: .default, handler: { (action) in
-            //if let text = popup.textFields?[0].text{
-                
-                // SEND TEXT TO NEXT VIEW
-                //                self.product = Product.init(productName: text)
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let viewController = storyboard.instantiateViewController(withIdentifier: "barcodeViewController") as! BarcodeViewController
-                self.navigationController?.pushViewController(viewController, animated: true)
-                
-            //} else {
-                // Error occured
-             //   print("An error has occurred when trying to add a new item")
-            //}
+            
+            // Init product
+            self.product = Product.init(productName: "")
+            // Add product to table view
+            //self.list.products.append(self.product)
+            
+            // Create and push BarcodeViewController
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "barcodeViewController") as! BarcodeViewController
+            
+            // Set BarcodeViewController vars
+            viewController.product = self.product
+            viewController.delegate = self
+            
+            self.navigationController?.pushViewController(viewController, animated: true)
             
         }))
         

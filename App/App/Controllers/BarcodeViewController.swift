@@ -18,43 +18,6 @@ import Alamofire
 
 class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
-    // Food Product structure (put into API.swift)
-    struct FoodProduct: Codable {
-        struct Hints: Codable {
-            var food: Food
-        }
-        
-        struct Food : Codable{
-            var foodId: String
-            var uri: String
-            var label: String
-            var nutrients: Nutrients
-            var brand: String
-            var category: String
-            var categoryLabel: String
-            var foodContentsLabel: String
-        }
-        
-        struct Nutrients: Codable{
-            var ENERC_KCAL: Double
-        }
-        
-        var text: String
-        var parsed: [String]
-        var hints: [Hints]
-        
-        func getLabel() -> String{
-            return hints[0].food.label
-        }
-    }
-    
-    struct APIerror: Codable {
-        var error: String
-        var message: String
-    }
-    
-    
-    
     // The current capture session,
     //     used to manage flow of data from input
     //     capture device (like captureDevice) to output (like metadataObject)
@@ -68,6 +31,9 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     // REMOVE: Temporary food display label
     @IBOutlet weak var foodDisplayLabel: UILabel!
+    
+    var product = Product()
+    var delegate: UpdateListDelegate?
     
     
     override func viewDidLoad() {
@@ -189,14 +155,12 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             guard let data = response.data else { return }
             
             do {
-                let product = try JSONDecoder().decode(FoodProduct.self, from: data)
-                // REMOVE:
-                self.foodDisplayLabel.isHidden = false
-                self.foodDisplayLabel.text = product.getLabel()
-                print(product.getLabel())
+                let foodProduct = try JSONDecoder().decode(FoodProduct.self, from: data)
+                
+                self.pushEditItemViewController(foodProduct: foodProduct)
                 
             } catch {
-                // Make into a function
+                // Make into an API function
                 do{
                     let error = try JSONDecoder().decode(APIerror.self, from: data)
                     print(error.message)
@@ -211,5 +175,19 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             
             
         }
+    }
+    
+    func pushEditItemViewController(foodProduct: FoodProduct){
+        // Create and push EditItemViewController
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
+        
+        // Set EditItemViewController vars
+        self.product.productName = foodProduct.getLabel()
+        viewController.product = self.product
+        viewController.delegate = self.delegate
+        viewController.editCell = false
+        
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }

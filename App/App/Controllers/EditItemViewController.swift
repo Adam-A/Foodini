@@ -9,7 +9,7 @@
 import UIKit
 
 protocol UpdateListDelegate{
-    func ListUpdate(finishedProduct: Product)
+    func ListUpdate(finishedProduct: Product, isEditing: Bool)
 }
 
 
@@ -23,6 +23,8 @@ class EditItemViewController: UIViewController {
     var delegate: UpdateListDelegate?
     
     var product = Product()
+    
+    var editCell: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,8 +93,24 @@ class EditItemViewController: UIViewController {
         product.price = Double(priceTextField.text ?? "0.00") ?? 0.00
         
         // Switch to Previous View Controller
-        self.delegate?.ListUpdate(finishedProduct: product)
-        self.navigationController?.popViewController(animated: true)
+        self.delegate?.ListUpdate(finishedProduct: product, isEditing: editCell)
+        self.navigationController?.popToRootViewController(animated: true)
+
+//        if let listOfViewControllers = self.navigationController?.viewControllers{
+//            for viewController in listOfViewControllers {
+//                print(viewController)
+//                // This doesn't work...
+//                if viewController.isKind(of: PantryViewController.self){
+//                    self.navigationController?.popToViewController(viewController, animated: true)
+//                } else {
+//                    print("Unable to get Pantry View Controller")
+//                    self.navigationController?.popViewController(animated: true)
+//                }
+//            }
+//        } else {
+//            print("Unable to get list of view controllers")
+//            self.navigationController?.popViewController(animated: true)
+//        }
     }
     
 }
