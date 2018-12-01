@@ -43,7 +43,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
         viewController.delegate = self
         //Push current VC onto backstack
-        viewController.product = self.product
+        viewController.product = self.list.products[indexPath.row]
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
