@@ -320,10 +320,15 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="brandTextField" destination="vbG-Ya-vn6" id="5hT-97-bAu"/>
+                        <outlet property="dairySwitch" destination="1uP-2Y-bTo" id="XDz-LG-OcW"/>
                         <outlet property="expDateTextField" destination="l2h-og-2li" id="VTk-Dr-Kqu"/>
                         <outlet property="itemNameTextField" destination="bbd-Wg-Qng" id="8hG-qH-Yvp"/>
+                        <outlet property="nutSwitch" destination="Vp8-U1-Aqh" id="mSn-EF-zY9"/>
+                        <outlet property="palmSwitch" destination="wzG-5m-4C6" id="5ET-PQ-lgD"/>
                         <outlet property="priceTextField" destination="tVI-sr-JHT" id="vyV-1e-YoU"/>
                         <outlet property="quantityTextField" destination="hlI-qK-L23" id="3Gy-Wl-Pwm"/>
+                        <outlet property="soySwitch" destination="g3U-Sk-pTm" id="pYt-Sj-xve"/>
+                        <outlet property="wheatSwitch" destination="ChR-DK-Mru" id="CUv-Az-LFC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sdb-lJ-mlN" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -22,6 +22,12 @@ class EditItemViewController: UIViewController {
     @IBOutlet weak var priceTextField: UITextField!
     @IBOutlet weak var brandTextField: UITextField!
     
+    @IBOutlet weak var palmSwitch: UISwitch!
+    @IBOutlet weak var dairySwitch: UISwitch!
+    @IBOutlet weak var nutSwitch: UISwitch!
+    @IBOutlet weak var wheatSwitch: UISwitch!
+    @IBOutlet weak var soySwitch: UISwitch!
+    
     
     
     var delegate: UpdateListDelegate?
@@ -33,15 +39,46 @@ class EditItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         DoneButton()
         
-        // Fill Text Fields with Info
+        // ---- Fill Text Fields with Info-----
         itemNameTextField.text = product.productName
         brandTextField.text = product.brandName
         quantityTextField.text = String(product.quantity)
         priceTextField.text = String(product.price)
         //expDateTextField.text = FillDate(product.expDate)
+        if product.containsPalm == true{
+            palmSwitch.isOn = true
+        }else{
+            palmSwitch.isOn = false
+        }
+        
+        if product.containsDairy == true{
+            dairySwitch.isOn = true
+        }else{
+            dairySwitch.isOn = false
+        }
+        
+        if product.containsNuts == true{
+            nutSwitch.isOn = true
+        }else{
+            nutSwitch.isOn = false
+        }
+        
+        if product.containsWheat == true{
+            wheatSwitch.isOn = true
+        }else{
+            wheatSwitch.isOn = false
+        }
+        
+        if product.containsSoy == true{
+            soySwitch.isOn = true
+        }else{
+            soySwitch.isOn = false
+        }
+        
+        
+        //----DATE PICKER-----
         // create a date picker
         let datePicker = UIDatePicker()
         // set date picker mode to date
@@ -109,6 +146,41 @@ class EditItemViewController: UIViewController {
             product.quantity = Int(quantityTextField.text ?? "1") ?? 1
             //product.price = Double(priceTextField.text ?? "0.00") ?? 0.00
             product.price = priceTextField.text ?? "No Price"
+            
+            //save Palm
+            if palmSwitch.isOn {
+                product.containsPalm = true
+            } else {
+                product.containsPalm = false
+            }
+            
+            //saveDairy
+            if dairySwitch.isOn {
+                product.containsDairy = true
+            } else {
+                product.containsDairy = false
+            }
+            
+            //saveNut
+            if nutSwitch.isOn {
+                product.containsNuts = true
+            } else {
+                product.containsNuts = false
+            }
+            
+            //saveWheat
+            if wheatSwitch.isOn {
+                product.containsWheat = true
+            } else {
+                product.containsWheat = false
+            }
+            
+            //saveSoy
+            if soySwitch.isOn {
+                product.containsSoy = true
+            } else {
+                product.containsSoy = false
+            }
             
             // Switch to Previous View Controller
             self.delegate?.ListUpdate(finishedProduct: product, isEditing: editCell)

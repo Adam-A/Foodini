@@ -71,7 +71,11 @@ class Product: Codable {
     var quantity: Int
     var price: String
     var daysLeft: Int
-    // ------ enter more to hold response from Edamam-----
+    var containsPalm: Bool
+    var containsDairy: Bool
+    var containsNuts: Bool
+    var containsWheat: Bool
+    var containsSoy: Bool
     
     init(){
         self.productName = ""
@@ -80,6 +84,11 @@ class Product: Codable {
         self.price = ""
         self.daysLeft = 0
         self.currentDate = Date()
+        self.containsPalm = false
+        self.containsDairy = false
+        self.containsNuts = false
+        self.containsWheat = false
+        self.containsSoy = false
     }
     
     // for creating a new product
@@ -91,6 +100,11 @@ class Product: Codable {
         self.price = ""
         self.daysLeft = 0
         self.currentDate = Date()
+        self.containsPalm = false
+        self.containsDairy = false
+        self.containsNuts = false
+        self.containsWheat = false
+        self.containsSoy = false
     }
     
     // for creating a new product with brand name
@@ -102,6 +116,11 @@ class Product: Codable {
         self.price = ""
         self.daysLeft = 0
         self.currentDate = Date()
+        self.containsPalm = false
+        self.containsDairy = false
+        self.containsNuts = false
+        self.containsWheat = false
+        self.containsSoy = false
     }
     
 }
