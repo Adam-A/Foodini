@@ -101,7 +101,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
             if let text = popup.textFields?[0].text{
                 // Create new list
                 self.product = Product.init(productName: text)
-                //self.list.products.append(self.product)
+                self.list.products.append(self.product)
                 self.itemCount = self.list.products.count
                 //self.pantryItems.append(self.product)
                 //self.itemCount = self.pantryItems.count
