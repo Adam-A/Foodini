@@ -1,24 +1,28 @@
 PODS:
   - Alamofire (4.7.3)
   - DropDown (2.3.4)
+  - TextFieldEffects (1.5.0)
   - ViewAnimator (2.2.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - DropDown (= 2.3.4)
+  - TextFieldEffects
   - ViewAnimator
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - DropDown
+    - TextFieldEffects
     - ViewAnimator
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   DropDown: f225ff0fd09dde064d17aa03db7e4d4e4ff40b6b
+  TextFieldEffects: bf9e9cac7cb1a97d632fbcd0724bb6347dd86633
   ViewAnimator: a849844cc3698620e1a562b510ed0c28aeafcdc5
 
-PODFILE CHECKSUM: fbbf02ac9fe4c1374c1c5aa233e9b4d737e19639
+PODFILE CHECKSUM: 9e3cb66e28020b73067979589596b08376ccf8d9
 
 COCOAPODS: 1.5.3

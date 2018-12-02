@@ -9,5 +9,6 @@ target 'App' do
 	pod "ViewAnimator"
 	pod 'DropDown', '2.3.4'
 	pod 'Alamofire', '~> 4.7'
+	pod 'TextFieldEffects'
 
 end

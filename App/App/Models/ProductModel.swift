@@ -61,6 +61,7 @@ class List: Codable {
 class Product: Codable {
     // Entered by the user
     var productName: String
+    var brandName: String
     // expiration date of product
     // will have to use UIDatePicker for the user to enter this
     var expDate: Date?
@@ -68,23 +69,37 @@ class Product: Codable {
     var currentDate: Date
     // Amount stored
     var quantity: Int
-    var price: Double
+    var price: String
     var daysLeft: Int
     // ------ enter more to hold response from Edamam-----
     
     init(){
         self.productName = ""
+        self.brandName = ""
         self.quantity = 1
-        self.price = 0.0
+        self.price = ""
         self.daysLeft = 0
         self.currentDate = Date()
     }
     
     // for creating a new product
+    // mainly used for manually entering info
     init(productName: String){
         self.productName = productName
+        self.brandName = ""
         self.quantity = 1
-        self.price = 0.0
+        self.price = ""
+        self.daysLeft = 0
+        self.currentDate = Date()
+    }
+    
+    // for creating a new product with brand name
+    // this could be from barcode
+    init(productName: String, brandName: String){
+        self.productName = productName
+        self.brandName = brandName
+        self.quantity = 1
+        self.price = ""
         self.daysLeft = 0
         self.currentDate = Date()
     }

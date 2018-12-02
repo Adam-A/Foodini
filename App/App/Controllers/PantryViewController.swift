@@ -150,7 +150,9 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
             if let text = popup.textFields?[0].text{
                 
                 // Init product using text field as name
-                self.product = Product.init(productName: text)
+                if text != "List"{
+                    self.product = Product.init(productName: text)
+                }
                 // Add product to table view
                 //self.list.products.append(self.product)
                 

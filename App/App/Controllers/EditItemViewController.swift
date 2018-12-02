@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TextFieldEffects
 
 protocol UpdateListDelegate{
     func ListUpdate(finishedProduct: Product, isEditing: Bool)
@@ -19,6 +20,9 @@ class EditItemViewController: UIViewController {
     @IBOutlet weak var itemNameTextField: UITextField!
     @IBOutlet weak var quantityTextField: UITextField!
     @IBOutlet weak var priceTextField: UITextField!
+    @IBOutlet weak var brandTextField: UITextField!
+    
+    
     
     var delegate: UpdateListDelegate?
     
@@ -28,10 +32,13 @@ class EditItemViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         DoneButton()
         
         // Fill Text Fields with Info
         itemNameTextField.text = product.productName
+        brandTextField.text = product.brandName
         quantityTextField.text = String(product.quantity)
         priceTextField.text = String(product.price)
         //expDateTextField.text = FillDate(product.expDate)
@@ -86,15 +93,26 @@ class EditItemViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = addDoneButton
     }
     
+    @IBAction func RevertTextColor(_ sender: Any) {
+        itemNameTextField.textColor = .black
+    }
+    
+    @IBAction func revertQuantitColor(_ sender: Any) {
+        quantityTextField.textColor = .black
+    }
     @objc func Done(sender: UIBarButtonItem){
         // Save Info from Text Fields
-        product.productName = itemNameTextField.text ?? "No Product Name"
-        product.quantity = Int(quantityTextField.text ?? "1") ?? 1
-        product.price = Double(priceTextField.text ?? "0.00") ?? 0.00
-        
-        // Switch to Previous View Controller
-        self.delegate?.ListUpdate(finishedProduct: product, isEditing: editCell)
-        self.navigationController?.popToRootViewController(animated: true)
+        if (itemNameTextField.text != "" && itemNameTextField.text != "Enter Product Name" && quantityTextField.text != "0")
+        {
+            product.productName = itemNameTextField.text ?? "No Product Name"
+            product.brandName = brandTextField.text ?? "No Product Name"
+            product.quantity = Int(quantityTextField.text ?? "1") ?? 1
+            //product.price = Double(priceTextField.text ?? "0.00") ?? 0.00
+            product.price = priceTextField.text ?? "No Price"
+            
+            // Switch to Previous View Controller
+            self.delegate?.ListUpdate(finishedProduct: product, isEditing: editCell)
+            self.navigationController?.popToRootViewController(animated: true)
 
 //        if let listOfViewControllers = self.navigationController?.viewControllers{
 //            for viewController in listOfViewControllers {
@@ -111,6 +129,16 @@ class EditItemViewController: UIViewController {
 //            print("Unable to get list of view controllers")
 //            self.navigationController?.popViewController(animated: true)
 //        }
+        }else if (itemNameTextField.text == "" || itemNameTextField.text == "Enter Product Name"){
+            itemNameTextField.resignFirstResponder()
+            itemNameTextField.textColor = .red
+            itemNameTextField.text = "Enter Product Name"
+        }else if (quantityTextField.text == "0"){
+            quantityTextField.resignFirstResponder()
+            quantityTextField.textColor = .red
+            quantityTextField.text = "Invalid Quantity"
+        }
+        
     }
     
 }
