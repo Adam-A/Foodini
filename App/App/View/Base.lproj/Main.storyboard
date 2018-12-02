@@ -539,31 +539,18 @@
                                     <constraint firstAttribute="height" constant="296" id="BnS-dD-l8P"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;food&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gRE-Sq-PT8">
-                                <rect key="frame" x="20" y="420" width="374" height="62"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="62" id="MSd-EN-Btr"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="tEU-iW-ttl" firstAttribute="top" secondItem="dYT-AN-EG5" secondAttribute="top" id="6SA-ld-08U"/>
                             <constraint firstItem="tEU-iW-ttl" firstAttribute="trailing" secondItem="dYT-AN-EG5" secondAttribute="trailing" id="6Uy-Pi-ois"/>
-                            <constraint firstItem="gRE-Sq-PT8" firstAttribute="leading" secondItem="dYT-AN-EG5" secondAttribute="leading" constant="20" id="Jxk-Gk-ehm"/>
-                            <constraint firstItem="dYT-AN-EG5" firstAttribute="trailing" secondItem="gRE-Sq-PT8" secondAttribute="trailing" constant="20" id="MAj-f4-cS0"/>
                             <constraint firstItem="tEU-iW-ttl" firstAttribute="leading" secondItem="dYT-AN-EG5" secondAttribute="leading" id="V1x-2I-kch"/>
-                            <constraint firstItem="gRE-Sq-PT8" firstAttribute="top" secondItem="tEU-iW-ttl" secondAttribute="bottom" constant="124" id="eZm-j2-kJ9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dYT-AN-EG5"/>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="cameraDisplay" destination="tEU-iW-ttl" id="6Ae-8z-qGA"/>
-                        <outlet property="foodDisplayLabel" destination="gRE-Sq-PT8" id="dqE-Gy-Uhz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Th-DB-WLt" userLabel="First Responder" sceneMemberID="firstResponder"/>

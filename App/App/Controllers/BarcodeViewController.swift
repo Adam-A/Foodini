@@ -14,7 +14,6 @@
 
 import UIKit
 import AVFoundation
-import Alamofire
 
 class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
@@ -29,18 +28,13 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     // "Window" for displaying output from the capture device
     @IBOutlet weak var cameraDisplay: UIView!
     
-    // REMOVE: Temporary food display label
-    @IBOutlet weak var foodDisplayLabel: UILabel!
-    
+    // Variables used to add product to pantry
     var product = Product()
     var delegate: UpdateListDelegate?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // REMOVE:
-        foodDisplayLabel.isHidden = true
         
         // Create an av capture session
         avSession = AVCaptureSession()
@@ -146,48 +140,31 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             trimmedBarcode = String(unprocessedBarcode.suffix(12))
         }
         
-        // Make API call (put into API.swift)
-        let appID = "9ca52e0d"
-        let appKey = "7dade37c47154913ca172a01f0e48921"
-        
-        Alamofire.request("https://api.edamam.com/api/food-database/parser?upc=\(trimmedBarcode)&app_id=\(appID)&app_key=\(appKey)").responseJSON { response in
-            
-            guard let data = response.data else { return }
-            
-            do {
-                let foodProduct = try JSONDecoder().decode(FoodProduct.self, from: data)
-                
-                self.pushEditItemViewController(foodProduct: foodProduct)
-                
-            } catch {
-                // Make into an API function
-                do{
-                    let error = try JSONDecoder().decode(APIerror.self, from: data)
-                    print(error.message)
-                    
-                } catch {
-                    print("An unknown error has occured")
-                    //self.navigationController?.popViewController(animated: true)
-                    return
+        // Make API call
+        API.ApiCall(barcode: trimmedBarcode) { (response, error) in
+            if (error == nil && response != nil) {
+                if let response = response{
+                    self.pushEditItemViewController(foodProduct: response)
                 }
-                
+            } else {
+                if let error = error{
+                    print("Error: \(error.message)")
+                }
             }
-            
-            
         }
     }
     
-    func pushEditItemViewController(foodProduct: FoodProduct){
+    func pushEditItemViewController(foodProduct: API.FoodProduct){
         // Create and push EditItemViewController
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
-        
+    
         // Set EditItemViewController vars
         self.product.productName = foodProduct.getLabel()
         viewController.product = self.product
         viewController.delegate = self.delegate
         viewController.editCell = false
-        
+    
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
