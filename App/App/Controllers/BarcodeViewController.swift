@@ -43,7 +43,7 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         let captureDevice = AVCaptureDevice.default(for: .video)
         
         // Create an input object from the device
-        let deviceInput: AVCaptureDeviceInput?
+        var deviceInput: AVCaptureDeviceInput?
         
         // If capture device exists, try to capture input from camptureDevice
         if let captureDevice = captureDevice {
@@ -51,13 +51,14 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
                 deviceInput = try AVCaptureDeviceInput(device: captureDevice)
             } catch {
                 print("Capture unavaliable")
-                //self.navigationController?.popViewController(animated: true)
-                return
+                // Spawn error popup
+                SpawnPopup(message: "This device can't currently capture.")
+                
             }
         } else {
             print ("No capture device")
-            //self.navigationController?.popViewController(animated: true)
-            return
+            // Spawn error popup
+            SpawnPopup(message: "This device has no capture device.")
         }
         
         // Unwrap avSession
@@ -69,8 +70,8 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
                 avSession.addInput(deviceInput)
             } else {
                 print("Cannot add input")
-                //self.navigationController?.popViewController(animated: true)
-                return
+                // Spawn error popup
+                SpawnPopup(message: "Cannot add input to this device, please try again later.")
             }
         }
         
@@ -89,8 +90,8 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             metadataObject.metadataObjectTypes = [AVMetadataObject.ObjectType.ean13]
         } else {
             print("Cannot add output")
-            //self.navigationController?.popViewController(animated: true)
-            return
+            // Spawn error popup
+            SpawnPopup(message: "Cannot add output to this device, please try again later.")
         }
         
         // Set preview layer to the current av capture session (avSession)
@@ -107,8 +108,7 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             avSession.startRunning()
         } else {
             print("Cannot display camera preview")
-            //self.navigationController?.popViewController(animated: true)
-            return
+            SpawnPopup(message: "Cannot display camera preview.")
         }
     }
     
@@ -129,8 +129,7 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         // If the barcode is invalid, return
         if (unprocessedBarcode == "error"){
             print("Invalid barcode")
-            //self.navigationController?.popViewController(animated: true)
-            return
+            SpawnPopup(message: "We encountered an error while processing the barcode, please try again.")
         }
         
         var trimmedBarcode = unprocessedBarcode
@@ -149,9 +148,20 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             } else {
                 if let error = error{
                     print("Error: \(error.message)")
+                    // Spawn pop up error
+                    self.SpawnPopup(message: "We can't find the item you searched for, please enter it manually.")
                 }
             }
         }
+    }
+    
+    func SpawnPopup(message: String){
+        let popup = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        popup.addAction(UIAlertAction(title: "Return", style: .default, handler: { (action) in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        self.present(popup, animated: true, completion: nil)
     }
     
     func pushEditItemViewController(foodProduct: API.FoodProduct){
