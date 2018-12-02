@@ -34,7 +34,7 @@ class ListStorage {
 }
 
 // FOR USE IN IndividualListViewController AND PantryViewController
-class List {
+class List: Codable {
     var name: String
     var totalProducts: Int
     var products: [Product]
@@ -58,7 +58,7 @@ class List {
 }
 
 // FOR USE IN EditItemViewController
-class Product {
+class Product: Codable {
     // Entered by the user
     var productName: String
     // expiration date of product

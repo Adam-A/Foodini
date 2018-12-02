@@ -70,6 +70,35 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         PantryTableView.delegate = self
         itemCount = list.products.count
         CreateNewItemButton()
+        LoadData()
+    }
+    
+    func LoadData(){
+        // Put on a background thread
+        if let listData = UserDefaults.standard.value(forKey: "PantryList") as? Data{
+            print("List Data exists")
+            do {
+                print("==============LOADING============")
+                list = try PropertyListDecoder().decode(List.self, from: listData)
+                itemCount = list.products.count
+                PantryTableView.reloadData()
+            } catch {
+                print("Couldn't retrieve data")
+                return
+            }
+        }
+    }
+    
+    func SerializeData(){
+        // Put on a background thread
+        do {
+            print("==============SAVING============")
+            let serializedList = try PropertyListEncoder().encode(self.list)
+            UserDefaults.standard.set(serializedList, forKey: "PantryList")
+        } catch {
+            print("++++++++Couldn't++++++++")
+            return
+        }
     }
     
     // Save Items from EditItemViewController
@@ -78,6 +107,8 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
             self.list.products.append(finishedProduct)
         }
         self.itemCount = self.list.products.count
+        // Serialize data
+        SerializeData()
         self.PantryTableView.reloadData()
     }
     
@@ -105,6 +136,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
                 self.itemCount = self.list.products.count
                 //self.pantryItems.append(self.product)
                 //self.itemCount = self.pantryItems.count
+                self.SerializeData()
                 self.PantryTableView.reloadData()
             } else {
                 // Error occured
