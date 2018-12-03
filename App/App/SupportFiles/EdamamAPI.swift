@@ -28,6 +28,7 @@ struct API{
     }
     
     typealias APIcompletion = ((_ response: FoodProduct?, _ error: APIerror?) -> Void)
+    typealias APIfunctionCompletion = ((_ response: [String:Bool], _ error: APIerror?) -> Void)
     
     struct FoodProduct: Codable {
         struct Hints: Codable {
@@ -66,6 +67,67 @@ struct API{
             }
             
             return label
+        }
+        
+        func getBrand() -> String{
+            return hints[0].food.brand.capitalized
+        }
+        
+        // .contains is has an O(n) runtime, so put it in a background thread
+        func getAllergins(completion: @escaping APIfunctionCompletion){
+            let allerginsQueue = DispatchQueue(label: "Allergen Processing Queue")
+        
+            allerginsQueue.async {
+                let group = DispatchGroup()
+                let foodContents = self.hints[0].food.foodContentsLabel.lowercased()
+                var allergins: [String:Bool] = ["palm" : false, "dairy" : false, "nuts" : false, "wheat" : false, "soy" : false]
+                
+                group.enter()
+                DispatchQueue.global(qos: .userInitiated).async {
+                    if foodContents.contains("palm"){
+                        allergins["palm"] = true
+                    }
+                    group.leave()
+                }
+                
+                group.enter()
+                DispatchQueue.global(qos: .userInitiated).async {
+                    if foodContents.contains("milk") || foodContents.contains("dairy"){
+                        allergins["dairy"] = true
+                    }
+                    group.leave()
+                }
+                
+                group.enter()
+                DispatchQueue.global(qos: .userInitiated).async {
+                    if foodContents.contains("nut"){
+                        allergins["nuts"] = true
+                    }
+                    group.leave()
+                }
+                
+                group.enter()
+                DispatchQueue.global(qos: .userInitiated).async {
+                    if foodContents.contains("wheat"){
+                        allergins["wheat"] = true
+                    }
+                    group.leave()
+                }
+                
+                group.enter()
+                DispatchQueue.global(qos: .userInitiated).async {
+                    if foodContents.contains("soy"){
+                        allergins["soy"] = true
+                    }
+                    group.leave()
+                }
+                
+                group.wait()
+                
+                DispatchQueue.main.async {
+                    completion(allergins, nil)
+                }
+            }
         }
     }
     

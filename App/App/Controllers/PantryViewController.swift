@@ -10,7 +10,7 @@ import UIKit
 
 class PantryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdateListDelegate {
     
-    var product = Product()
+    //var product = Product()
     var list = List()
     
     //Shows the Appropriate amount of Cells
@@ -44,7 +44,8 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         viewController.delegate = self
         //Push current VC onto backstack
         viewController.product = self.list.products[indexPath.row]
-        viewController.isEditing = true
+        viewController.editCell = true
+        //viewController.isEditing = true
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -54,6 +55,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
             list.products.remove(at: indexPath.row)
             itemCount = list.products.count
             PantryTableView.reloadData()
+            SerializeData()
         }
     }
     
@@ -76,9 +78,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
     func LoadData(){
         // Put on a background thread
         if let listData = UserDefaults.standard.value(forKey: "PantryList") as? Data{
-            print("List Data exists")
             do {
-                print("==============LOADING============")
                 list = try PropertyListDecoder().decode(List.self, from: listData)
                 itemCount = list.products.count
                 PantryTableView.reloadData()
@@ -92,11 +92,9 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
     func SerializeData(){
         // Put on a background thread
         do {
-            print("==============SAVING============")
             let serializedList = try PropertyListEncoder().encode(self.list)
             UserDefaults.standard.set(serializedList, forKey: "PantryList")
         } catch {
-            print("++++++++Couldn't++++++++")
             return
         }
     }
@@ -125,19 +123,25 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         
         // Add text field to alert and autofill with "List"
         popup.addTextField { (textField) in
-            textField.text = "List"
+            textField.text = ""
         }
         // Add "Quick Add" button to alert
         popup.addAction(UIAlertAction(title: "Quick Add", style: .default, handler: { (action) in
             if let text = popup.textFields?[0].text{
-                // Create new list
-                self.product = Product.init(productName: text)
-                self.list.products.append(self.product)
-                self.itemCount = self.list.products.count
-                //self.pantryItems.append(self.product)
-                //self.itemCount = self.pantryItems.count
-                self.SerializeData()
-                self.PantryTableView.reloadData()
+                
+                if text == "" {
+                    popup.actions[0].isEnabled = false
+                } else {
+                    // Create new list
+                    popup.actions[0].isEnabled = true
+                    let product = Product.init(productName: text)
+                    self.list.products.append(product)
+                    self.itemCount = self.list.products.count
+                    //self.pantryItems.append(self.product)
+                    //self.itemCount = self.pantryItems.count
+                    self.SerializeData()
+                    self.PantryTableView.reloadData()
+                }
             } else {
                 // Error occured
                 print("An error has occurred when trying to add a new item")
@@ -150,9 +154,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
             if let text = popup.textFields?[0].text{
                 
                 // Init product using text field as name
-                if text != "List"{
-                    self.product = Product.init(productName: text)
-                }
+                let product = Product.init(productName: text)
                 // Add product to table view
                 //self.list.products.append(self.product)
                 
@@ -163,8 +165,9 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
                 // Set EditItemViewController vars
                 viewController.delegate = self
                 viewController.product.productName = text
-                viewController.product = self.product
-                viewController.isEditing = false
+                viewController.product = product
+                viewController.editCell = false
+                //viewController.isEditing = false
                 
                 self.navigationController?.pushViewController(viewController, animated: true)
                 
@@ -179,7 +182,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         popup.addAction(UIAlertAction(title: "Barcode", style: .default, handler: { (action) in
             
             // Init product
-            self.product = Product.init(productName: "")
+            let product = Product.init(productName: "")
             // Add product to table view
             //self.list.products.append(self.product)
             
@@ -188,7 +191,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
             let viewController = storyboard.instantiateViewController(withIdentifier: "barcodeViewController") as! BarcodeViewController
             
             // Set BarcodeViewController vars
-            viewController.product = self.product
+            viewController.product = product
             viewController.delegate = self
             
             self.navigationController?.pushViewController(viewController, animated: true)

@@ -169,12 +169,35 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
     
-        // Set EditItemViewController vars
+        // Set product vars
         self.product.productName = foodProduct.getLabel()
+        
+        self.product.brandName = foodProduct.getBrand()
+        
+        foodProduct.getAllergins(){ response, _ in
+
+            if response["palm"] == true {
+                self.product.containsPalm = true
+            }
+            if response["dairy"] == true {
+                self.product.containsDairy = true
+            }
+            if response["nuts"] == true {
+                self.product.containsNuts = true
+            }
+            if response["wheat"] == true {
+                self.product.containsWheat = true
+            }
+            if response["soy"] == true {
+                self.product.containsSoy = true
+            }
+        }
+        
+        // Set EditItemViewController vars
         viewController.product = self.product
         viewController.delegate = self.delegate
         viewController.editCell = false
-    
+
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 }

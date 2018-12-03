@@ -47,36 +47,6 @@ class EditItemViewController: UIViewController {
         quantityTextField.text = String(product.quantity)
         priceTextField.text = String(product.price)
         //expDateTextField.text = FillDate(product.expDate)
-        if product.containsPalm == true{
-            palmSwitch.isOn = true
-        }else{
-            palmSwitch.isOn = false
-        }
-        
-        if product.containsDairy == true{
-            dairySwitch.isOn = true
-        }else{
-            dairySwitch.isOn = false
-        }
-        
-        if product.containsNuts == true{
-            nutSwitch.isOn = true
-        }else{
-            nutSwitch.isOn = false
-        }
-        
-        if product.containsWheat == true{
-            wheatSwitch.isOn = true
-        }else{
-            wheatSwitch.isOn = false
-        }
-        
-        if product.containsSoy == true{
-            soySwitch.isOn = true
-        }else{
-            soySwitch.isOn = false
-        }
-        
         
         //----DATE PICKER-----
         // create a date picker
@@ -89,6 +59,36 @@ class EditItemViewController: UIViewController {
         // instead of a keyboard appearing, show a date picker
         expDateTextField.inputView = datePicker
         // Do any additional setup after loading the view.
+        
+        checkProductContains()
+    }
+    
+    func checkProductContains(){
+        if product.containsPalm == false && product.containsDairy == false &&
+            product.containsNuts == false && product.containsWheat == false && product.containsSoy == false {
+            return
+            
+        } else {
+            if product.containsPalm == true{
+                palmSwitch.isOn = true
+            }
+            
+            if product.containsDairy == true{
+                dairySwitch.isOn = true
+            }
+            
+            if product.containsNuts == true{
+                nutSwitch.isOn = true
+            }
+            
+            if product.containsWheat == true{
+                wheatSwitch.isOn = true
+            }
+            
+            if product.containsSoy == true{
+                soySwitch.isOn = true
+            }
+        }
     }
     
 //    @objc func FillDate(sender: product.expDate){
@@ -118,6 +118,7 @@ class EditItemViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        checkProductContains()
         view.endEditing(true)
     }
     
@@ -146,6 +147,8 @@ class EditItemViewController: UIViewController {
             product.quantity = Int(quantityTextField.text ?? "1") ?? 1
             //product.price = Double(priceTextField.text ?? "0.00") ?? 0.00
             product.price = priceTextField.text ?? "No Price"
+            
+            checkProductContains()
             
             //save Palm
             if palmSwitch.isOn {
