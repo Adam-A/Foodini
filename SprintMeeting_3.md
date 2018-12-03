@@ -72,4 +72,5 @@ For the remainder of the time left, going to work on app design and finish up
 some functions for the product model (setting expiration, etc).
 
 ### Links
-_Please add links here!_
+-[ProductModel integration for EditItem and PantryView VCs](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/01ebf5cc48b3bfc5bc3e446e03a6af38debcb54b)
+- [Added saving for allergens in the EditItem VC](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/5e43acd88a53992cfd2ef1e7601dcd7d2d5275c8)
