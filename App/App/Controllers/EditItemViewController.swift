@@ -201,15 +201,14 @@ class EditItemViewController: UIViewController {
             if let viewControllers = self.navigationController?.viewControllers{
                 for controllers in viewControllers{
                     if controllers.isKind(of: IndividualListViewController.self){
+                        print("Popping to indi")
                         self.navigationController?.popToViewController(controllers, animated: true)
+                        return
                     }
                 }
-                self.navigationController?.popToRootViewController(animated: true)
             }
             
-            
-            
-            
+            self.navigationController?.popToRootViewController(animated: true)
             
         }else if (itemNameTextField.text == "" || itemNameTextField.text == "Enter Product Name"){
             itemNameTextField.resignFirstResponder()
