@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
 
-class IndividualListViewController: UIViewController, UITableViewDataSource {
+class IndividualListViewController: UIViewController, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
     @IBOutlet weak var table: UITableView!
     var list: ShoppingList?
@@ -20,6 +21,11 @@ class IndividualListViewController: UIViewController, UITableViewDataSource {
         // Generate the "Add" button in the top right
         let newItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(NewItem(sender:)))
         self.navigationItem.rightBarButtonItem = newItem
+        
+        //DZNEmptyDataSet
+        table.emptyDataSetSource = self
+        table.emptyDataSetDelegate = self
+        table.tableFooterView = UIView()
     }
     
     @objc func NewItem(sender: UIBarButtonItem){
@@ -64,5 +70,16 @@ class IndividualListViewController: UIViewController, UITableViewDataSource {
             list?.listItems.remove(at: indexPath.row)
             tableView.reloadData()
         }
+    }
+    
+    //-----DZNEmptyDataSet cocoapod use -----
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        let title = "Let's Get Started"
+        let Attributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline)]
+        return NSAttributedString(string: title, attributes: Attributes)
+    }
+    
+    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
+        return UIImage(named: "IndListEmptyState")
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
 
 struct cellData {
     var opened = Bool()
@@ -15,8 +16,9 @@ struct cellData {
     
 }
 
-class RecipesViewController: UITableViewController {
+class RecipesViewController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
+    @IBOutlet var recipeTableView: UITableView!
     @IBOutlet weak var rouletteButton: UIBarButtonItem!
     @IBOutlet weak var editButton: UIBarButtonItem!
     var tableViewData = [cellData]()
@@ -25,6 +27,11 @@ class RecipesViewController: UITableViewController {
         
         /* TEST DATA */
         tableViewData = [cellData(opened: false, title: "Rice and Beans", sectionData: ["Rice", "Beans", "Salt"]),cellData(opened: false, title: "Curry Chicken", sectionData: ["Curry", "Chicken"]),cellData(opened: false, title: "Mac n Cheese", sectionData: ["Mac", "Cheese"])]
+        
+        //DZNEmptyDataSet
+        recipeTableView.emptyDataSetSource = self
+        recipeTableView.emptyDataSetDelegate = self
+        recipeTableView.tableFooterView = UIView()
         
         
 }
@@ -169,5 +176,16 @@ class RecipesViewController: UITableViewController {
         } else {
             //dont close cells
         }
+    }
+    
+    //-----DZNEmptyDataSet cocoapod use -----
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        let title = "Welcome To Your Recipe Book"
+        let Attributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline)]
+        return NSAttributedString(string: title, attributes: Attributes)
+    }
+    
+    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
+        return UIImage(named: "RecipeEmptyState")
     }
 }

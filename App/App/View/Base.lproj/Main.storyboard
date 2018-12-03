@@ -86,7 +86,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Item Name" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bbd-Wg-Qng" customClass="KaedeTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Item Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bbd-Wg-Qng" customClass="KaedeTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="16" y="58" width="382" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="VZR-Dz-ffJ"/>
@@ -105,7 +105,7 @@
                                     <action selector="RevertTextColor:" destination="ev8-7a-PrA" eventType="editingDidBegin" id="qCo-fa-RVS"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Quantity" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hlI-qK-L23" customClass="KaedeTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Quantity" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hlI-qK-L23" customClass="KaedeTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="16" y="134" width="382" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="qIb-zJ-Xei"/>
@@ -124,7 +124,7 @@
                                     <action selector="revertQuantitColor:" destination="ev8-7a-PrA" eventType="editingDidBegin" id="xJe-vz-MXm"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Price" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tVI-sr-JHT" customClass="KaedeTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Price" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tVI-sr-JHT" customClass="KaedeTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="16" y="172" width="382" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="BSO-4X-fjL"/>
@@ -140,7 +140,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Expiration Date" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l2h-og-2li" customClass="KaedeTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Expiration Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l2h-og-2li" customClass="KaedeTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="16" y="210" width="382" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="wH5-7I-mQu"/>
@@ -156,7 +156,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Brand Name" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vbG-Ya-vn6" customClass="KaedeTextField" customModule="TextFieldEffects">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Brand Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vbG-Ya-vn6" customClass="KaedeTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="16" y="96" width="382" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="2vS-0M-fd6"/>
@@ -605,6 +605,7 @@
                     <tabBarItem key="tabBarItem" title="Recipes" id="15o-tU-Chb"/>
                     <connections>
                         <outlet property="editButton" destination="Joa-3i-cI6" id="wm6-nu-Fvi"/>
+                        <outlet property="recipeTableView" destination="Mo7-v7-rQq" id="SUD-wv-NoP"/>
                         <outlet property="rouletteButton" destination="stf-PQ-D3d" id="8hb-Fm-ylL"/>
                     </connections>
                 </tableViewController>

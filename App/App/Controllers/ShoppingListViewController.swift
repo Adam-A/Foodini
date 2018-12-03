@@ -11,6 +11,7 @@
 // [] Clean up temp struct stuff
 
 import UIKit
+import DZNEmptyDataSet
 
 // REMOVE: replace with model
 struct ShoppingList{
@@ -18,7 +19,8 @@ struct ShoppingList{
     var listItems: [String] = []
 }
 
-class ShoppingListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ShoppingListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // How many cells to create
         // return number of lists user has
@@ -64,6 +66,9 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
     
     // Begin outlet definitions
     @IBOutlet weak var tableView: UITableView!
+    
+    // reference to ProductModel
+    var masterList = ListStorage()
 //    @IBOutlet weak var listButton: UIButton!
     
     // REMOVE
@@ -89,6 +94,11 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
         
         //REMOVE
         listCount = shoppingLists.count
+        
+        //DZNEmptyDataSet
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
+        tableView.tableFooterView = UIView()
     }
     
     func CreateNewListButton(){
@@ -175,6 +185,17 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
          // Push current VC onto backstack
          self.navigationController?.pushViewController(viewController, animated: false)
          
+    }
+    
+    //-----DZNEmptyDataSet cocoapod use -----
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        let title = "Make Your Lists Here"
+        let Attributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline)]
+        return NSAttributedString(string: title, attributes: Attributes)
+    }
+    
+    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
+        return UIImage(named: "MasterListEmptyState")
     }
     
 }
