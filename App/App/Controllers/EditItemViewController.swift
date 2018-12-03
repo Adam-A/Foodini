@@ -196,15 +196,18 @@ class EditItemViewController: UIViewController {
                 self.individualListDelegate?.IndividualListUpdate()
             }
             
-            
-            // Check what previous VC was, if it was barcode pop to root, otherwise, pop VC
-            let previousViewController = self.navigationController?.viewControllers.description ?? "nil"
-
-            if (previousViewController.contains("Barcode")){
+            // If the IndividualListViewController is on the stack, pop to it
+            // Otherwise, pop to root
+            if let viewControllers = self.navigationController?.viewControllers{
+                for controllers in viewControllers{
+                    if controllers.isKind(of: IndividualListViewController.self){
+                        self.navigationController?.popToViewController(controllers, animated: true)
+                    }
+                }
                 self.navigationController?.popToRootViewController(animated: true)
-            } else {
-                self.navigationController?.popViewController(animated: true)
             }
+            
+            
             
             
             
