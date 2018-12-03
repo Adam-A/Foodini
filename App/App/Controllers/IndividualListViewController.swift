@@ -13,7 +13,7 @@ protocol UpdateShoppingListDelegate{
     func UpdateTableContents()
 }
 
-class IndividualListViewController: UIViewController, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class IndividualListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
     @IBOutlet weak var table: UITableView!
     var list = List()
@@ -28,6 +28,7 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, DZN
         self.navigationItem.rightBarButtonItem = newItem
         
         table.dataSource = self
+        table.delegate = self
         
         //DZNEmptyDataSet
         table.emptyDataSetSource = self
@@ -85,6 +86,21 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, DZN
             // Update ShoppingListViewController when removing an object
             self.delegate?.UpdateTableContents()
         }
+    }
+
+    // If a user selects a cell open the list view for that cell
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        table.deselectRow(at: indexPath, animated: true)
+
+        //INSERT CODE TO VIEW ITEM DETAILS VIEW CONTROLLER
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
+        //viewController.delegate = self
+        //Push current VC onto backstack
+        viewController.product = self.list.products[indexPath.row]
+        viewController.editCell = true
+        //viewController.isEditing = true
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     //-----DZNEmptyDataSet cocoapod use -----

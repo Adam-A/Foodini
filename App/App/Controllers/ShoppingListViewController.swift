@@ -136,7 +136,6 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
     
     func UpdateTableContents() {
         // Save data
-        print("=====================RELOADING=====================")
         tableView.reloadData()
     }
     
@@ -165,7 +164,8 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
         
         cell.textLabel?.text = "\(masterList.Lists[indexPath.row].name)"
         // Set detail label to the items in the list
-        cell.detailTextLabel?.text = "\(masterList.Lists[indexPath.row].products)"
+        
+        cell.detailTextLabel?.text = "\(masterList.Lists[indexPath.row].returnProducts())"
         return cell
         
     }

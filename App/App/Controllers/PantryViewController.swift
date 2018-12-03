@@ -18,8 +18,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
     
     //Shows the Appropriate amount of Cells
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return itemCount
+        return list.products.count
     }
     
     //Display Table Contents
@@ -56,7 +55,6 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         if editingStyle == .delete{
             // Delete cell at position
             list.products.remove(at: indexPath.row)
-            itemCount = list.products.count
             PantryTableView.reloadData()
             SerializeData()
         }
@@ -65,7 +63,6 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
 
     @IBOutlet weak var PantryTableView: UITableView!
     
-    var itemCount: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,12 +70,11 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         navigationItem.leftBarButtonItem = editButtonItem
         PantryTableView.dataSource = self
         PantryTableView.delegate = self
-        //
+        
         PantryTableView.emptyDataSetSource = self
         PantryTableView.emptyDataSetDelegate = self
         PantryTableView.tableFooterView = UIView()
-        //
-        itemCount = list.products.count
+        
         CreateNewItemButton()
         LoadData()
     }
@@ -88,7 +84,6 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         if let listData = UserDefaults.standard.value(forKey: "PantryList") as? Data{
             do {
                 list = try PropertyListDecoder().decode(List.self, from: listData)
-                itemCount = list.products.count
                 PantryTableView.reloadData()
             } catch {
                 print("Couldn't retrieve data")
@@ -112,7 +107,6 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         if isEditing == false{
             self.list.products.append(finishedProduct)
         }
-        self.itemCount = self.list.products.count
         // Serialize data
         SerializeData()
         self.PantryTableView.reloadData()
@@ -144,9 +138,8 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
                     popup.actions[0].isEnabled = true
                     let product = Product.init(productName: text)
                     self.list.products.append(product)
-                    self.itemCount = self.list.products.count
+
                     //self.pantryItems.append(self.product)
-                    //self.itemCount = self.pantryItems.count
                     self.SerializeData()
                     self.PantryTableView.reloadData()
                 }

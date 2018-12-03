@@ -54,6 +54,15 @@ class List: Codable {
         self.products = [Product]()
     }
     
+    func returnProducts() -> String{
+        var productStr: String = ""
+        for product in products.dropLast(){
+            productStr.append("\(product.productName), ")
+        }
+        productStr.append(products.last?.productName ?? "")
+        return productStr
+    }
+    
     //------------ EXPIRATION -------------
     // Need function to see how close product is to expiration date
     // if it is past expiration date, change text to red or something

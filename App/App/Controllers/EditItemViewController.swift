@@ -184,23 +184,18 @@ class EditItemViewController: UIViewController {
             
             // Switch to Previous View Controller
             self.delegate?.ListUpdate(finishedProduct: product, isEditing: editCell)
-            self.navigationController?.popToRootViewController(animated: true)
+            
+            // Check what previous VC was, if it was barcode pop to root, otherwise, pop VC
+            let previousViewController = self.navigationController?.viewControllers.description ?? "nil"
 
-//        if let listOfViewControllers = self.navigationController?.viewControllers{
-//            for viewController in listOfViewControllers {
-//                print(viewController)
-//                // This doesn't work...
-//                if viewController.isKind(of: PantryViewController.self){
-//                    self.navigationController?.popToViewController(viewController, animated: true)
-//                } else {
-//                    print("Unable to get Pantry View Controller")
-//                    self.navigationController?.popViewController(animated: true)
-//                }
-//            }
-//        } else {
-//            print("Unable to get list of view controllers")
-//            self.navigationController?.popViewController(animated: true)
-//        }
+            if (previousViewController.contains("Barcode")){
+                self.navigationController?.popToRootViewController(animated: true)
+            } else {
+                self.navigationController?.popViewController(animated: true)
+            }
+            
+            
+            
         }else if (itemNameTextField.text == "" || itemNameTextField.text == "Enter Product Name"){
             itemNameTextField.resignFirstResponder()
             itemNameTextField.textColor = .red
