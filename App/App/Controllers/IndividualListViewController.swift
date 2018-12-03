@@ -13,7 +13,7 @@ protocol UpdateShoppingListDelegate{
     func UpdateTableContents()
 }
 
-class IndividualListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class IndividualListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdateIndividualListDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
     @IBOutlet weak var table: UITableView!
     var list = List()
@@ -44,23 +44,85 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
         // Generate a text field
         alert.addTextField { (textField) in textField.text = "" }
         
-        // Add the "Add" button to the alert
-        alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { (action) in
-            if let text = alert.textFields?[0].text {
-                // Append the entry to the current list
+        // Add "Quick Add" button to alert
+        alert.addAction(UIAlertAction(title: "Quick Add", style: .default, handler: { (action) in
+            if let text = alert.textFields?[0].text{
                 
+                if text == "" {
+                    alert.actions[0].isEnabled = false
+                } else {
+                    // Create new list
+                    alert.actions[0].isEnabled = true
+                    let product = Product.init(productName: text)
+                    self.list.products.append(product)
+                    self.IndividualListUpdate()
+                }
+            } else {
+                // Error occured
+                print("An error has occurred when trying to add a new item")
+            }
+            
+        }))
+        
+        // Add "Item Details" button to alert
+        alert.addAction(UIAlertAction(title: "Item Details", style: .default, handler: { (action) in
+            if let text = alert.textFields?[0].text{
+                
+                // Init product using text field as name
                 let product = Product.init(productName: text)
                 self.list.products.append(product)
                 self.table.reloadData()
                 
-                // Update ShoppingListViewController when adding an object
-                self.delegate?.UpdateTableContents()
+                // Create and push EditItemViewController
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
+                
+                // Set EditItemViewController vars
+                viewController.individualListDelegate = self
+                viewController.product.productName = text
+                viewController.product = product
+                viewController.editCell = false
+                
+                self.navigationController?.pushViewController(viewController, animated: true)
+                
+            } else {
+                // Error occured
+                print("An error has occurred when trying to add a new item")
             }
+            
         }))
+        
+        // Add "Barcode" button to alert
+        alert.addAction(UIAlertAction(title: "Barcode", style: .default, handler: { (action) in
+            
+            // Init product
+            let product = Product.init(productName: "")
+            self.list.products.append(product)
+            self.table.reloadData()
+            
+            // Create and push BarcodeViewController
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "barcodeViewController") as! BarcodeViewController
+            
+            // Set BarcodeViewController vars
+            viewController.product = product
+            viewController.individualListDelegate = self
+            
+            self.navigationController?.pushViewController(viewController, animated: true)
+            
+        }))
+        
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in }))
         
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func IndividualListUpdate() {
+        // Reloads current list data
+        self.table.reloadData()
+        // Reloads shopping list data
+        self.delegate?.UpdateTableContents()
     }
     
     
@@ -95,11 +157,12 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
         //INSERT CODE TO VIEW ITEM DETAILS VIEW CONTROLLER
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
-        //viewController.delegate = self
+        
         //Push current VC onto backstack
+        viewController.individualListDelegate = self
         viewController.product = self.list.products[indexPath.row]
         viewController.editCell = true
-        //viewController.isEditing = true
+        
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     

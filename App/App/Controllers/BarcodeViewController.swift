@@ -30,7 +30,8 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     // Variables used to add product to pantry
     var product = Product()
-    var delegate: UpdateListDelegate?
+    var pantryListDelegate: UpdatePantryListDelegate?
+    var individualListDelegate: UpdateIndividualListDelegate?
     
     
     override func viewDidLoad() {
@@ -200,7 +201,13 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         // Set EditItemViewController vars
         viewController.product = self.product
-        viewController.delegate = self.delegate
+        
+        if pantryListDelegate != nil{
+            viewController.pantryListDelegate = self.pantryListDelegate
+        } else if individualListDelegate != nil {
+            viewController.individualListDelegate = self.individualListDelegate
+        }
+        
         viewController.editCell = false
 
         self.navigationController?.pushViewController(viewController, animated: true)

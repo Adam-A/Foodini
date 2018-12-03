@@ -9,8 +9,12 @@
 import UIKit
 import TextFieldEffects
 
-protocol UpdateListDelegate{
-    func ListUpdate(finishedProduct: Product, isEditing: Bool)
+protocol UpdatePantryListDelegate{
+    func PantryListUpdate(finishedProduct: Product, isEditing: Bool)
+}
+
+protocol UpdateIndividualListDelegate{
+    func IndividualListUpdate()
 }
 
 
@@ -30,7 +34,9 @@ class EditItemViewController: UIViewController {
     
     
     
-    var delegate: UpdateListDelegate?
+    var pantryListDelegate: UpdatePantryListDelegate?
+    
+    var individualListDelegate: UpdateIndividualListDelegate?
     
     var product = Product()
     
@@ -182,8 +188,14 @@ class EditItemViewController: UIViewController {
                 product.containsSoy = false
             }
             
-            // Switch to Previous View Controller
-            self.delegate?.ListUpdate(finishedProduct: product, isEditing: editCell)
+            // If pantry list delegate is set, update the pantry
+            if pantryListDelegate != nil{
+                self.pantryListDelegate?.PantryListUpdate(finishedProduct: product, isEditing: editCell)
+            // Otherwise, if the individual list delegate is set, update the individual list
+            } else if individualListDelegate != nil {
+                self.individualListDelegate?.IndividualListUpdate()
+            }
+            
             
             // Check what previous VC was, if it was barcode pop to root, otherwise, pop VC
             let previousViewController = self.navigationController?.viewControllers.description ?? "nil"
