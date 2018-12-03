@@ -9,23 +9,31 @@
 import UIKit
 import DZNEmptyDataSet
 
+protocol UpdateShoppingListDelegate{
+    func UpdateTableContents()
+}
+
 class IndividualListViewController: UIViewController, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
     @IBOutlet weak var table: UITableView!
     var list = List()
+    var delegate: UpdateShoppingListDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        table.reloadData()
+        
         
         // Generate the "Add" button in the top right
         let newItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(NewItem(sender:)))
         self.navigationItem.rightBarButtonItem = newItem
         
+        table.dataSource = self
+        
         //DZNEmptyDataSet
         table.emptyDataSetSource = self
         table.emptyDataSetDelegate = self
         table.tableFooterView = UIView()
+        table.reloadData()
     }
     
     @objc func NewItem(sender: UIBarButtonItem){
@@ -43,6 +51,9 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, DZN
                 let product = Product.init(productName: text)
                 self.list.products.append(product)
                 self.table.reloadData()
+                
+                // Update ShoppingListViewController when adding an object
+                self.delegate?.UpdateTableContents()
             }
         }))
         
@@ -71,6 +82,8 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, DZN
             // Delete the cell at the given index
             list.products.remove(at: indexPath.row)
             tableView.reloadData()
+            // Update ShoppingListViewController when removing an object
+            self.delegate?.UpdateTableContents()
         }
     }
     

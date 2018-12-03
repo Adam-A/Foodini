@@ -7,19 +7,11 @@
 //
 // TODO:
 // [] Serilization
-// [] Update to use model
-// [] Clean up temp struct stuff
 
 import UIKit
 import DZNEmptyDataSet
 
-// REMOVE: replace with model
-struct ShoppingList{
-    var name: String = ""
-    var listItems: [String] = []
-}
-
-class ShoppingListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class ShoppingListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdateShoppingListDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     // Begin outlet definitions
     @IBOutlet weak var tableView: UITableView!
@@ -55,16 +47,28 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
         
         // Add text field to alert and autofill with "List"
         popup.addTextField { (textField) in
-            textField.text = "List"
+            textField.text = ""
         }
         // Add "create" button to alert
         popup.addAction(UIAlertAction(title: "Create", style: .default, handler: { (action) in
-            if let text = popup.textFields?[0].text{
+            if var text = popup.textFields?[0].text{
+                if text == "" {
+                    text = "List"
+                }
                 // Create new list
                 let newShoppingList = List.init(name: text)
                 self.masterList.addToLists(list: newShoppingList)
-                //self.shoppingLists.append(newShoppingList)
-                //self.listCount = self.shoppingLists.count
+                
+                // Instantiate instance of IndividualListViewController
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let viewController = storyboard.instantiateViewController(withIdentifier: "individualListViewController") as! IndividualListViewController
+                // Assign the relevent ShoppingList to the next VC
+                viewController.list = newShoppingList
+                viewController.title = newShoppingList.name
+                viewController.delegate = self
+                // Push current VC onto backstack
+                self.navigationController?.pushViewController(viewController, animated: true)
+
                 self.tableView.reloadData()
             } else {
                 // Error occured
@@ -130,7 +134,13 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
          
     }
     
-    //-----DZNEmptyDataSet cocoapod use -----
+    func UpdateTableContents() {
+        // Save data
+        print("=====================RELOADING=====================")
+        tableView.reloadData()
+    }
+    
+    //-----DZNEmptyDataSet cocoapod use-----
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         let title = "Make Your Lists Here"
         let Attributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline)]
@@ -179,6 +189,7 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
         // Assign the relevent ShoppingList to the next VC
         viewController.list = masterList.Lists[indexPath.item]
         viewController.title = masterList.Lists[indexPath.item].name
+        viewController.delegate = self
         // Push current VC onto backstack
         self.navigationController?.pushViewController(viewController, animated: true)
         
