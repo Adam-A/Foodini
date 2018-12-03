@@ -21,79 +21,21 @@ struct ShoppingList{
 
 class ShoppingListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // How many cells to create
-        // return number of lists user has
-        // REMOVE
-        return listCount
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Populate cells as list cells
-        let cell = tableView.dequeueReusableCell(withIdentifier: "listCell") ?? UITableViewCell(style: .subtitle, reuseIdentifier: "listCell")
-        // Set text label to list name
-        cell.textLabel?.text = "\(shoppingLists[indexPath.row].name)"
-        // Set detail label to the items in the list
-        cell.detailTextLabel?.text = "\(shoppingLists[indexPath.row].listItems)"
-        return cell
-
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete{
-            // Delete cell at position
-            shoppingLists.remove(at: indexPath.row)
-            listCount = shoppingLists.count
-            tableView.reloadData()
-        }
-    }
-    
-    // If a user selects a cell open the list view for that cell
-     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Deselect row
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        // Instantiate instance of IndividualListViewController
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "individualListViewController") as! IndividualListViewController
-        // Assign the relevent ShoppingList to the next VC
-        viewController.list = shoppingLists[indexPath.item]
-        viewController.title = viewController.list?.name
-        // Push current VC onto backstack
-        self.navigationController?.pushViewController(viewController, animated: true)
-        
-    }
-    
     // Begin outlet definitions
     @IBOutlet weak var tableView: UITableView!
     
     // reference to ProductModel
     var masterList = ListStorage()
-//    @IBOutlet weak var listButton: UIButton!
-    
-    // REMOVE
-    var listCount: Int = 0
-    var shoppingLists: [ShoppingList] =
-        [ShoppingList.init(name: "Safeway", listItems: ["Peas", "Carrots"]),
-         ShoppingList.init(name: "Sprouts", listItems: ["Apples", "Oranges", "Eggs"]),
-         ShoppingList.init(name: "Trader Joe's", listItems: ["Leeks"]),
-         ShoppingList.init(name: "Farmer's Market", listItems: ["Lettuce", "Tomatoes", "Potatoes", "Cabbage"]),
-         ShoppingList.init(name: "Nugget", listItems: ["Flour", "Butter"])]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view
-        // Disable button for current view
-//        listButton.isEnabled = false
         tableView.dataSource = self
         tableView.delegate = self
         
         navigationItem.leftBarButtonItem = editButtonItem
         CreateNewListButton()
-        
-        //REMOVE
-        listCount = shoppingLists.count
         
         //DZNEmptyDataSet
         tableView.emptyDataSetSource = self
@@ -119,9 +61,10 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
         popup.addAction(UIAlertAction(title: "Create", style: .default, handler: { (action) in
             if let text = popup.textFields?[0].text{
                 // Create new list
-                let newShoppingList = ShoppingList.init(name: text, listItems: [])
-                self.shoppingLists.append(newShoppingList)
-                self.listCount = self.shoppingLists.count
+                let newShoppingList = List.init(name: text)
+                self.masterList.addToLists(list: newShoppingList)
+                //self.shoppingLists.append(newShoppingList)
+                //self.listCount = self.shoppingLists.count
                 self.tableView.reloadData()
             } else {
                 // Error occured
@@ -196,6 +139,49 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
     
     func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
         return UIImage(named: "MasterListEmptyState")
+    }
+    
+    
+    //-----Table View-----
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // How many cells to create
+        return masterList.Lists.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Populate cells as list cells
+        let cell = tableView.dequeueReusableCell(withIdentifier: "listCell") ?? UITableViewCell(style: .subtitle, reuseIdentifier: "listCell")
+        // Set text label to list name
+        
+        cell.textLabel?.text = "\(masterList.Lists[indexPath.row].name)"
+        // Set detail label to the items in the list
+        cell.detailTextLabel?.text = "\(masterList.Lists[indexPath.row].products)"
+        return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            // Delete cell at position
+            masterList.removeList(index: indexPath.row)
+            tableView.reloadData()
+        }
+    }
+    
+    // If a user selects a cell open the list view for that cell
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Deselect row
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        // Instantiate instance of IndividualListViewController
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "individualListViewController") as! IndividualListViewController
+        // Assign the relevent ShoppingList to the next VC
+        viewController.list = masterList.Lists[indexPath.item]
+        viewController.title = masterList.Lists[indexPath.item].name
+        // Push current VC onto backstack
+        self.navigationController?.pushViewController(viewController, animated: true)
+        
     }
     
 }

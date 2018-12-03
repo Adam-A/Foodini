@@ -12,7 +12,7 @@ import DZNEmptyDataSet
 class IndividualListViewController: UIViewController, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
     @IBOutlet weak var table: UITableView!
-    var list: ShoppingList?
+    var list = List()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,9 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, DZN
         alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { (action) in
             if let text = alert.textFields?[0].text {
                 // Append the entry to the current list
-                self.list?.listItems.append(text)
+                
+                let product = Product.init(productName: text)
+                self.list.products.append(product)
                 self.table.reloadData()
             }
         }))
@@ -52,14 +54,14 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, DZN
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Number of cells to generate
-        return list?.listItems.count ?? 0
+        return list.products.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Generate cells with list contents
         let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell") ?? UITableViewCell(style: .default, reuseIdentifier: "itemCell")
         // Set text to item name
-        cell.textLabel?.text = list?.listItems[indexPath.row]
+        cell.textLabel?.text = list.products[indexPath.row].productName
         return cell
         
     }
@@ -67,7 +69,7 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, DZN
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
             // Delete the cell at the given index
-            list?.listItems.remove(at: indexPath.row)
+            list.products.remove(at: indexPath.row)
             tableView.reloadData()
         }
     }

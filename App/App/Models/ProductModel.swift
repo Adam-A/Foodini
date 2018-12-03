@@ -17,19 +17,21 @@ protocol AddProduct {
 
 // FOR USE IN ShoppingListViewController
 class ListStorage {
-    var ListName: String
     var Lists: [List]
     
     // Standard Init
     init(){
-        self.ListName = "List"
         self.Lists = [List]()
     }
     
-    // for creating customized list name
-    init(ListName: String){
-        self.ListName = ListName
-        self.Lists = [List]()
+    // Add a new list to the array of lists
+    func addToLists(list: List){
+        Lists.append(list)
+    }
+    
+    // Remove shopping list
+    func removeList(index: Int){
+        Lists.remove(at: index)
     }
 }
 
