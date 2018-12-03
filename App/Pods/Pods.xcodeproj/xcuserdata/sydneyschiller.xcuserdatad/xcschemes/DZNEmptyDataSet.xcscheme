@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FE945120C76C9B29CDABD2618D186137"
-               BlueprintName = "ViewAnimator"
+               BlueprintIdentifier = "284992A50F0B3E64703FA6E94A694797"
+               BlueprintName = "DZNEmptyDataSet"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "ViewAnimator.framework">
+               BuildableName = "DZNEmptyDataSet.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

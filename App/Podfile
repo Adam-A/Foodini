@@ -6,9 +6,9 @@ target 'App' do
   use_frameworks!
 
   # Pods for App
-	pod "ViewAnimator"
 	pod 'DropDown', '2.3.4'
 	pod 'Alamofire', '~> 4.7'
 	pod 'TextFieldEffects'
+	pod 'DZNEmptyDataSet'
 
 end

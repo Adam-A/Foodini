@@ -11,6 +11,10 @@
 		661C0D9521A2987600787382 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661C0D9421A2987600787382 /* RecipesViewController.swift */; };
 		661C0D9721A2988000787382 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661C0D9621A2988000787382 /* SettingsViewController.swift */; };
 		9C076867FCB15D543125888E /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6808E00D042A315B0AFFF865 /* Pods_App.framework */; };
+		B25A7BFF21B5A034005EE536 /* PantryEmptyState.png in Resources */ = {isa = PBXBuildFile; fileRef = B25A7BFE21B5A034005EE536 /* PantryEmptyState.png */; };
+		B25A7C0321B5A22B005EE536 /* IndListEmptyState.png in Resources */ = {isa = PBXBuildFile; fileRef = B25A7C0021B5A22B005EE536 /* IndListEmptyState.png */; };
+		B25A7C0421B5A22B005EE536 /* MasterListEmptyState.png in Resources */ = {isa = PBXBuildFile; fileRef = B25A7C0121B5A22B005EE536 /* MasterListEmptyState.png */; };
+		B25A7C0521B5A22B005EE536 /* RecipeEmptyState.png in Resources */ = {isa = PBXBuildFile; fileRef = B25A7C0221B5A22B005EE536 /* RecipeEmptyState.png */; };
 		B28A14B521AF877000D5291D /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A14B421AF877000D5291D /* EditItemViewController.swift */; };
 		B28A14B721AF87AF00D5291D /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A14B621AF87AF00D5291D /* ProductModel.swift */; };
 		B2AE2DC821A0DA0300ECC3E2 /* PantryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AE2DC721A0DA0300ECC3E2 /* PantryViewController.swift */; };
@@ -30,6 +34,10 @@
 		661C0D9621A2988000787382 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6808E00D042A315B0AFFF865 /* Pods_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78F2B372CD27FB99408D381F /* Pods-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.release.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.release.xcconfig"; sourceTree = "<group>"; };
+		B25A7BFE21B5A034005EE536 /* PantryEmptyState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PantryEmptyState.png; sourceTree = "<group>"; };
+		B25A7C0021B5A22B005EE536 /* IndListEmptyState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IndListEmptyState.png; sourceTree = "<group>"; };
+		B25A7C0121B5A22B005EE536 /* MasterListEmptyState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MasterListEmptyState.png; sourceTree = "<group>"; };
+		B25A7C0221B5A22B005EE536 /* RecipeEmptyState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecipeEmptyState.png; sourceTree = "<group>"; };
 		B28A14B421AF877000D5291D /* EditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
 		B28A14B621AF87AF00D5291D /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProductModel.swift; path = App/Models/ProductModel.swift; sourceTree = SOURCE_ROOT; };
 		B2AE2DC721A0DA0300ECC3E2 /* PantryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +70,17 @@
 				6808E00D042A315B0AFFF865 /* Pods_App.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B25A7BFD21B59FDB005EE536 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				B25A7C0021B5A22B005EE536 /* IndListEmptyState.png */,
+				B25A7C0121B5A22B005EE536 /* MasterListEmptyState.png */,
+				B25A7C0221B5A22B005EE536 /* RecipeEmptyState.png */,
+				B25A7BFE21B5A034005EE536 /* PantryEmptyState.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		B27AC0A521A0FFC400B7AB94 /* Controllers */ = {
@@ -128,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				B27AC0A521A0FFC400B7AB94 /* Controllers */,
+				B25A7BFD21B59FDB005EE536 /* Images */,
 				B27AC0A721A1005900B7AB94 /* View */,
 				E48DE0A721AF9B4C00CD6FB4 /* Models */,
 				E4767F2721A0B44100C665D8 /* Info.plist */,
@@ -205,8 +225,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4767F2621A0B44100C665D8 /* LaunchScreen.storyboard in Resources */,
+				B25A7C0521B5A22B005EE536 /* RecipeEmptyState.png in Resources */,
+				B25A7C0421B5A22B005EE536 /* MasterListEmptyState.png in Resources */,
+				B25A7BFF21B5A034005EE536 /* PantryEmptyState.png in Resources */,
 				E4767F2321A0B44100C665D8 /* Assets.xcassets in Resources */,
 				E4767F2121A0B44000C665D8 /* Main.storyboard in Resources */,
+				B25A7C0321B5A22B005EE536 /* IndListEmptyState.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,18 +269,18 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-App/Pods-App-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
 				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
-				"${BUILT_PRODUCTS_DIR}/ViewAnimator/ViewAnimator.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ViewAnimator.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

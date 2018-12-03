@@ -5,10 +5,13 @@
 //  Created by Sydney Schiller on 11/17/18.
 //  Copyright © 2018 Can I Graduate Already, LLC. All rights reserved.
 //
+// Followed tutorial at https://www.hackingwithswift.com/example-code/libraries/how-to-make-empty-uitableviews-look-more-attractive-using-dznemptydataset
+// for help using DZNEmptyDataSet cocoapod
 
 import UIKit
+import DZNEmptyDataSet
 
-class PantryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdateListDelegate {
+class PantryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdateListDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     //var product = Product()
     var list = List()
@@ -70,6 +73,11 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         navigationItem.leftBarButtonItem = editButtonItem
         PantryTableView.dataSource = self
         PantryTableView.delegate = self
+        //
+        PantryTableView.emptyDataSetSource = self
+        PantryTableView.emptyDataSetDelegate = self
+        PantryTableView.tableFooterView = UIView()
+        //
         itemCount = list.products.count
         CreateNewItemButton()
         LoadData()
@@ -240,5 +248,16 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
          // Push current VC onto backstack
          self.navigationController?.pushViewController(viewController, animated: false)
         
+    }
+    
+    //-----DZNEmptyDataSet cocoapod use -----
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        let title = "Welcome To Your Pantry"
+        let Attributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline)]
+        return NSAttributedString(string: title, attributes: Attributes)
+    }
+    
+    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
+        return UIImage(named: "PantryEmptyState")
     }
 }
