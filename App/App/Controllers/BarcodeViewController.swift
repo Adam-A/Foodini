@@ -178,18 +178,23 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
             if response["palm"] == true {
                 self.product.containsPalm = true
+                viewController.palmSwitch.isOn = true
             }
             if response["dairy"] == true {
                 self.product.containsDairy = true
+                viewController.dairySwitch.isOn = true
             }
             if response["nuts"] == true {
                 self.product.containsNuts = true
+                viewController.nutSwitch.isOn = true
             }
             if response["wheat"] == true {
                 self.product.containsWheat = true
+                viewController.wheatSwitch.isOn = true
             }
             if response["soy"] == true {
                 self.product.containsSoy = true
+                viewController.soySwitch.isOn = true
             }
         }
         
