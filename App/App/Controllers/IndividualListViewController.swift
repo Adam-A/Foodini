@@ -13,7 +13,7 @@ protocol UpdateShoppingListDelegate{
     func UpdateTableContents()
 }
 
-class IndividualListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdateIndividualListDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class IndividualListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdateListDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
     @IBOutlet weak var table: UITableView!
     var list = List()
@@ -54,8 +54,7 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
                     // Create new list
                     alert.actions[0].isEnabled = true
                     let product = Product.init(productName: text)
-                    self.list.products.append(product)
-                    self.IndividualListUpdate()
+                    self.ListUpdate(finishedProduct: product, isEditing: false)
                 }
             } else {
                 // Error occured
@@ -70,7 +69,7 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
                 
                 // Init product using text field as name
                 let product = Product.init(productName: text)
-                self.list.products.append(product)
+                
                 self.table.reloadData()
                 
                 // Create and push EditItemViewController
@@ -78,7 +77,7 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
                 let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
                 
                 // Set EditItemViewController vars
-                viewController.individualListDelegate = self
+                viewController.delegate = self
                 viewController.product.productName = text
                 viewController.product = product
                 viewController.editCell = false
@@ -97,7 +96,6 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
             
             // Init product
             let product = Product.init(productName: "")
-            self.list.products.append(product)
             self.table.reloadData()
             
             // Create and push BarcodeViewController
@@ -106,7 +104,7 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
             
             // Set BarcodeViewController vars
             viewController.product = product
-            viewController.individualListDelegate = self
+            viewController.delegate = self
             
             self.navigationController?.pushViewController(viewController, animated: true)
             
@@ -118,11 +116,14 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
         self.present(alert, animated: true, completion: nil)
     }
     
-    func IndividualListUpdate() {
-        // Reloads current list data
-        self.table.reloadData()
-        // Reloads shopping list data
+    func ListUpdate(finishedProduct: Product, isEditing: Bool) {
+        if isEditing == false{
+            self.list.products.append(finishedProduct)
+        }
         self.delegate?.UpdateTableContents()
+        // Serialize data
+        //SerializeData()
+        self.table.reloadData()
     }
     
     
@@ -159,7 +160,7 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
         let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
         
         //Push current VC onto backstack
-        viewController.individualListDelegate = self
+        viewController.delegate = self
         viewController.product = self.list.products[indexPath.row]
         viewController.editCell = true
         

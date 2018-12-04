@@ -11,7 +11,7 @@
 import UIKit
 import DZNEmptyDataSet
 
-class PantryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdatePantryListDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class PantryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdateListDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     //var product = Product()
     var list = List()
@@ -43,7 +43,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         //INSERT CODE TO VIEW ITEM DETAILS VIEW CONTROLLER
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
-        viewController.pantryListDelegate = self
+        viewController.delegate = self
         //Push current VC onto backstack
         viewController.product = self.list.products[indexPath.row]
         viewController.editCell = true
@@ -112,6 +112,15 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         self.PantryTableView.reloadData()
     }
     
+    func ListUpdate(finishedProduct: Product, isEditing: Bool) {
+        if isEditing == false{
+            self.list.products.append(finishedProduct)
+        }
+        // Serialize data
+        SerializeData()
+        self.PantryTableView.reloadData()
+    }
+    
     // Used for adding additional items to Pantry
     func CreateNewItemButton(){
         // Create new list button using AddNewList as a selector
@@ -164,7 +173,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
                 let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
                 
                 // Set EditItemViewController vars
-                viewController.pantryListDelegate = self
+                viewController.delegate = self
                 viewController.product.productName = text
                 viewController.product = product
                 viewController.editCell = false
@@ -193,7 +202,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
             
             // Set BarcodeViewController vars
             viewController.product = product
-            viewController.pantryListDelegate = self
+            viewController.delegate = self
             
             self.navigationController?.pushViewController(viewController, animated: true)
             

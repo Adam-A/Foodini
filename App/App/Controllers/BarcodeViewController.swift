@@ -30,8 +30,7 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     // Variables used to add product to pantry
     var product = Product()
-    var pantryListDelegate: UpdatePantryListDelegate?
-    var individualListDelegate: UpdateIndividualListDelegate?
+    var delegate: UpdateListDelegate?
     
     
     override func viewDidLoad() {
@@ -160,6 +159,7 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         let popup = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         popup.addAction(UIAlertAction(title: "Return", style: .default, handler: { (action) in
             self.navigationController?.popViewController(animated: true)
+            return
         }))
         
         self.present(popup, animated: true, completion: nil)
@@ -201,12 +201,7 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         // Set EditItemViewController vars
         viewController.product = self.product
-        
-        if pantryListDelegate != nil{
-            viewController.pantryListDelegate = self.pantryListDelegate
-        } else if individualListDelegate != nil {
-            viewController.individualListDelegate = self.individualListDelegate
-        }
+        viewController.delegate = self.delegate
         
         viewController.editCell = false
 

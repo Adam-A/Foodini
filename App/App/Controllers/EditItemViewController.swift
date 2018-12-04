@@ -9,12 +9,8 @@
 import UIKit
 import TextFieldEffects
 
-protocol UpdatePantryListDelegate{
-    func PantryListUpdate(finishedProduct: Product, isEditing: Bool)
-}
-
-protocol UpdateIndividualListDelegate{
-    func IndividualListUpdate()
+protocol UpdateListDelegate {
+    func ListUpdate(finishedProduct: Product, isEditing: Bool)
 }
 
 
@@ -32,11 +28,7 @@ class EditItemViewController: UIViewController {
     @IBOutlet weak var wheatSwitch: UISwitch!
     @IBOutlet weak var soySwitch: UISwitch!
     
-    
-    
-    var pantryListDelegate: UpdatePantryListDelegate?
-    
-    var individualListDelegate: UpdateIndividualListDelegate?
+    var delegate: UpdateListDelegate?
     
     var product = Product()
     
@@ -188,20 +180,14 @@ class EditItemViewController: UIViewController {
                 product.containsSoy = false
             }
             
-            // If pantry list delegate is set, update the pantry
-            if pantryListDelegate != nil{
-                self.pantryListDelegate?.PantryListUpdate(finishedProduct: product, isEditing: editCell)
-            // Otherwise, if the individual list delegate is set, update the individual list
-            } else if individualListDelegate != nil {
-                self.individualListDelegate?.IndividualListUpdate()
-            }
+            self.delegate?.ListUpdate(finishedProduct: product, isEditing: editCell)
             
             // If the IndividualListViewController is on the stack, pop to it
             // Otherwise, pop to root
             if let viewControllers = self.navigationController?.viewControllers{
                 for controllers in viewControllers{
                     if controllers.isKind(of: IndividualListViewController.self){
-                        print("Popping to indi")
+                        // Pop to IndividualListViewController
                         self.navigationController?.popToViewController(controllers, animated: true)
                         return
                     }
