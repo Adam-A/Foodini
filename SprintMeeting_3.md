@@ -26,16 +26,16 @@ _Please add links here!_
 
 ## Will Chilcote
 ### Accomplishments
-Worked on implementing a navigation task bar for each of the four main views
-(Shopping list, pantry, settings, and recipe). Found some nice icons/assets to
-use in the design of the app.
+Found some nice icons/assets to use in the design of the app, will apply them shortly
+In addition to the existing tapping functionality, the user can now swipe left-to-right on list items to increment the quantity, which is also now displayed as a right-side detail on the cell.
+Minor adjustments to Tab Bar
+Designed and added App home screen icon
 
 ### Planned
-For the remainder of the time left, will add model support in the
-IndividualListViewController.
+For the remainder of the time left, will work on integrating the Pantry and List data
 
 ### Links
-_Please add links here!_
+- [Individual List Enhancements](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/1fdc4ed0f948a83287a79af2ced36e796b7c346c)
 
 ## Mark Nickerson
 ### Accomplishments
