@@ -63,6 +63,16 @@ class List: Codable {
         return productStr
     }
     
+    func GetQuantity(name: String) -> Int {
+        var value : Int = 0
+        products.forEach { item in
+            if (item.productName == name) {
+                value = item.quantity
+            }
+        }
+        return value
+    }
+    
     //------------ EXPIRATION -------------
     // Need function to see how close product is to expiration date
     // if it is past expiration date, change text to red or something

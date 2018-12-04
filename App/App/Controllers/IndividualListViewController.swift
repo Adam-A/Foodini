@@ -19,8 +19,14 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
     var list = List()
     var delegate: UpdateShoppingListDelegate?
     
+//    var pantryList : List?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
+//        let pantryView = vc.viewControllers?[1] as! PantryViewController
+//        pantryList = pantryView.list
         
         
         // Generate the "Add" button in the top right
@@ -29,6 +35,10 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
         
         table.dataSource = self
         table.delegate = self
+        
+//        list.products.forEach { item in
+//            item.quantity = pantryList?.GetQuantity(name: item.productName) ?? 0
+//        }
         
         //DZNEmptyDataSet
         table.emptyDataSetSource = self
@@ -69,6 +79,7 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
                 
                 // Init product using text field as name
                 let product = Product.init(productName: text)
+//                product.quantity = self.pantryList?.GetQuantity(name: product.productName) ?? 0
                 
                 self.table.reloadData()
                 
@@ -137,6 +148,7 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
         let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell") ?? UITableViewCell(style: .default, reuseIdentifier: "itemCell")
         // Set text to item name
         cell.textLabel?.text = list.products[indexPath.row].productName
+        cell.detailTextLabel?.text = "\(list.products[indexPath.row].quantity)";
         return cell
         
     }
@@ -165,6 +177,18 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
         viewController.editCell = true
         
         self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let addItem = UIContextualAction(style: .normal, title:  "To Pantry", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            print("Added item")
+            self.list.products[indexPath.row].quantity += 1;
+            self.table.reloadData()
+            success(true)
+        })
+        addItem.backgroundColor = .green
+        
+        return UISwipeActionsConfiguration(actions: [addItem])
     }
     
     //-----DZNEmptyDataSet cocoapod use -----
