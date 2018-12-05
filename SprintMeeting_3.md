@@ -22,7 +22,9 @@ For the remainder of the time left, will work on finishing up the settings view
 and implementing the RecipeViewController functionality.
 
 ### Links
-_Please add links here!_
+- [Recipe View Controller Recipe Roulette](https://github.com/ECS189E/Can-I-graduate-already-LLC/blob/master/App/App/Controllers/RecipesViewController.swift)
+
+Recipe roulette somewhat works -- Looks horrible and the codebase makes me wanna cry but oh well -- Still not fully done, need to clean up how it looks.
 
 ## Will Chilcote
 ### Accomplishments
