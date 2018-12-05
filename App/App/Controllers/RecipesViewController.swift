@@ -25,7 +25,7 @@ class RecipesViewController: UITableViewController, DZNEmptyDataSetSource, DZNEm
     override func viewDidLoad() {
     super.viewDidLoad()
         
-        /* TEST DATA */
+        //TEST DATA
         tableViewData = [cellData(opened: false, title: "Rice and Beans", sectionData: ["Rice", "Beans", "Salt"]),cellData(opened: false, title: "Curry Chicken", sectionData: ["Curry", "Chicken"]),cellData(opened: false, title: "Mac n Cheese", sectionData: ["Mac", "Cheese"])]
         
         //DZNEmptyDataSet
@@ -48,61 +48,45 @@ class RecipesViewController: UITableViewController, DZNEmptyDataSetSource, DZNEm
     }
     
     @IBAction func recipeRoulette(){
-        let edamamEndpoint: String = "https://api.edamam.com/search?q=chicken&app_id=$57137e17&app_key=$630a79c36b59b59acca9fa0461eb2329&from=0&to=3&calories=591-722&health=alcohol-free"
-        
-        //https://api.edamam.com/search?q=chicken&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&from=0&to=3&calories=591-722&health=alcohol-free
-        
-        //"https://api.edamam.com/search?app_id=${57137e17}&app_key=${4a3e0bd717007d50a87e60f20e7af8bf}&from=0&to=30&calories=1-5000"
-        guard let url = URL(string: edamamEndpoint) else {
-            print("Error: cannot create URL")
-            return
-        }
-        
-        let urlRequest = URLRequest(url: url)
-        
-        // set up the session
-        let config = URLSessionConfiguration.default
-        let session = URLSession(configuration: config)
-        
-        // make the request
-        let task = session.dataTask(with: urlRequest) {
-            (data, response, error) in
-            // check for any errors
-            guard error == nil else {
-                print("error calling GET on /todos/1")
-                print(error!)
-                return
-            }
-            // make sure we got data
-            guard let responseData = data else {
-                print("Error: did not receive data")
-                return
-            }
-            // parse the result as JSON, since that's what the API provides
-            do {
-                guard let foodItem = try JSONSerialization.jsonObject(with: responseData, options: [])
-                    as? [String: Any] else {
-                        print("error trying to convert data to JSON")
-                        return
-                }
-                // now we have the todo
-                // let's just print it to prove we can access it
-                print("The todo is: " + foodItem.description)
+        let theMealDBEndpoint: String = "http://www.themealdb.com/api/json/v1/1/random.php"
+        guard let url = URL(string: theMealDBEndpoint) else { return }
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let dataResponse = data,
+                error == nil else {
+                    print(error?.localizedDescription ?? "Response Error")
+                    return }
+                do{
+                //here dataResponse received from a network request
+                let jsonResponse = try JSONSerialization.jsonObject(with:
+                    dataResponse, options: [])
+                //print(jsonResponse) //Response result
                 
-                // the todo object is a dictionary
-                // so we just access the title using the "title" key
-                // so check for a title and print it if we have one
-                guard let foodItemTitle = foodItem["label"] as? String else {
-                    print("Could not get todo title from JSON")
+                guard let jsonArray = jsonResponse as? [String: Any] else {
                     return
                 }
-                print("The title is: " + foodItemTitle)
-            } catch  {
-                print("error trying to convert data to JSON")
-                return
+                let jsonDict = jsonArray.first?.value as? [[String:Any]]
+                //print(jsonDict?.first)
+                var cd = cellData.init()
+                var sectionData = [String]()
+                for item in (jsonDict?.first)! {
+                    if (item.key == "strMeal"){
+                        cd.title = item.value as! String
+                    }
+                    if (item.key.starts(with: "strIngredient")) {
+                        sectionData.append(item.value as! String)
+                    }
+                }
+                cd.opened = false
+                cd.sectionData = sectionData
+                self.tableViewData.append(cd)
+                self.tableView.reloadData()
+            } catch let parsingError {
+                print("Error", parsingError)
             }
         }
         task.resume()
+        
+        
     }
     
     @IBAction func editingCells() {
