@@ -77,6 +77,8 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         
         CreateNewItemButton()
         LoadData()
+        
+        
     }
     
     func LoadData(){
