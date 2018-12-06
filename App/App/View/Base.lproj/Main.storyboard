@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sbk-1X-sZL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sbk-1X-sZL">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -444,6 +444,7 @@
                                 </constraints>
                                 <state key="normal" title="Contact Us"/>
                                 <connections>
+                                    <action selector="onContactUsPress:" destination="Sag-Ps-esZ" eventType="touchUpInside" id="FOf-4S-GWL"/>
                                     <action selector="onListsPress:" destination="BvI-fq-fJK" eventType="touchUpInside" id="g9u-Hi-ckj"/>
                                 </connections>
                             </button>
@@ -454,6 +455,7 @@
                                 </constraints>
                                 <state key="normal" title="Feedback"/>
                                 <connections>
+                                    <action selector="onFeedbackPress:" destination="Sag-Ps-esZ" eventType="touchUpInside" id="YRE-8d-lpR"/>
                                     <action selector="onListsPress:" destination="BvI-fq-fJK" eventType="touchUpInside" id="Kfh-zR-zIg"/>
                                 </connections>
                             </button>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class SettingsViewController: UIViewController {
     @IBOutlet weak var darkThemeToggle: UISwitch!
@@ -27,45 +28,14 @@ class SettingsViewController: UIViewController {
 //         settingsViewButton.isEnabled = false
 
     }
+
     
-    
-    @IBAction func onPantryPress(_ sender: Any) {
-        // Save data before transferring
-        self.navigationItem.hidesBackButton = false;
-//        settingsViewButton.isEnabled = true
-        // Create the pantry VC
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "PantryViewController") as! PantryViewController
-        //viewController.delegate = self
-        // Push current VC onto backstack
-        self.navigationController?.pushViewController(viewController, animated: false)
-        
+    @IBAction func onContactUsPress(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "mailto:support@canigraduatealready.com")! as URL, options: [:], completionHandler: nil)
     }
     
-    @IBAction func onRecipePress(_ sender: Any) {
-        // Save data before transferring
-        
-         // Create the pantry VC
-         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-         let viewController = storyboard.instantiateViewController(withIdentifier: "RecipesViewController") as! RecipesViewController
-         //viewController.delegate = self
-         // Push current VC onto backstack
-         self.navigationController?.pushViewController(viewController, animated: false)
+    @IBAction func onFeedbackPress(_ sender: Any){
+          UIApplication.shared.open(URL(string: "mailto:feedback@canigraduatealready.com")! as URL, options: [:], completionHandler: nil)
         
     }
-    
-    @IBAction func onListsPress(_ sender: Any) {
-        // Save data before transferring
-        self.navigationItem.hidesBackButton = false;
-//        settingsViewButton.isEnabled = true
-        // Create the pantry VC
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "shoppingListViewController") as! ShoppingListViewController
-        //viewController.delegate = self
-        //Push current VC onto backstack
-        self.navigationController?.pushViewController(viewController, animated: false)
-        
-    }
-    
-    
 }

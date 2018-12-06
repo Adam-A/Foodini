@@ -72,7 +72,7 @@ class RecipesViewController: UITableViewController, DZNEmptyDataSetSource, DZNEm
                     if (item.key == "strMeal"){
                         cd.title = item.value as! String
                     }
-                    if (item.key.starts(with: "strIngredient")) {
+                    if (item.key.starts(with: "strIngredient") && item.value as? String != nil &&  item.value as! String != "") {
                         sectionData.append(item.value as! String)
                     }
                 }
@@ -141,7 +141,9 @@ class RecipesViewController: UITableViewController, DZNEmptyDataSetSource, DZNEm
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else { return UITableViewCell() }
-            cell.textLabel?.text = tableViewData[indexPath.section].sectionData[dataIndex]
+            cell.textLabel?.text = "  \u{2022} \(tableViewData[indexPath.section].sectionData[dataIndex])"
+
+            
            return cell
         }
     }
