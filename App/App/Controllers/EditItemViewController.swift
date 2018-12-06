@@ -14,13 +14,15 @@ protocol UpdateListDelegate {
 }
 
 
-class EditItemViewController: UIViewController {
+class EditItemViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var expDateTextField: UITextField!
     @IBOutlet weak var itemNameTextField: UITextField!
     @IBOutlet weak var quantityTextField: UITextField!
     @IBOutlet weak var priceTextField: UITextField!
     @IBOutlet weak var brandTextField: UITextField!
+    
+    @IBOutlet weak var expiredLabel: UILabel!
     
     @IBOutlet weak var palmSwitch: UISwitch!
     @IBOutlet weak var dairySwitch: UISwitch!
@@ -29,6 +31,9 @@ class EditItemViewController: UIViewController {
     @IBOutlet weak var soySwitch: UISwitch!
     
     var delegate: UpdateListDelegate?
+    var expiredDate: Date?
+    let currencyFormatter = NumberFormatter()
+    let US = Locale(identifier: "en_US")
     
     var product = Product()
     
@@ -39,12 +44,13 @@ class EditItemViewController: UIViewController {
         
         DoneButton()
         
+        expiredLabel.isHidden = true
+        
         // ---- Fill Text Fields with Info-----
         itemNameTextField.text = product.productName
         brandTextField.text = product.brandName
         quantityTextField.text = String(product.quantity)
         priceTextField.text = String(product.price)
-        //expDateTextField.text = FillDate(product.expDate)
         
         if product.containsPalm == true{
             palmSwitch.isOn = true
@@ -87,19 +93,46 @@ class EditItemViewController: UIViewController {
         // instead of a keyboard appearing, show a date picker
         expDateTextField.inputView = datePicker
         // Do any additional setup after loading the view.
+        
+        //Autofill date if date was already entered previously
+        guard let expiry = product.expDate else{
+            print("No Date")
+            return
+        }
+        expDateTextField.text =  Product.date(input: expiry)
+        
+        expiredDate = expiry
+        
+        product.calculateExpiry(date: expiry)
+        
+        if product.isExpired == true{
+            expiredLabel.isHidden = false
+        }else{
+            expiredLabel.isHidden = true
+        }
+        
+        currencyFormatter.numberStyle = NumberFormatter.Style.currency
+        currencyFormatter.currencyCode = (Locale.current as NSLocale).displayName(forKey: .currencySymbol, value: "USD") ?? ""
+
+        
     }
     
-//    @objc func FillDate(sender: product.expDate){
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        if textField == priceTextField{
+//            let text = priceTextField.text?.replacingOccurrences(of: currencyFormatter.currencySymbol, with: "").replacingOccurrences(of: currencyFormatter.groupingSeparator, with: "").replacingOccurrences(of: currencyFormatter.decimalSeparator, with: "")
 //
-//        let formatter = DateFormatter()
+//            let nsNumber: NSNumber = NSNumber(value: Double(text ?? "0.0") ?? 0.0)
 //
-//        //show only date, not time
-//        formatter.dateStyle = DateFormatter.Style.medium
-//        formatter.timeStyle = DateFormatter.Style.none
+//            //priceTextField.text = currencyFormatter.string(from: NSNumber(text as Double))
 //
-//        //show chosen date in text field
-//        product.expDate = sender.date
-//        expDateTextField.text = formatter.string(from: sender.date)
+//
+//            //priceTextField.text = currencyFormatter.string(from: nsNumber)
+//            textField.text = currencyFormatter.string(from: nsNumber)
+//            return false
+//        }
+//        else{
+//            return true
+//        }
 //    }
     
     @objc func datePickerValueChanged(sender: UIDatePicker){
@@ -111,15 +144,27 @@ class EditItemViewController: UIViewController {
         formatter.timeStyle = DateFormatter.Style.none
         
         //show chosen date in text field
-        product.expDate = sender.date
+        expiredDate = sender.date
         expDateTextField.text = formatter.string(from: sender.date)
+        
+        // Calculate Expiration
+        guard let expiry = expiredDate else{
+            print("No Date")
+            return
+        }
+        
+        product.calculateExpiry(date: expiry)
+        
+        if product.isExpired == true{
+            expiredLabel.isHidden = false
+        }else{
+            expiredLabel.isHidden = true
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
-    
-    //Save Items when done
     
     // Used for Saving Items
     func DoneButton(){
@@ -127,6 +172,18 @@ class EditItemViewController: UIViewController {
         let addDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(Done(sender:)))
         self.navigationItem.rightBarButtonItem = addDoneButton
     }
+    
+    
+    
+    @IBAction func priceFormatting(_ sender: Any) {
+        let text = priceTextField.text?.replacingOccurrences(of: currencyFormatter.currencySymbol, with: "").replacingOccurrences(of: currencyFormatter.groupingSeparator, with: "").replacingOccurrences(of: currencyFormatter.decimalSeparator, with: "")
+        
+        let nsNumber: NSNumber = NSNumber(value: (Double(text ?? "0.0") ?? 0.0)/100.0)
+        
+        priceTextField.text = currencyFormatter.string(from: nsNumber)
+    }
+
+    
     
     @IBAction func RevertTextColor(_ sender: Any) {
         itemNameTextField.textColor = .black
@@ -137,6 +194,8 @@ class EditItemViewController: UIViewController {
     }
     @objc func Done(sender: UIBarButtonItem){
         // Save Info from Text Fields
+        product.expDate = expiredDate
+        
         if (itemNameTextField.text != "" && itemNameTextField.text != "Enter Product Name" && quantityTextField.text != "0")
         {
             product.productName = itemNameTextField.text ?? "No Product Name"

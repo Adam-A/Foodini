@@ -17,6 +17,7 @@
 		B25A7C0521B5A22B005EE536 /* RecipeEmptyState.png in Resources */ = {isa = PBXBuildFile; fileRef = B25A7C0221B5A22B005EE536 /* RecipeEmptyState.png */; };
 		B28A14B521AF877000D5291D /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A14B421AF877000D5291D /* EditItemViewController.swift */; };
 		B28A14B721AF87AF00D5291D /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A14B621AF87AF00D5291D /* ProductModel.swift */; };
+		B293BB3521B9AD5100840D6A /* ExpiredAlert.png in Resources */ = {isa = PBXBuildFile; fileRef = B293BB3421B9AD5100840D6A /* ExpiredAlert.png */; };
 		B2AE2DC821A0DA0300ECC3E2 /* PantryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AE2DC721A0DA0300ECC3E2 /* PantryViewController.swift */; };
 		E4124CD021A0BC7C007EB2EF /* ShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4124CCF21A0BC7C007EB2EF /* ShoppingListViewController.swift */; };
 		E43D32AC21B34138008B8E85 /* EdamamAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43D32AB21B34138008B8E85 /* EdamamAPI.swift */; };
@@ -41,6 +42,7 @@
 		B25A7C0221B5A22B005EE536 /* RecipeEmptyState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecipeEmptyState.png; sourceTree = "<group>"; };
 		B28A14B421AF877000D5291D /* EditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
 		B28A14B621AF87AF00D5291D /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProductModel.swift; path = App/Models/ProductModel.swift; sourceTree = SOURCE_ROOT; };
+		B293BB3421B9AD5100840D6A /* ExpiredAlert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ExpiredAlert.png; sourceTree = "<group>"; };
 		B2AE2DC721A0DA0300ECC3E2 /* PantryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryViewController.swift; sourceTree = "<group>"; };
 		E4124CCF21A0BC7C007EB2EF /* ShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
 		E43D32AB21B34138008B8E85 /* EdamamAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdamamAPI.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 		B25A7BFD21B59FDB005EE536 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B293BB3421B9AD5100840D6A /* ExpiredAlert.png */,
 				B25A7C0021B5A22B005EE536 /* IndListEmptyState.png */,
 				B25A7C0121B5A22B005EE536 /* MasterListEmptyState.png */,
 				B25A7C0221B5A22B005EE536 /* RecipeEmptyState.png */,
@@ -231,6 +234,7 @@
 				B25A7C0521B5A22B005EE536 /* RecipeEmptyState.png in Resources */,
 				B25A7C0421B5A22B005EE536 /* MasterListEmptyState.png in Resources */,
 				B25A7BFF21B5A034005EE536 /* PantryEmptyState.png in Resources */,
+				B293BB3521B9AD5100840D6A /* ExpiredAlert.png in Resources */,
 				E4767F2321A0B44100C665D8 /* Assets.xcassets in Resources */,
 				E4767F2121A0B44000C665D8 /* Main.storyboard in Resources */,
 				B25A7C0321B5A22B005EE536 /* IndListEmptyState.png in Resources */,
