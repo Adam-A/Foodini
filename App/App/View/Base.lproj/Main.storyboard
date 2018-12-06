@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sbk-1X-sZL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sbk-1X-sZL">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -267,15 +267,27 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expired Item" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cXH-sS-Sy8">
+                                <rect key="frame" x="16" y="240" width="382" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="kA4-So-SaW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.03624573524" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="D9N-YJ-2ad" firstAttribute="top" secondItem="S0F-Df-SdO" secondAttribute="bottom" constant="8" id="5aZ-NR-FUN"/>
+                            <constraint firstItem="S0F-Df-SdO" firstAttribute="top" secondItem="cXH-sS-Sy8" secondAttribute="bottom" constant="8" id="6hr-b8-U6Z"/>
                             <constraint firstItem="zWc-Gl-Ycq" firstAttribute="leading" secondItem="EXS-0b-ZGf" secondAttribute="leading" constant="16" id="73E-42-o7g"/>
                             <constraint firstItem="D9N-YJ-2ad" firstAttribute="leading" secondItem="EXS-0b-ZGf" secondAttribute="leading" constant="16" id="894-4X-Svj"/>
+                            <constraint firstItem="EXS-0b-ZGf" firstAttribute="trailing" secondItem="cXH-sS-Sy8" secondAttribute="trailing" constant="16" id="8Cr-A6-LTG"/>
                             <constraint firstItem="EXS-0b-ZGf" firstAttribute="trailing" secondItem="Vp8-U1-Aqh" secondAttribute="trailing" constant="16" id="BV8-af-hpL"/>
                             <constraint firstItem="EXS-0b-ZGf" firstAttribute="trailing" secondItem="kDr-1v-ODM" secondAttribute="trailing" constant="18" id="D9J-4l-Vhd"/>
                             <constraint firstItem="S0F-Df-SdO" firstAttribute="leading" secondItem="EXS-0b-ZGf" secondAttribute="leading" constant="16" id="Dq7-wC-vJw"/>
+                            <constraint firstItem="cXH-sS-Sy8" firstAttribute="top" secondItem="l2h-og-2li" secondAttribute="bottom" id="Ec0-nu-voR"/>
                             <constraint firstItem="bbd-Wg-Qng" firstAttribute="top" secondItem="kDr-1v-ODM" secondAttribute="bottom" constant="8" id="GSx-u2-EgX"/>
                             <constraint firstItem="vbG-Ya-vn6" firstAttribute="top" secondItem="bbd-Wg-Qng" secondAttribute="bottom" constant="8" id="HRb-P0-PaX"/>
                             <constraint firstItem="1uP-2Y-bTo" firstAttribute="top" secondItem="wzG-5m-4C6" secondAttribute="bottom" constant="8" id="HTf-aH-IXk"/>
@@ -285,12 +297,12 @@
                             <constraint firstItem="bbd-Wg-Qng" firstAttribute="leading" secondItem="EXS-0b-ZGf" secondAttribute="leading" constant="16" id="JAI-Di-JA8"/>
                             <constraint firstItem="EXS-0b-ZGf" firstAttribute="trailing" secondItem="1uP-2Y-bTo" secondAttribute="trailing" constant="16" id="KHV-ay-gVp"/>
                             <constraint firstItem="EXS-0b-ZGf" firstAttribute="trailing" secondItem="wzG-5m-4C6" secondAttribute="trailing" constant="18" id="Krt-15-uje"/>
+                            <constraint firstItem="S0F-Df-SdO" firstAttribute="top" secondItem="cXH-sS-Sy8" secondAttribute="bottom" constant="8" id="LcH-oj-Kfp"/>
                             <constraint firstItem="zWc-Gl-Ycq" firstAttribute="top" secondItem="bey-LG-4wn" secondAttribute="bottom" constant="18" id="LiF-nZ-H6M"/>
                             <constraint firstItem="EXS-0b-ZGf" firstAttribute="trailing" secondItem="l2h-og-2li" secondAttribute="trailing" constant="16" id="NgF-fH-3z4"/>
                             <constraint firstItem="vbG-Ya-vn6" firstAttribute="leading" secondItem="EXS-0b-ZGf" secondAttribute="leading" constant="16" id="POj-WE-zVR"/>
                             <constraint firstItem="EXS-0b-ZGf" firstAttribute="trailing" secondItem="hlI-qK-L23" secondAttribute="trailing" constant="16" id="QxA-0l-H7T"/>
                             <constraint firstItem="QLp-5f-iLw" firstAttribute="leading" secondItem="EXS-0b-ZGf" secondAttribute="leading" constant="16" id="R8x-GX-BPF"/>
-                            <constraint firstItem="S0F-Df-SdO" firstAttribute="top" secondItem="l2h-og-2li" secondAttribute="bottom" constant="29" id="Rge-ZJ-f4M"/>
                             <constraint firstItem="QLp-5f-iLw" firstAttribute="top" secondItem="5HO-9d-Pyi" secondAttribute="bottom" constant="18" id="URG-WF-X84"/>
                             <constraint firstItem="EXS-0b-ZGf" firstAttribute="trailing" secondItem="bbd-Wg-Qng" secondAttribute="trailing" constant="16" id="WNX-ZK-7Cm"/>
                             <constraint firstItem="kDr-1v-ODM" firstAttribute="top" secondItem="EXS-0b-ZGf" secondAttribute="top" constant="29" id="XvP-Lf-4rT"/>
@@ -303,6 +315,7 @@
                             <constraint firstItem="EXS-0b-ZGf" firstAttribute="trailing" secondItem="g3U-Sk-pTm" secondAttribute="trailing" constant="16" id="m3x-Gn-w2W"/>
                             <constraint firstItem="EXS-0b-ZGf" firstAttribute="trailing" secondItem="S0F-Df-SdO" secondAttribute="trailing" constant="20" id="m5e-zd-BSf"/>
                             <constraint firstItem="hlI-qK-L23" firstAttribute="leading" secondItem="EXS-0b-ZGf" secondAttribute="leading" constant="16" id="oZw-aA-CK9"/>
+                            <constraint firstItem="cXH-sS-Sy8" firstAttribute="leading" secondItem="EXS-0b-ZGf" secondAttribute="leading" constant="16" id="owg-MB-HB1"/>
                             <constraint firstItem="ChR-DK-Mru" firstAttribute="top" secondItem="Vp8-U1-Aqh" secondAttribute="bottom" constant="8" id="p4S-Fa-F2K"/>
                             <constraint firstItem="l2h-og-2li" firstAttribute="top" secondItem="tVI-sr-JHT" secondAttribute="bottom" constant="8" id="q82-gs-MgJ"/>
                             <constraint firstItem="tVI-sr-JHT" firstAttribute="top" secondItem="hlI-qK-L23" secondAttribute="bottom" constant="8" id="sJm-zO-gLz"/>
@@ -319,6 +332,7 @@
                         <outlet property="brandTextField" destination="vbG-Ya-vn6" id="5hT-97-bAu"/>
                         <outlet property="dairySwitch" destination="1uP-2Y-bTo" id="XDz-LG-OcW"/>
                         <outlet property="expDateTextField" destination="l2h-og-2li" id="VTk-Dr-Kqu"/>
+                        <outlet property="expiredLabel" destination="cXH-sS-Sy8" id="Zar-6o-1ym"/>
                         <outlet property="itemNameTextField" destination="bbd-Wg-Qng" id="8hG-qH-Yvp"/>
                         <outlet property="nutSwitch" destination="Vp8-U1-Aqh" id="mSn-EF-zY9"/>
                         <outlet property="palmSwitch" destination="wzG-5m-4C6" id="5ET-PQ-lgD"/>

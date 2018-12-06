@@ -86,12 +86,13 @@ class Product: Codable {
     // expiration date of product
     // will have to use UIDatePicker for the user to enter this
     var expDate: Date?
-    // current date that will be used to see if product is close to expiring
-    var currentDate: Date
+
+
     // Amount stored
     var quantity: Int
     var price: String
     var daysLeft: Int
+    var isExpired: Bool
     var containsPalm: Bool
     var containsDairy: Bool
     var containsNuts: Bool
@@ -107,7 +108,7 @@ class Product: Codable {
         self.quantity = 1
         self.price = ""
         self.daysLeft = 0
-        self.currentDate = Date()
+        self.isExpired = false
         self.containsPalm = false
         self.containsDairy = false
         self.containsNuts = false
@@ -124,7 +125,7 @@ class Product: Codable {
         self.quantity = 1
         self.price = ""
         self.daysLeft = 0
-        self.currentDate = Date()
+        self.isExpired = false
         self.containsPalm = false
         self.containsDairy = false
         self.containsNuts = false
@@ -141,13 +142,39 @@ class Product: Codable {
         self.quantity = 1
         self.price = ""
         self.daysLeft = 0
-        self.currentDate = Date()
+        self.isExpired = false
         self.containsPalm = false
         self.containsDairy = false
         self.containsNuts = false
         self.containsWheat = false
         self.containsSoy = false
         self.wasPurchased = false
+    }
+    
+    func calculateExpiry(date: Date){
+        let currentDate = Date()
+        
+        
+        if date < currentDate {
+            print("expired")
+            isExpired = true
+        } else if date > currentDate {
+            print("not expired")
+            isExpired = false
+        } else if date == currentDate {
+            print("not expired")
+            isExpired = false
+        }
+    }
+    
+    static func date(input: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        
+        //dateFormatter.locale = Locale(identifier: "en_US")
+        let result = dateFormatter.string(from: input)
+        return result
     }
     
 }

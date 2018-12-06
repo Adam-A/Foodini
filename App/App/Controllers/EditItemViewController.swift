@@ -22,6 +22,8 @@ class EditItemViewController: UIViewController {
     @IBOutlet weak var priceTextField: UITextField!
     @IBOutlet weak var brandTextField: UITextField!
     
+    @IBOutlet weak var expiredLabel: UILabel!
+    
     @IBOutlet weak var palmSwitch: UISwitch!
     @IBOutlet weak var dairySwitch: UISwitch!
     @IBOutlet weak var nutSwitch: UISwitch!
@@ -29,6 +31,7 @@ class EditItemViewController: UIViewController {
     @IBOutlet weak var soySwitch: UISwitch!
     
     var delegate: UpdateListDelegate?
+    var expiredDate: Date?
     
     var product = Product()
     
@@ -39,12 +42,13 @@ class EditItemViewController: UIViewController {
         
         DoneButton()
         
+        expiredLabel.isHidden = true
+        
         // ---- Fill Text Fields with Info-----
         itemNameTextField.text = product.productName
         brandTextField.text = product.brandName
         quantityTextField.text = String(product.quantity)
         priceTextField.text = String(product.price)
-        //expDateTextField.text = FillDate(product.expDate)
         
         if product.containsPalm == true{
             palmSwitch.isOn = true
@@ -87,20 +91,25 @@ class EditItemViewController: UIViewController {
         // instead of a keyboard appearing, show a date picker
         expDateTextField.inputView = datePicker
         // Do any additional setup after loading the view.
+        
+        //Autofill date if date was already entered previously
+        guard let expiry = product.expDate else{
+            print("No Date")
+            return
+        }
+        expDateTextField.text =  Product.date(input: expiry)
+        
+        expiredDate = expiry
+        
+        product.calculateExpiry(date: expiry)
+        
+        if product.isExpired == true{
+            expiredLabel.isHidden = false
+        }else{
+            expiredLabel.isHidden = true
+        }
     }
-    
-//    @objc func FillDate(sender: product.expDate){
-//
-//        let formatter = DateFormatter()
-//
-//        //show only date, not time
-//        formatter.dateStyle = DateFormatter.Style.medium
-//        formatter.timeStyle = DateFormatter.Style.none
-//
-//        //show chosen date in text field
-//        product.expDate = sender.date
-//        expDateTextField.text = formatter.string(from: sender.date)
-//    }
+
     
     @objc func datePickerValueChanged(sender: UIDatePicker){
         
@@ -111,15 +120,27 @@ class EditItemViewController: UIViewController {
         formatter.timeStyle = DateFormatter.Style.none
         
         //show chosen date in text field
-        product.expDate = sender.date
+        expiredDate = sender.date
         expDateTextField.text = formatter.string(from: sender.date)
+        
+        // Calculate Expiration
+        guard let expiry = expiredDate else{
+            print("No Date")
+            return
+        }
+        
+        product.calculateExpiry(date: expiry)
+        
+        if product.isExpired == true{
+            expiredLabel.isHidden = false
+        }else{
+            expiredLabel.isHidden = true
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
-    
-    //Save Items when done
     
     // Used for Saving Items
     func DoneButton(){
@@ -137,6 +158,8 @@ class EditItemViewController: UIViewController {
     }
     @objc func Done(sender: UIBarButtonItem){
         // Save Info from Text Fields
+        product.expDate = expiredDate
+        
         if (itemNameTextField.text != "" && itemNameTextField.text != "Enter Product Name" && quantityTextField.text != "0")
         {
             product.productName = itemNameTextField.text ?? "No Product Name"
