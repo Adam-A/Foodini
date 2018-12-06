@@ -145,8 +145,8 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             trimmedBarcode = String(unprocessedBarcode.suffix(12))
         }
         
-        // Make API call
-        API.ApiCall(barcode: trimmedBarcode) { (response, error) in
+        // Make EdamamAPI call
+        EdamamAPI.ApiCall(barcode: trimmedBarcode) { (response, error) in
             if (error == nil && response != nil) {
                 if let response = response{
                     self.pushEditItemViewController(foodProduct: response)
@@ -154,9 +154,7 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             } else {
                 if let error = error{
                     print("Error: \(error.message)")
-                    // Spawn pop up error
-                    self.SpawnPopup(message: "We can't find the item you searched for, please enter it manually.")
-                    return
+                    self.BackupAPICall(barcode: trimmedBarcode)
                 }
             }
         }
@@ -172,7 +170,7 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         self.present(popup, animated: true, completion: nil)
     }
     
-    func pushEditItemViewController(foodProduct: API.FoodProduct){
+    func pushEditItemViewController(foodProduct: EdamamAPI.FoodProduct){
         // Create and push EditItemViewController
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
@@ -213,5 +211,38 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         viewController.editCell = false
 
         self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func BackupAPICall(barcode: String){
+        UPCitemdbAPI.ApiCall(barcode: barcode) { (response, error) in
+            
+            if (error == nil && response != nil) {
+                if let response = response{
+                    // Create and push EditItemViewController
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
+                    
+                    // Set product vars
+                    self.product.productName = response.getLabel()
+                    
+                    self.product.brandName = response.getBrand()
+                    // Set EditItemViewController vars
+                    viewController.product = self.product
+                    viewController.delegate = self.delegate
+                    
+                    viewController.editCell = false
+                    
+                    self.navigationController?.pushViewController(viewController, animated: true)
+                    
+                }
+            } else {
+                // Spawn pop up error
+                self.SpawnPopup(message: "We can't find the item you searched for, please enter it manually.")
+                return
+            }
+            
+            
+        }
+        
     }
 }

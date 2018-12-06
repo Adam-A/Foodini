@@ -25,6 +25,7 @@
 		E4767F2321A0B44100C665D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4767F2221A0B44100C665D8 /* Assets.xcassets */; };
 		E4767F2621A0B44100C665D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4767F2421A0B44100C665D8 /* LaunchScreen.storyboard */; };
 		E496706821AF8FB000C047C5 /* BarcodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E496706721AF8FB000C047C5 /* BarcodeViewController.swift */; };
+		E4BFE40721B9C3E400005A4C /* UPCitemdbAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BFE40621B9C3E400005A4C /* UPCitemdbAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		E4767F2521A0B44100C665D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E4767F2721A0B44100C665D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E496706721AF8FB000C047C5 /* BarcodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeViewController.swift; sourceTree = "<group>"; };
+		E4BFE40621B9C3E400005A4C /* UPCitemdbAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPCitemdbAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				E4767F2221A0B44100C665D8 /* Assets.xcassets */,
 				E4767F1B21A0B44000C665D8 /* AppDelegate.swift */,
 				E43D32AB21B34138008B8E85 /* EdamamAPI.swift */,
+				E4BFE40621B9C3E400005A4C /* UPCitemdbAPI.swift */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				661C0D9521A2987600787382 /* RecipesViewController.swift in Sources */,
 				E43D32AC21B34138008B8E85 /* EdamamAPI.swift in Sources */,
 				B28A14B521AF877000D5291D /* EditItemViewController.swift in Sources */,
+				E4BFE40721B9C3E400005A4C /* UPCitemdbAPI.swift in Sources */,
 				E496706821AF8FB000C047C5 /* BarcodeViewController.swift in Sources */,
 				B2AE2DC821A0DA0300ECC3E2 /* PantryViewController.swift in Sources */,
 				E4124CD021A0BC7C007EB2EF /* ShoppingListViewController.swift in Sources */,

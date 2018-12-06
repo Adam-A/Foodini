@@ -15,7 +15,7 @@
 import Foundation
 import Alamofire
 
-struct API{
+struct EdamamAPI{
     
     struct APIerror: Codable {
         var error: String
@@ -182,27 +182,4 @@ struct API{
 
         }
     }
-    
-    // An attempt to get the RecipeCall to work: still gets 401 error, need to check appID and appKey before proceeding
-//    static func RecipeCall(){
-//        let appID = "57137e17"
-//        let appKey = "630a79c36b59b59acca9fa0461eb2329"
-//        let queue = DispatchQueue.main
-//
-//        Alamofire.request("https://api.edamam.com/search?q=chicken&app_id=\(appID)&app_key=\(appKey)&from=0&to=3&calories=591-722&health=alcohol-free").responseJSON(queue: queue) { response in
-//
-//            print("Request: \(String(describing: response.request))")   // original url request
-//            print("Response: \(String(describing: response.response))") // http url response
-//            print("Result: \(response.result)")                         // response serialization result
-//
-//            if let json = response.result.value {
-//                print("JSON: \(json)") // serialized json response
-//            }
-//
-//            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-//                print("Data: \(utf8Text)") // original server data as UTF8 string
-//            }
-//
-//        }
-//    }
 }
