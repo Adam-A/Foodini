@@ -48,43 +48,46 @@ class RecipesViewController: UITableViewController, DZNEmptyDataSetSource, DZNEm
     }
     
     @IBAction func recipeRoulette(){
-        let theMealDBEndpoint: String = "http://www.themealdb.com/api/json/v1/1/random.php"
-        guard let url = URL(string: theMealDBEndpoint) else { return }
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let dataResponse = data,
-                error == nil else {
-                    print(error?.localizedDescription ?? "Response Error")
-                    return }
+        
+        DispatchQueue.global(qos: .background).async {
+            let theMealDBEndpoint: String = "http://www.themealdb.com/api/json/v1/1/random.php"
+            guard let url = URL(string: theMealDBEndpoint) else { return }
+            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                guard let dataResponse = data,
+                    error == nil else {
+                        print(error?.localizedDescription ?? "Response Error")
+                        return }
                 do{
-                //here dataResponse received from a network request
-                let jsonResponse = try JSONSerialization.jsonObject(with:
-                    dataResponse, options: [])
-                //print(jsonResponse) //Response result
-                
-                guard let jsonArray = jsonResponse as? [String: Any] else {
-                    return
-                }
-                let jsonDict = jsonArray.first?.value as? [[String:Any]]
-                //print(jsonDict?.first)
-                var cd = cellData.init()
-                var sectionData = [String]()
-                for item in (jsonDict?.first)! {
-                    if (item.key == "strMeal"){
-                        cd.title = item.value as! String
+                    let jsonResponse = try JSONSerialization.jsonObject(with:
+                        dataResponse, options: [])
+                    guard let jsonArray = jsonResponse as? [String: Any] else {
+                        return
                     }
-                    if (item.key.starts(with: "strIngredient") && item.value as? String != nil &&  item.value as! String != "") {
-                        sectionData.append(item.value as! String)
+                    let jsonDict = jsonArray.first?.value as? [[String:Any]]
+                    var cd = cellData.init()
+                    for item in (jsonDict?.first)! {
+                        if (item.key == "strMeal"){
+                            cd.title = item.value as! String
+                        }
+                        if (item.key.starts(with: "strIngredient") && item.value as? String != nil &&  item.value as! String != "") {
+                            cd.sectionData.append(item.value as! String)
+                        }
                     }
+                    cd.opened = false
+                    self.tableViewData.append(cd)
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                } catch let parsingError {
+                    print("Error", parsingError)
                 }
-                cd.opened = false
-                cd.sectionData = sectionData
-                self.tableViewData.append(cd)
-                self.tableView.reloadData()
-            } catch let parsingError {
-                print("Error", parsingError)
             }
+            task.resume()
+            
+          
         }
-        task.resume()
+ 
+       
         
         
     }
