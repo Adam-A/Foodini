@@ -63,14 +63,24 @@ class RecipesViewController: UITableViewController, DZNEmptyDataSetSource, DZNEm
                     guard let jsonArray = jsonResponse as? [String: Any] else {
                         return
                     }
+                    var recipe = Recipe()
+              
                     let jsonDict = jsonArray.first?.value as? [[String:Any]]
                     var cd = cellData.init()
                     for item in (jsonDict?.first)! {
-                        if (item.key == "strMeal"){
+                        if (item.key.starts(with: "strMeasure") || item.key.starts(with: "strIngredient")) {
+                        recipe.apiMap[item.key] = item.value as? String
+                        }
+                        if (item.key == "strMeal") {
                             cd.title = item.value as! String
                         }
-                        if (item.key.starts(with: "strIngredient") && item.value as? String != nil &&  item.value as! String != "") {
-                            cd.sectionData.append(item.value as! String)
+                    }
+                    for n in 1...20 {
+                        let measure = recipe.apiMap[ "strMeasure\(n)"]
+                        let ingredient = recipe.apiMap[ "strIngredient\(n)"]
+                        let sectionDataString = "\(measure ?? "") \(ingredient ?? "")"
+                        if (!sectionDataString.isEmpty && sectionDataString.count > 3) {
+                        cd.sectionData.append(sectionDataString)
                         }
                     }
                     cd.opened = false
@@ -91,6 +101,8 @@ class RecipesViewController: UITableViewController, DZNEmptyDataSetSource, DZNEm
         
         
     }
+    
+    
     
     @IBAction func editingCells() {
         // If the edit button title is "Done"
@@ -176,5 +188,62 @@ class RecipesViewController: UITableViewController, DZNEmptyDataSetSource, DZNEm
     
     func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
         return UIImage(named: "RecipeEmptyState")
+    }
+}
+
+
+struct Recipe {
+    var strMeal = String()
+    var strInstructions = String()
+    
+    var apiMap = [
+        "strIngredient1" : "",
+        "strIngredient2" : "",
+        "strIngredient3" : "",
+        "strIngredient4" : "",
+        "strIngredient5" : "",
+        "strIngredient6" : "",
+        "strIngredient7" : "",
+        "strIngredient8" : "",
+        "strIngredient9" : "",
+        "strIngredient10" : "",
+        "strIngredient11" : "",
+        "strIngredient12" : "",
+        "strIngredient13" : "",
+        "strIngredient14" : "",
+        "strIngredient15" : "",
+        "strIngredient16" : "",
+        "strIngredient17" : "",
+        "strIngredient18" : "",
+        "strIngredient19" : "",
+        "strIngredient20" : "",
+        
+        "strMeasure1" : "",
+        "strMeasure2" : "",
+        "strMeasure3" : "",
+        "strMeasure4" : "",
+        "strMeasure5" : "",
+        "strMeasure6" : "",
+        "strMeasure7" : "",
+        "strMeasure8" : "",
+        "strMeasure9" : "",
+        "strMeasure10" : "",
+        "strMeasure11" : "",
+        "strMeasure12" : "",
+        "strMeasure13" : "",
+        "strMeasure14" : "",
+        "strMeasure15" : "",
+        "strMeasure16" : "",
+        "strMeasure17" : "",
+        "strMeasure18" : "",
+        "strMeasure19" : "",
+        "strMeasure20" : "",
+    ]
+    
+}
+
+extension Array where Element == [String:String] {
+    func sorted(by key: String) -> [[String:String]] {
+        return sorted { $0[key] ?? "" < $1[key] ?? "" }
     }
 }
