@@ -145,28 +145,41 @@ struct API{
         // Set queue for alamofire request
         let queue = DispatchQueue.main
         
-        Alamofire.request("https://api.edamam.com/api/food-database/parser?upc=\(barcode)&app_id=\(appID)&app_key=\(appKey)").responseJSON(queue: queue) { response in
+        // Set alamofire request timeout configuration
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 30
+        let sessionManager = Alamofire.SessionManager(configuration: configuration)
+        
+        sessionManager.request("https://api.edamam.com/api/food-database/parser?upc=\(barcode)&app_id=\(appID)&app_key=\(appKey)").responseJSON(queue: queue) { response in
             
-            guard let data = response.data else {
-                completion(nil, APIerror.init(response: "No data returned from API call"))
-                return
-            }
-            
-            // Try to decode data and store it in a FoodProduct struct
-            do {
-                let foodProduct = try JSONDecoder().decode(FoodProduct.self, from: data)
-                completion(foodProduct, nil)
-                
-            } catch {
-                do{
-                    let error = try JSONDecoder().decode(APIerror.self, from: data)
-                    completion(nil, error)
-                    
-                } catch {
-                    completion(nil, APIerror.init(response: "An unknown error has occured"))
+            response.result.ifSuccess {
+                guard let data = response.data else {
+                    completion(nil, APIerror.init(response: "No data returned from API call"))
                     return
                 }
+                
+                // Try to decode data and store it in a FoodProduct struct
+                do {
+                    let foodProduct = try JSONDecoder().decode(FoodProduct.self, from: data)
+                    completion(foodProduct, nil)
+                    
+                } catch {
+                    do{
+                        let error = try JSONDecoder().decode(APIerror.self, from: data)
+                        completion(nil, error)
+                        
+                    } catch {
+                        completion(nil, APIerror.init(response: "An unknown error has occured"))
+                        return
+                    }
+                }
             }
+            
+            response.result.ifFailure {
+                completion(nil, APIerror.init(response: "Request timeout"))
+            }
+            
+
         }
     }
     

@@ -77,8 +77,11 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         
         CreateNewItemButton()
         LoadData()
-        
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // Load pantry list when view appears
+        LoadData()
     }
     
     func LoadData(){
@@ -111,7 +114,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         }
         // Serialize data
         SerializeData()
-        self.PantryTableView.reloadData()
+        //self.PantryTableView.reloadData()
     }
     
     func ListUpdate(finishedProduct: Product, isEditing: Bool) {

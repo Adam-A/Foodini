@@ -14,19 +14,13 @@ protocol UpdateShoppingListDelegate{
 }
 
 class IndividualListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdateListDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
-
+    
     @IBOutlet weak var table: UITableView!
     var list = List()
     var delegate: UpdateShoppingListDelegate?
     
-//    var pantryList : List?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
-//        let pantryView = vc.viewControllers?[1] as! PantryViewController
-//        pantryList = pantryView.list
         
         
         // Generate the "Add" button in the top right
@@ -36,10 +30,6 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
         table.dataSource = self
         table.delegate = self
         
-//        list.products.forEach { item in
-//            item.quantity = pantryList?.GetQuantity(name: item.productName) ?? 0
-//        }
-        
         //DZNEmptyDataSet
         table.emptyDataSetSource = self
         table.emptyDataSetDelegate = self
@@ -48,7 +38,7 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     @objc func NewItem(sender: UIBarButtonItem){
-
+        
         let alert = UIAlertController(title: "New item", message: "Add an item", preferredStyle: .alert)
         
         // Generate a text field
@@ -79,7 +69,6 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
                 
                 // Init product using text field as name
                 let product = Product.init(productName: text)
-//                product.quantity = self.pantryList?.GetQuantity(name: product.productName) ?? 0
                 
                 self.table.reloadData()
                 
@@ -149,6 +138,9 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
         // Set text to item name
         cell.textLabel?.text = list.products[indexPath.row].productName
         cell.detailTextLabel?.text = "\(list.products[indexPath.row].quantity)";
+        if list.products[indexPath.row].wasPurchased == true {
+            cell.backgroundColor = UIColor.green
+        }
         return cell
         
     }
@@ -162,34 +154,80 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
             self.delegate?.UpdateTableContents()
         }
     }
-
+    
     // If a user selects a cell open the list view for that cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         table.deselectRow(at: indexPath, animated: true)
-
-        //INSERT CODE TO VIEW ITEM DETAILS VIEW CONTROLLER
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
         
-        //Push current VC onto backstack
-        viewController.delegate = self
-        viewController.product = self.list.products[indexPath.row]
-        viewController.editCell = true
-        
-        self.navigationController?.pushViewController(viewController, animated: true)
+        if self.list.products[indexPath.row].wasPurchased != true{
+            //INSERT CODE TO VIEW ITEM DETAILS VIEW CONTROLLER
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
+            
+            //Push current VC onto backstack
+            viewController.delegate = self
+            viewController.product = self.list.products[indexPath.row]
+            viewController.editCell = true
+            
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        if self.list.products[indexPath.row].wasPurchased == true{
+            return UISwipeActionsConfiguration(actions: [])
+        }
+        
         let addItem = UIContextualAction(style: .normal, title:  "To Pantry", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            print("Added item")
-            self.list.products[indexPath.row].quantity += 1;
-            self.table.reloadData()
+            
+            self.table.cellForRow(at: indexPath)?.backgroundColor = UIColor.green
+            self.list.products[indexPath.row].wasPurchased = true
+            self.ListUpdate(finishedProduct: self.list.products[indexPath.row], isEditing: true)
+            //self.SerializeData(listToSave: self.list)
+    
+            // Each time you check an item off the shopping list, load the pantry and append to the list
+            // Then save the pantry list list
+            let loadedList = self.LoadData()
+            if let loadedList = loadedList{
+                loadedList.products.append(self.list.products[indexPath.row])
+                self.SerializeData(listToSave: loadedList)
+            }
+            
             success(true)
         })
         addItem.backgroundColor = .green
         
         return UISwipeActionsConfiguration(actions: [addItem])
     }
+    
+    func LoadData() -> List?{
+        // Put on a background thread
+        if let listData = UserDefaults.standard.value(forKey: "PantryList") as? Data{
+            do {
+                let loadedList = try PropertyListDecoder().decode(List.self, from: listData)
+                print("SUCCESS!")
+                return loadedList
+            } catch {
+                // If the pantry list couldn't be loaded, return nil
+                print("Couldn't retrieve data for individual list")
+                return nil
+            }
+        }
+        // If no pantry list exists, return an initializer
+        return List()
+    }
+    
+    func SerializeData(listToSave: List){
+        // Put on a background thread
+        do {
+            let serializedList = try PropertyListEncoder().encode(listToSave)
+            UserDefaults.standard.set(serializedList, forKey: "PantryList")
+        } catch {
+            return
+        }
+    }
+
     
     //-----DZNEmptyDataSet cocoapod use -----
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {

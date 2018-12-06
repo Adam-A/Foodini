@@ -53,12 +53,14 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
                 print("Capture unavaliable")
                 // Spawn error popup
                 SpawnPopup(message: "This device can't currently capture.")
+                return
                 
             }
         } else {
             print ("No capture device")
             // Spawn error popup
             SpawnPopup(message: "This device has no capture device.")
+            return
         }
         
         // Unwrap avSession
@@ -72,6 +74,7 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
                 print("Cannot add input")
                 // Spawn error popup
                 SpawnPopup(message: "Cannot add input to this device, please try again later.")
+                return
             }
         }
         
@@ -92,6 +95,7 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             print("Cannot add output")
             // Spawn error popup
             SpawnPopup(message: "Cannot add output to this device, please try again later.")
+            return
         }
         
         // Set preview layer to the current av capture session (avSession)
@@ -109,6 +113,7 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         } else {
             print("Cannot display camera preview")
             SpawnPopup(message: "Cannot display camera preview.")
+            return
         }
     }
     
@@ -130,6 +135,7 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         if (unprocessedBarcode == "error"){
             print("Invalid barcode")
             SpawnPopup(message: "We encountered an error while processing the barcode, please try again.")
+            return
         }
         
         var trimmedBarcode = unprocessedBarcode
@@ -150,6 +156,7 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
                     print("Error: \(error.message)")
                     // Spawn pop up error
                     self.SpawnPopup(message: "We can't find the item you searched for, please enter it manually.")
+                    return
                 }
             }
         }

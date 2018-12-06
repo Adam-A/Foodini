@@ -29,16 +29,45 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
         navigationItem.leftBarButtonItem = editButtonItem
         CreateNewListButton()
         
+        LoadData()
+        
         //DZNEmptyDataSet
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
         tableView.tableFooterView = UIView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        LoadData()
+    }
+    
     func CreateNewListButton(){
         // Create new list button using AddNewList as a selector
         let addNewListButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(AddNewList(sender:)))
         self.navigationItem.rightBarButtonItem = addNewListButton
+    }
+    
+    func LoadData(){
+        // Put on a background thread
+        if let listData = UserDefaults.standard.value(forKey: "MasterShoppingList") as? Data{
+            do {
+                masterList = try PropertyListDecoder().decode(ListStorage.self, from: listData)
+                tableView.reloadData()
+            } catch {
+                print("Couldn't retrieve data")
+                return
+            }
+        }
+    }
+    
+    func SerializeData(){
+        // Put on a background thread
+        do {
+            let serializedList = try PropertyListEncoder().encode(self.masterList)
+            UserDefaults.standard.set(serializedList, forKey: "MasterShoppingList")
+        } catch {
+            return
+        }
     }
     
     @objc func AddNewList(sender: UIBarButtonItem){
@@ -100,7 +129,7 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
 
     @IBAction func onPantryPress(_ sender: Any) {
         // Save data before transferring
-        
+        SerializeData()
         // Create the pantry VC
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "PantryViewController") as! PantryViewController
@@ -112,7 +141,7 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBAction func onRecipePress(_ sender: Any) {
         // Save data before transferring
-        
+        SerializeData()
          // Create the pantry VC
          let storyboard = UIStoryboard(name: "Main", bundle: nil)
          let viewController = storyboard.instantiateViewController(withIdentifier: "RecipesViewController") as! RecipesViewController
@@ -124,7 +153,7 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBAction func onSettingsPress(_ sender: Any) {
         // Save data before transferring
-        
+        SerializeData()
          // Create the pantry VC
          let storyboard = UIStoryboard(name: "Main", bundle: nil)
          let viewController = storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
@@ -136,6 +165,7 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
     
     func UpdateTableContents() {
         // Save data
+        SerializeData()
         tableView.reloadData()
     }
     
@@ -174,6 +204,7 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
         if editingStyle == .delete{
             // Delete cell at position
             masterList.removeList(index: indexPath.row)
+            SerializeData()
             tableView.reloadData()
         }
     }

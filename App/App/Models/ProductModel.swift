@@ -16,7 +16,7 @@ protocol AddProduct {
 }
 
 // FOR USE IN ShoppingListViewController
-class ListStorage {
+class ListStorage: Codable {
     var Lists: [List]
     
     // Standard Init
@@ -98,6 +98,9 @@ class Product: Codable {
     var containsWheat: Bool
     var containsSoy: Bool
     
+    // Was already purchased
+    var wasPurchased: Bool
+    
     init(){
         self.productName = ""
         self.brandName = ""
@@ -110,6 +113,7 @@ class Product: Codable {
         self.containsNuts = false
         self.containsWheat = false
         self.containsSoy = false
+        self.wasPurchased = false
     }
     
     // for creating a new product
@@ -126,6 +130,7 @@ class Product: Codable {
         self.containsNuts = false
         self.containsWheat = false
         self.containsSoy = false
+        self.wasPurchased = false
     }
     
     // for creating a new product with brand name
@@ -142,6 +147,7 @@ class Product: Codable {
         self.containsNuts = false
         self.containsWheat = false
         self.containsSoy = false
+        self.wasPurchased = false
     }
     
 }
