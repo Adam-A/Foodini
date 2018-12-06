@@ -14,7 +14,7 @@ protocol UpdateListDelegate {
 }
 
 
-class EditItemViewController: UIViewController {
+class EditItemViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var expDateTextField: UITextField!
     @IBOutlet weak var itemNameTextField: UITextField!
@@ -32,6 +32,8 @@ class EditItemViewController: UIViewController {
     
     var delegate: UpdateListDelegate?
     var expiredDate: Date?
+    let currencyFormatter = NumberFormatter()
+    let US = Locale(identifier: "en_US")
     
     var product = Product()
     
@@ -108,8 +110,30 @@ class EditItemViewController: UIViewController {
         }else{
             expiredLabel.isHidden = true
         }
-    }
+        
+        currencyFormatter.numberStyle = NumberFormatter.Style.currency
+        currencyFormatter.currencyCode = (Locale.current as NSLocale).displayName(forKey: .currencySymbol, value: "USD") ?? ""
 
+        
+    }
+    
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        if textField == priceTextField{
+//            let text = priceTextField.text?.replacingOccurrences(of: currencyFormatter.currencySymbol, with: "").replacingOccurrences(of: currencyFormatter.groupingSeparator, with: "").replacingOccurrences(of: currencyFormatter.decimalSeparator, with: "")
+//
+//            let nsNumber: NSNumber = NSNumber(value: Double(text ?? "0.0") ?? 0.0)
+//
+//            //priceTextField.text = currencyFormatter.string(from: NSNumber(text as Double))
+//
+//
+//            //priceTextField.text = currencyFormatter.string(from: nsNumber)
+//            textField.text = currencyFormatter.string(from: nsNumber)
+//            return false
+//        }
+//        else{
+//            return true
+//        }
+//    }
     
     @objc func datePickerValueChanged(sender: UIDatePicker){
         
@@ -148,6 +172,18 @@ class EditItemViewController: UIViewController {
         let addDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(Done(sender:)))
         self.navigationItem.rightBarButtonItem = addDoneButton
     }
+    
+    
+    
+    @IBAction func priceFormatting(_ sender: Any) {
+        let text = priceTextField.text?.replacingOccurrences(of: currencyFormatter.currencySymbol, with: "").replacingOccurrences(of: currencyFormatter.groupingSeparator, with: "").replacingOccurrences(of: currencyFormatter.decimalSeparator, with: "")
+        
+        let nsNumber: NSNumber = NSNumber(value: (Double(text ?? "0.0") ?? 0.0)/100.0)
+        
+        priceTextField.text = currencyFormatter.string(from: nsNumber)
+    }
+
+    
     
     @IBAction func RevertTextColor(_ sender: Any) {
         itemNameTextField.textColor = .black
