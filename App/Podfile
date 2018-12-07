@@ -10,5 +10,5 @@ target 'App' do
 	pod 'Alamofire', '~> 4.7'
 	pod 'TextFieldEffects'
 	pod 'DZNEmptyDataSet'
-
+	pod 'NVActivityIndicatorView'
 end

@@ -2,12 +2,16 @@ PODS:
   - Alamofire (4.7.3)
   - DropDown (2.3.4)
   - DZNEmptyDataSet (1.8.1)
+  - NVActivityIndicatorView (4.4.0):
+    - NVActivityIndicatorView/Presenter (= 4.4.0)
+  - NVActivityIndicatorView/Presenter (4.4.0)
   - TextFieldEffects (1.5.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - DropDown (= 2.3.4)
   - DZNEmptyDataSet
+  - NVActivityIndicatorView
   - TextFieldEffects
 
 SPEC REPOS:
@@ -15,14 +19,16 @@ SPEC REPOS:
     - Alamofire
     - DropDown
     - DZNEmptyDataSet
+    - NVActivityIndicatorView
     - TextFieldEffects
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   DropDown: f225ff0fd09dde064d17aa03db7e4d4e4ff40b6b
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  NVActivityIndicatorView: ec7440a57af2450319d3a4181cca7da6fc127064
   TextFieldEffects: bf9e9cac7cb1a97d632fbcd0724bb6347dd86633
 
-PODFILE CHECKSUM: 98b0b666cae4092474737e72244f1daa03773fc9
+PODFILE CHECKSUM: f1fbe3df1a03e79b048542ac11dcc8b923cbedb8
 
 COCOAPODS: 1.5.3
