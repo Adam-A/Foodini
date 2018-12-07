@@ -36,6 +36,9 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        cameraDisplay.layer.cornerRadius = 30
+        cameraDisplay.layer.masksToBounds = true
+        
         // Create an av capture session
         avSession = AVCaptureSession()
         
