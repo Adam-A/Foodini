@@ -15,6 +15,7 @@
 		B25A7C0321B5A22B005EE536 /* IndListEmptyState.png in Resources */ = {isa = PBXBuildFile; fileRef = B25A7C0021B5A22B005EE536 /* IndListEmptyState.png */; };
 		B25A7C0421B5A22B005EE536 /* MasterListEmptyState.png in Resources */ = {isa = PBXBuildFile; fileRef = B25A7C0121B5A22B005EE536 /* MasterListEmptyState.png */; };
 		B25A7C0521B5A22B005EE536 /* RecipeEmptyState.png in Resources */ = {isa = PBXBuildFile; fileRef = B25A7C0221B5A22B005EE536 /* RecipeEmptyState.png */; };
+		B25F3C1021BA4A89004BA268 /* PantryLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B25F3C0F21BA4A89004BA268 /* PantryLogo.png */; };
 		B28A14B521AF877000D5291D /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A14B421AF877000D5291D /* EditItemViewController.swift */; };
 		B28A14B721AF87AF00D5291D /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28A14B621AF87AF00D5291D /* ProductModel.swift */; };
 		B293BB3521B9AD5100840D6A /* ExpiredAlert.png in Resources */ = {isa = PBXBuildFile; fileRef = B293BB3421B9AD5100840D6A /* ExpiredAlert.png */; };
@@ -40,6 +41,7 @@
 		B25A7C0021B5A22B005EE536 /* IndListEmptyState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IndListEmptyState.png; sourceTree = "<group>"; };
 		B25A7C0121B5A22B005EE536 /* MasterListEmptyState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MasterListEmptyState.png; sourceTree = "<group>"; };
 		B25A7C0221B5A22B005EE536 /* RecipeEmptyState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecipeEmptyState.png; sourceTree = "<group>"; };
+		B25F3C0F21BA4A89004BA268 /* PantryLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PantryLogo.png; sourceTree = "<group>"; };
 		B28A14B421AF877000D5291D /* EditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
 		B28A14B621AF87AF00D5291D /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProductModel.swift; path = App/Models/ProductModel.swift; sourceTree = SOURCE_ROOT; };
 		B293BB3421B9AD5100840D6A /* ExpiredAlert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ExpiredAlert.png; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 		B25A7BFD21B59FDB005EE536 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B25F3C0F21BA4A89004BA268 /* PantryLogo.png */,
 				B293BB3421B9AD5100840D6A /* ExpiredAlert.png */,
 				B25A7C0021B5A22B005EE536 /* IndListEmptyState.png */,
 				B25A7C0121B5A22B005EE536 /* MasterListEmptyState.png */,
@@ -236,6 +239,7 @@
 				B25A7BFF21B5A034005EE536 /* PantryEmptyState.png in Resources */,
 				B293BB3521B9AD5100840D6A /* ExpiredAlert.png in Resources */,
 				E4767F2321A0B44100C665D8 /* Assets.xcassets in Resources */,
+				B25F3C1021BA4A89004BA268 /* PantryLogo.png in Resources */,
 				E4767F2121A0B44000C665D8 /* Main.storyboard in Resources */,
 				B25A7C0321B5A22B005EE536 /* IndListEmptyState.png in Resources */,
 			);
