@@ -529,11 +529,11 @@
             </objects>
             <point key="canvasLocation" x="1867" y="-88"/>
         </scene>
-        <!--Item-->
+        <!--Settings-->
         <scene sceneID="MUC-b6-Zkc">
             <objects>
                 <navigationController id="Jv9-xw-84n" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="Settings Tab" id="Ymj-DY-a2T"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="Settings Tab" id="Ymj-DY-a2T"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1YA-im-rHn">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -646,11 +646,11 @@
             </objects>
             <point key="canvasLocation" x="1867" y="600"/>
         </scene>
-        <!--Item-->
+        <!--Recipes-->
         <scene sceneID="al0-bg-VkR">
             <objects>
                 <navigationController id="K75-G6-EPg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="Recipes Tab" id="Epp-ps-CZl"/>
+                    <tabBarItem key="tabBarItem" title="Recipes" image="Recipes Tab" id="Epp-ps-CZl"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ROQ-U2-B5z">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

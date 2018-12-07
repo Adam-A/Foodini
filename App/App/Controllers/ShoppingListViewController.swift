@@ -226,4 +226,29 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
         
     }
     
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let addItem = UIContextualAction(style: .normal, title:  "Reset Purchases", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            
+            for item in self.masterList.Lists[indexPath.row].products {
+                item.wasPurchased = false
+            }
+//            self.ListUpdate(finishedProduct: self.list.products[indexPath.row], isEditing: true)
+            //self.SerializeData(listToSave: self.list)
+            
+            // Each time you check an item off the shopping list, load the pantry and append to the list
+            // Then save the pantry list list
+//            let loadedList = self.LoadData()
+//            if let loadedList = loadedList{
+//                loadedList.products.append(self.list.products[indexPath.row])
+//                self.SerializeData(listToSave: loadedList)
+//            }
+            
+            success(true)
+        })
+        addItem.backgroundColor = .green
+        
+        return UISwipeActionsConfiguration(actions: [addItem])
+    }
+    
 }

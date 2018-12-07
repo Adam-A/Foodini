@@ -206,7 +206,6 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
         if let listData = UserDefaults.standard.value(forKey: "PantryList") as? Data{
             do {
                 let loadedList = try PropertyListDecoder().decode(List.self, from: listData)
-                print("SUCCESS!")
                 return loadedList
             } catch {
                 // If the pantry list couldn't be loaded, return nil
