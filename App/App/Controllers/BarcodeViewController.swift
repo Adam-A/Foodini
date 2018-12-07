@@ -36,6 +36,9 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        cameraDisplay.layer.cornerRadius = 30
+        cameraDisplay.layer.masksToBounds = true
+        
         // Create an av capture session
         avSession = AVCaptureSession()
         
@@ -233,16 +236,14 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
                     viewController.editCell = false
                     
                     self.navigationController?.pushViewController(viewController, animated: true)
-                    
                 }
             } else {
                 // Spawn pop up error
                 self.SpawnPopup(message: "We can't find the item you searched for, please enter it manually.")
                 return
             }
-            
-            
         }
         
     }
+    
 }

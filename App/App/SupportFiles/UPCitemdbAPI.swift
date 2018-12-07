@@ -15,6 +15,8 @@
 import Foundation
 import Alamofire
 
+var UPCitemdbSessionManager = Alamofire.SessionManager.init(configuration: .default)
+
 struct UPCitemdbAPI{
     
     struct APIerror: Codable {
@@ -82,13 +84,12 @@ struct UPCitemdbAPI{
         let queue = DispatchQueue.main
         
         // Set alamofire request timeout configuration
-        // For some reason this doesn't work...
-//        let configuration = URLSessionConfiguration.default
-//        configuration.timeoutIntervalForResource = 30
-//        configuration.timeoutIntervalForRequest = 30
-//        let sessionManager = Alamofire.SessionManager(configuration: configuration)
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForResource = 10
+        configuration.timeoutIntervalForRequest = 10
+        UPCitemdbSessionManager = Alamofire.SessionManager(configuration: configuration)
         
-        Alamofire.request("https://api.upcitemdb.com/prod/trial/lookup?upc=\(barcode)").responseJSON(queue: queue) { response in
+        UPCitemdbSessionManager.request("https://api.upcitemdb.com/prod/trial/lookup?upc=\(barcode)").responseJSON(queue: queue) { response in
             
             response.result.ifSuccess {
                 guard let data = response.data else {

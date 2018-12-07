@@ -15,6 +15,8 @@
 import Foundation
 import Alamofire
 
+var edamamSessionManager = Alamofire.SessionManager.init(configuration: .default)
+
 struct EdamamAPI{
     
     struct APIerror: Codable {
@@ -147,10 +149,11 @@ struct EdamamAPI{
         
         // Set alamofire request timeout configuration
         let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 30
-        let sessionManager = Alamofire.SessionManager(configuration: configuration)
+        configuration.timeoutIntervalForRequest = 10
+        configuration.timeoutIntervalForResource = 10
+        edamamSessionManager = Alamofire.SessionManager(configuration: configuration)
         
-        sessionManager.request("https://api.edamam.com/api/food-database/parser?upc=\(barcode)&app_id=\(appID)&app_key=\(appKey)").responseJSON(queue: queue) { response in
+        edamamSessionManager.request("https://api.edamam.com/api/food-database/parser?upc=\(barcode)&app_id=\(appID)&app_key=\(appKey)").responseJSON(queue: queue) { response in
             
             response.result.ifSuccess {
                 guard let data = response.data else {
