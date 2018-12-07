@@ -44,6 +44,9 @@ class EditItemViewController: UIViewController, UITextFieldDelegate {
         
         DoneButton()
         
+        currencyFormatter.numberStyle = NumberFormatter.Style.currency
+        currencyFormatter.currencyCode = (Locale.current as NSLocale).displayName(forKey: .currencySymbol, value: "USD") ?? ""
+        
         expiredLabel.isHidden = true
         
         // ---- Fill Text Fields with Info-----
@@ -111,8 +114,7 @@ class EditItemViewController: UIViewController, UITextFieldDelegate {
             expiredLabel.isHidden = true
         }
         
-        currencyFormatter.numberStyle = NumberFormatter.Style.currency
-        currencyFormatter.currencyCode = (Locale.current as NSLocale).displayName(forKey: .currencySymbol, value: "USD") ?? ""
+        
 
         
     }

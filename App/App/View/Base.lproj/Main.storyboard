@@ -130,7 +130,7 @@
                                     <constraint firstAttribute="height" constant="30" id="BSO-4X-fjL"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
                                         <real key="value" value="1"/>
