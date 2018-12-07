@@ -233,16 +233,14 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
                     viewController.editCell = false
                     
                     self.navigationController?.pushViewController(viewController, animated: true)
-                    
                 }
             } else {
                 // Spawn pop up error
                 self.SpawnPopup(message: "We can't find the item you searched for, please enter it manually.")
                 return
             }
-            
-            
         }
         
     }
+    
 }
