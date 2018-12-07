@@ -139,7 +139,9 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
         cell.textLabel?.text = list.products[indexPath.row].productName
         cell.detailTextLabel?.text = "\(list.products[indexPath.row].quantity)";
         if list.products[indexPath.row].wasPurchased == true {
-            cell.backgroundColor = UIColor.green
+            //cell.backgroundColor = UIColor.lightGray
+            cell.accessoryType = .checkmark
+            
         }
         return cell
         
@@ -181,7 +183,8 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
         
         let addItem = UIContextualAction(style: .normal, title:  "To Pantry", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
-            self.table.cellForRow(at: indexPath)?.backgroundColor = UIColor.green
+            //self.table.cellForRow(at: indexPath)?.backgroundColor = UIColor.lightGray
+            self.table.cellForRow(at: indexPath)?.accessoryType = .checkmark
             self.list.products[indexPath.row].wasPurchased = true
             self.ListUpdate(finishedProduct: self.list.products[indexPath.row], isEditing: true)
             //self.SerializeData(listToSave: self.list)
@@ -196,7 +199,7 @@ class IndividualListViewController: UIViewController, UITableViewDataSource, UIT
             
             success(true)
         })
-        addItem.backgroundColor = .green
+        addItem.backgroundColor = .blue
         
         return UISwipeActionsConfiguration(actions: [addItem])
     }

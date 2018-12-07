@@ -233,6 +233,8 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
             for item in self.masterList.Lists[indexPath.row].products {
                 item.wasPurchased = false
             }
+            
+            self.SerializeData()
 //            self.ListUpdate(finishedProduct: self.list.products[indexPath.row], isEditing: true)
             //self.SerializeData(listToSave: self.list)
             
@@ -246,7 +248,7 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
             
             success(true)
         })
-        addItem.backgroundColor = .green
+        addItem.backgroundColor = UIColor.blue
         
         return UISwipeActionsConfiguration(actions: [addItem])
     }

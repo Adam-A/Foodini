@@ -14,6 +14,7 @@
 
 import UIKit
 import AVFoundation
+import NVActivityIndicatorView
 
 class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
@@ -27,6 +28,8 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     // "Window" for displaying output from the capture device
     @IBOutlet weak var cameraDisplay: UIView!
+    @IBOutlet weak var indicator: NVActivityIndicatorView!
+    
     
     // Variables used to add product to pantry
     var product = Product()
@@ -141,6 +144,8 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             return
         }
         
+        indicator.startAnimating()
+        
         var trimmedBarcode = unprocessedBarcode
         
         // If the barcode is in EAN13 format, process it into a UPC format
@@ -177,14 +182,14 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         // Create and push EditItemViewController
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "editItemViewController") as! EditItemViewController
-    
+        
         // Set product vars
         self.product.productName = foodProduct.getLabel()
         
         self.product.brandName = foodProduct.getBrand()
         
         foodProduct.getAllergins(){ response, _ in
-
+            
             if response["palm"] == true {
                 self.product.containsPalm = true
                 viewController.palmSwitch.isOn = true
@@ -212,7 +217,7 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         viewController.delegate = self.delegate
         
         viewController.editCell = false
-
+        indicator.stopAnimating()
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -235,11 +240,13 @@ class BarcodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
                     
                     viewController.editCell = false
                     
+                    self.indicator.stopAnimating()
                     self.navigationController?.pushViewController(viewController, animated: true)
                 }
             } else {
                 // Spawn pop up error
                 self.SpawnPopup(message: "We can't find the item you searched for, please enter it manually.")
+                self.indicator.stopAnimating()
                 return
             }
         }

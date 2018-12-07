@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sbk-1X-sZL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sbk-1X-sZL">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -665,10 +665,26 @@
                                     <constraint firstAttribute="width" secondItem="tEU-iW-ttl" secondAttribute="height" multiplier="187:106" id="oFB-5j-24r"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qhP-Pj-bGz" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                <rect key="frame" x="87" y="340" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="qhP-Pj-bGz" secondAttribute="height" multiplier="15:8" id="37e-CJ-3Fe"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" red="1" green="0.1888230065" blue="0.13169167970000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="lineScalePulseOut"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="qhP-Pj-bGz" firstAttribute="leading" secondItem="dYT-AN-EG5" secondAttribute="leading" constant="87" id="59C-76-ImC"/>
+                            <constraint firstItem="qhP-Pj-bGz" firstAttribute="top" secondItem="tEU-iW-ttl" secondAttribute="bottom" constant="108" id="EPd-SY-ck1"/>
                             <constraint firstItem="tEU-iW-ttl" firstAttribute="top" secondItem="dYT-AN-EG5" secondAttribute="top" constant="20" id="EQf-2z-xkk"/>
+                            <constraint firstItem="dYT-AN-EG5" firstAttribute="trailing" secondItem="qhP-Pj-bGz" secondAttribute="trailing" constant="87" id="Fpb-nL-2XB"/>
                             <constraint firstItem="tEU-iW-ttl" firstAttribute="leading" secondItem="dYT-AN-EG5" secondAttribute="leading" constant="20" id="d6H-cy-bRM"/>
                             <constraint firstItem="dYT-AN-EG5" firstAttribute="trailing" secondItem="tEU-iW-ttl" secondAttribute="trailing" constant="20" id="yVX-bp-uch"/>
                         </constraints>
@@ -677,6 +693,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="cameraDisplay" destination="tEU-iW-ttl" id="6Ae-8z-qGA"/>
+                        <outlet property="indicator" destination="qhP-Pj-bGz" id="zcT-qw-1Ta"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Th-DB-WLt" userLabel="First Responder" sceneMemberID="firstResponder"/>
