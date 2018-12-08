@@ -8,6 +8,7 @@
 
 import UIKit
 import TextFieldEffects
+import UserNotifications
 
 protocol UpdateListDelegate {
     func ListUpdate(finishedProduct: Product, isEditing: Bool)
@@ -34,14 +35,13 @@ class EditItemViewController: UIViewController, UITextFieldDelegate {
     var expiredDate: Date?
     let currencyFormatter = NumberFormatter()
     let US = Locale(identifier: "en_US")
-    
     var product = Product()
-    
     var editCell: Bool = false
+    let center = UNUserNotificationCenter.current()
+    let options: UNAuthorizationOptions = [.alert, .sound];
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         DoneButton()
         
         currencyFormatter.numberStyle = NumberFormatter.Style.currency
@@ -102,12 +102,29 @@ class EditItemViewController: UIViewController, UITextFieldDelegate {
             print("No Date")
             return
         }
+        //Local notifications.. Gets date from datepicker, puts it in unix format,
+        //gets todays date, subtracts expiry date and today's date and schedules
+        //a notification
+        let timeInterval = expiry.timeIntervalSince1970-Date().timeIntervalSince1970
+        if (timeInterval > 0) {
         expDateTextField.text =  Product.date(input: expiry)
-        
         expiredDate = expiry
-        
         product.calculateExpiry(date: expiry)
-        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval:  timeInterval,
+                                    repeats: false)
+        let content = UNMutableNotificationContent()
+        content.title = "Pantry Item Expired"
+        content.body = "\(product.productName) has expired!"
+        content.sound = UNNotificationSound.default
+        let identifier = "UYLLocalNotification"
+        let request = UNNotificationRequest(identifier: identifier,
+                                            content: content, trigger: trigger)
+        center.add(request, withCompletionHandler: { (error) in
+            if error != nil {
+                // Something went wrong
+            }
+        })
+        }
         if product.isExpired == true{
             expiredLabel.isHidden = false
         }else{
