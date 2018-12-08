@@ -107,6 +107,7 @@ class EditItemViewController: UIViewController, UITextFieldDelegate {
         //a notification
         let timeInterval = expiry.timeIntervalSince1970-Date().timeIntervalSince1970
         if (timeInterval > 0) {
+            
         expDateTextField.text =  Product.date(input: expiry)
         expiredDate = expiry
         product.calculateExpiry(date: expiry)
@@ -116,7 +117,7 @@ class EditItemViewController: UIViewController, UITextFieldDelegate {
         content.title = "Pantry Item Expired"
         content.body = "\(product.productName) has expired!"
         content.sound = UNNotificationSound.default
-        let identifier = "UYLLocalNotification"
+        let identifier = "\(product.productName)-UYLLocalNotification"
         let request = UNNotificationRequest(identifier: identifier,
                                             content: content, trigger: trigger)
         center.add(request, withCompletionHandler: { (error) in
