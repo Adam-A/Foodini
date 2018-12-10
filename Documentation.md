@@ -61,6 +61,12 @@ list.
 
 ## Sydney Schiller
 ### Accomplishments
+For Foodini, I was in charge of the pantryViewController, the  editItemViewController, and our model (productModel). The pantryViewController was the simplest part, consisting of just a table view which contains various products the user owns. The editItemViewController is where the user can enter in more detailed information about the product, like price, quantity, expirations, and allergen flags. Here, the price is auto-formatted and the expiration date is compared to the current date to determine if the item is expired. This information can also be filled out based on information received when someone scans a barcode. All of this information is then stored in the productModel This model also holds the information needed for the individualListViewController and the ShoppingListViewController.
 
 ### Links
-_Please add links here!_
+- [Pantry View Controller PR](https://github.com/ECS189E/Can-I-graduate-already-LLC/pull/2)
+- [File Organization for Project](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/dd69943ac7aad926bebb258d7282a7c36abdf19f)
+- [Product Model Work](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/cca08a97bf491962e06e4e97d8199e9c229b9e89)
+- [Set up edit item view controller](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/a33b1a1f36549f0ec2332fde1659ef057c32c900)
+- [ProductModel integration for EditItem and PantryView VCs](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/01ebf5cc48b3bfc5bc3e446e03a6af38debcb54b)
+- [Added saving for allergens in the EditItem VC](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/5e43acd88a53992cfd2ef1e7601dcd7d2d5275c8)
