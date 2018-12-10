@@ -2,14 +2,36 @@
 __An app brought to you by Can I Graduate Already, LLC.__
 
 _Special note: In order to make use of the barcode scanning functionality and
-the "contact us" functionality, the app needs to be ran on a physical device._
+the "contact us" & "feedback" functionalities in settings, the app needs to be ran on a physical device._
 
 # Individual Contributions
 ## Adam Ali
 ### Accomplishments
 
+ * RecipesViewController
+   * UITableViewController with expanding cells.
+   * Cell titles are the recipes names, and when a user taps the desired recipe all the ingredients are expanded
+   * I chose to go with the cell expanding implementation because I liked the way it looked
+   * Cell expanding implementation has a few edge cases
+      * If user clicks on "Edit" button on the top left while cells are expanded, they can delete ingredients
+         * Fixed edge case by detracting cells if user clicks on edit
+   * Roulette button on the top right adds a random recipe from mealdb.com using an API call
+      * I originally used the edamam recipe API, but that was a mess and after wasting time with it I just went with mealdb
+ * SettingsViewController
+   * Originally had switches for Colorblind mode, Accessibility mode, Sync to iCloud, Push Notifications, and more.
+      * We didn't end up using iCloud because it required an iOS dev account for $100
+      * Accessibility and Colorblind mode proved to be out of scope
+      * For Push Notification button, thought I needed a dev account but then I learned about Local Notifications last second     so I Implemented local notifications but didn't have enough time to create switch in settings and serialize Settings to get notification witch data.
+   * "Contact Us" and "Support" buttons work on physical device only. They redirect the user to the mail app using pre-filled company emails
+   * P.S wish we could have kept the buttons that didn't lead anywhere. Settings looks horrible now :(
+ * Local Push Notifications
+   * Implemented local push notifications based on expiry date of food item. The library provided by Apple reschedules notifications based on the identifiers so if a user changes expiry date, that notification reschedules because the notification label created for scheduling is based on the product's name.
+ 
+
 ### Links
-_Please add links here!_
+- [RecipesViewController](https://github.com/ECS189E/Can-I-graduate-already-LLC/blob/master/App/App/Controllers/RecipesViewController.swift)
+- [SettingsViewController](https://github.com/ECS189E/Can-I-graduate-already-LLC/blob/master/App/App/Controllers/SettingsViewController.swift)
+- [Expiry Local Push Notifications](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/900ed79d03ccc5ef88fbf9f71efcee0988a0271f)
 
 ## Will Chilcote
 ### Accomplishments
