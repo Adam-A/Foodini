@@ -15,7 +15,7 @@ protocol UpdateListDelegate {
 }
 
 
-class EditItemViewController: UIViewController, UITextFieldDelegate {
+class EditItemViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
     
     @IBOutlet weak var expDateTextField: UITextField!
     @IBOutlet weak var itemNameTextField: UITextField!
@@ -41,6 +41,7 @@ class EditItemViewController: UIViewController, UITextFieldDelegate {
     let options: UNAuthorizationOptions = [.alert, .sound];
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         DoneButton()
         
@@ -102,6 +103,11 @@ class EditItemViewController: UIViewController, UITextFieldDelegate {
             print("No Date")
             return
         }
+        
+        expDateTextField.text =  Product.date(input: expiry)
+        expiredDate = expiry
+        product.calculateExpiry(date: expiry)
+        
         //Local notifications.. Gets date from datepicker, puts it in unix format,
         //gets todays date, subtracts expiry date and today's date and schedules
         //a notification
@@ -162,6 +168,8 @@ class EditItemViewController: UIViewController, UITextFieldDelegate {
         }else{
             expiredLabel.isHidden = true
         }
+        
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -183,8 +191,8 @@ class EditItemViewController: UIViewController, UITextFieldDelegate {
         let nsNumber: NSNumber = NSNumber(value: (Double(text ?? "0.0") ?? 0.0)/100.0)
         
         priceTextField.text = currencyFormatter.string(from: nsNumber)
+        
     }
-
     
     
     @IBAction func RevertTextColor(_ sender: Any) {
@@ -196,6 +204,7 @@ class EditItemViewController: UIViewController, UITextFieldDelegate {
     }
     @objc func Done(sender: UIBarButtonItem){
         // Save Info from Text Fields
+        
         product.expDate = expiredDate
         
         if (itemNameTextField.text != "" && itemNameTextField.text != "Enter Product Name" && quantityTextField.text != "0")
@@ -240,6 +249,7 @@ class EditItemViewController: UIViewController, UITextFieldDelegate {
                 product.containsSoy = false
             }
             
+            view.endEditing(true)
             self.delegate?.ListUpdate(finishedProduct: product, isEditing: editCell)
             
             // If the IndividualListViewController is on the stack, pop to it
@@ -260,10 +270,12 @@ class EditItemViewController: UIViewController, UITextFieldDelegate {
             itemNameTextField.resignFirstResponder()
             itemNameTextField.textColor = .red
             itemNameTextField.text = "Enter Product Name"
+             view.endEditing(true)
         }else if (quantityTextField.text == "0"){
             quantityTextField.resignFirstResponder()
             quantityTextField.textColor = .red
             quantityTextField.text = "Invalid Quantity"
+             view.endEditing(true)
         }
         
     }
