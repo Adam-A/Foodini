@@ -10,7 +10,7 @@ the "contact us" & "feedback" functionalities in settings, the app needs to be r
 
  * RecipesViewController
    * UITableViewController with expanding cells.
-   * Cell titles are the recipes names, and when a user taps the desired recipe all the ingredients are expanded
+   * Cell titles are the recipes names, and when a user taps the desired recipe all the ingredients and measures are expanded
    * I chose to go with the cell expanding implementation because I liked the way it looked
    * Cell expanding implementation has a few edge cases
       * If user clicks on "Edit" button on the top left while cells are expanded, they can delete ingredients
