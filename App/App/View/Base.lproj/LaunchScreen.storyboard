@@ -30,6 +30,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="132" id="Cjz-kh-7PG"/>
                                     <constraint firstAttribute="height" constant="124" id="MP4-Hw-Tso"/>
+                                    <constraint firstAttribute="width" secondItem="Gzm-3x-h2J" secondAttribute="height" multiplier="33:31" id="waO-uu-7GD"/>
                                 </constraints>
                             </imageView>
                         </subviews>

@@ -13,7 +13,6 @@ import DZNEmptyDataSet
 
 class PantryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdateListDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
-    //var product = Product()
     var list = List()
     
     //Shows the Appropriate amount of Cells
@@ -31,9 +30,6 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         // Set detail label to the items in the list
         cell.detailTextLabel?.text = "\(list.products[indexPath.row].quantity)"
         
-//        let cells = PantryTableView.visibleCells(in: 1)
-//        UIView.animate(views: cells, animations: [rotateAnimation, fadeAnimation])
-        
         return cell
     }
     
@@ -47,7 +43,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         //Push current VC onto backstack
         viewController.product = self.list.products[indexPath.row]
         viewController.editCell = true
-        //viewController.isEditing = true
+
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -114,7 +110,6 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
         }
         // Serialize data
         SerializeData()
-        //self.PantryTableView.reloadData()
     }
     
     func ListUpdate(finishedProduct: Product, isEditing: Bool) {
@@ -153,7 +148,6 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
                     let product = Product.init(productName: text)
                     self.list.products.append(product)
 
-                    //self.pantryItems.append(self.product)
                     self.SerializeData()
                     self.PantryTableView.reloadData()
                 }
@@ -170,8 +164,6 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
                 
                 // Init product using text field as name
                 let product = Product.init(productName: text)
-                // Add product to table view
-                //self.list.products.append(self.product)
                 
                 // Create and push EditItemViewController
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -182,7 +174,6 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
                 viewController.product.productName = text
                 viewController.product = product
                 viewController.editCell = false
-                //viewController.isEditing = false
                 
                 self.navigationController?.pushViewController(viewController, animated: true)
                 
@@ -198,8 +189,6 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
             
             // Init product
             let product = Product.init(productName: "")
-            // Add product to table view
-            //self.list.products.append(self.product)
             
             // Create and push BarcodeViewController
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -226,7 +215,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
          // Create the pantry VC
          let storyboard = UIStoryboard(name: "Main", bundle: nil)
          let viewController = storyboard.instantiateViewController(withIdentifier: "shoppingListViewController") as! ShoppingListViewController
-         //viewController.delegate = self
+
           //Push current VC onto backstack
          self.navigationController?.pushViewController(viewController, animated: false)
     }
@@ -238,7 +227,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
          // Create the pantry VC
          let storyboard = UIStoryboard(name: "Main", bundle: nil)
          let viewController = storyboard.instantiateViewController(withIdentifier: "RecipesViewController") as! RecipesViewController
-         //viewController.delegate = self
+
          // Push current VC onto backstack
          self.navigationController?.pushViewController(viewController, animated: false)
         
@@ -251,7 +240,7 @@ class PantryViewController: UIViewController, UITableViewDataSource, UITableView
          // Create the pantry VC
          let storyboard = UIStoryboard(name: "Main", bundle: nil)
          let viewController = storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
-         //viewController.delegate = self
+
          // Push current VC onto backstack
          self.navigationController?.pushViewController(viewController, animated: false)
         

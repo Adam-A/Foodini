@@ -137,24 +137,6 @@ class EditItemViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        if textField == priceTextField{
-//            let text = priceTextField.text?.replacingOccurrences(of: currencyFormatter.currencySymbol, with: "").replacingOccurrences(of: currencyFormatter.groupingSeparator, with: "").replacingOccurrences(of: currencyFormatter.decimalSeparator, with: "")
-//
-//            let nsNumber: NSNumber = NSNumber(value: Double(text ?? "0.0") ?? 0.0)
-//
-//            //priceTextField.text = currencyFormatter.string(from: NSNumber(text as Double))
-//
-//
-//            //priceTextField.text = currencyFormatter.string(from: nsNumber)
-//            textField.text = currencyFormatter.string(from: nsNumber)
-//            return false
-//        }
-//        else{
-//            return true
-//        }
-//    }
-    
     @objc func datePickerValueChanged(sender: UIDatePicker){
         
         let formatter = DateFormatter()
@@ -221,7 +203,6 @@ class EditItemViewController: UIViewController, UITextFieldDelegate {
             product.productName = itemNameTextField.text ?? "No Product Name"
             product.brandName = brandTextField.text ?? "No Product Name"
             product.quantity = Int(quantityTextField.text ?? "1") ?? 1
-            //product.price = Double(priceTextField.text ?? "0.00") ?? 0.00
             product.price = priceTextField.text ?? "No Price"
             
             //save Palm

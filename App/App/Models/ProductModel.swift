@@ -171,8 +171,7 @@ class Product: Codable {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
-        
-        //dateFormatter.locale = Locale(identifier: "en_US")
+    
         let result = dateFormatter.string(from: input)
         return result
     }

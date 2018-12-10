@@ -5,8 +5,6 @@
 //  Created by Mark Nickerson on 11/17/18.
 //  Copyright © 2018 Can I Graduate Already, LLC. All rights reserved.
 //
-// TODO:
-// [] Serilization
 
 import UIKit
 import DZNEmptyDataSet
@@ -133,7 +131,7 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
         // Create the pantry VC
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "PantryViewController") as! PantryViewController
-        //viewController.delegate = self
+
         // Push current VC onto backstack
         self.navigationController?.pushViewController(viewController, animated: false)
  
@@ -145,7 +143,7 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
          // Create the pantry VC
          let storyboard = UIStoryboard(name: "Main", bundle: nil)
          let viewController = storyboard.instantiateViewController(withIdentifier: "RecipesViewController") as! RecipesViewController
-         //viewController.delegate = self
+
          // Push current VC onto backstack
          self.navigationController?.pushViewController(viewController, animated: false)
         
@@ -157,7 +155,7 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
          // Create the pantry VC
          let storyboard = UIStoryboard(name: "Main", bundle: nil)
          let viewController = storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
-         //viewController.delegate = self
+        
          // Push current VC onto backstack
          self.navigationController?.pushViewController(viewController, animated: false)
          
@@ -235,19 +233,9 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, UITab
             }
             
             self.SerializeData()
-//            self.ListUpdate(finishedProduct: self.list.products[indexPath.row], isEditing: true)
-            //self.SerializeData(listToSave: self.list)
-            
-            // Each time you check an item off the shopping list, load the pantry and append to the list
-            // Then save the pantry list list
-//            let loadedList = self.LoadData()
-//            if let loadedList = loadedList{
-//                loadedList.products.append(self.list.products[indexPath.row])
-//                self.SerializeData(listToSave: loadedList)
-//            }
-            
             success(true)
         })
+        
         addItem.backgroundColor = UIColor.blue
         
         return UISwipeActionsConfiguration(actions: [addItem])
