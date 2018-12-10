@@ -33,11 +33,24 @@ the "contact us" & "feedback" functionalities in settings, the app needs to be r
 - [SettingsViewController](https://github.com/ECS189E/Can-I-graduate-already-LLC/blob/master/App/App/Controllers/SettingsViewController.swift)
 - [Expiry Local Push Notifications](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/900ed79d03ccc5ef88fbf9f71efcee0988a0271f)
 
-## Will Chilcote
+## William Chilcote
 ### Accomplishments
+- Built the IndividualListViewController, and linked to the the master list view
+- Implemented the Tab Bar Controller to change between root level views, which had previously been handled manually with individual buttons
+- Added various constraints to various views to assure it would format properly on all devices
+- Designed, created, and implemented the app icon and the four glyphs displayed in the Tab Bar for all resolutions (x2 and x3)
+- Added ability to swipe left-to-right on list contents to mark it as bought and increase the pantry quantity
+- Added ability to swipe left-to-right on an individual list in the master list view to reset all items from their purchased state
+- Designed and implemented an application-wide color scheme, consisting of a dark red tab bar and navigation controllers, white text and selections, and light gray buttons.
 
 ### Links
-_Please add links here!_
+- [Individual List View Controller](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/66d704d8caae14a2946d68fba427e960995151e5)
+- [Tab Bar Controller](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/4dced91dca1efc23208895c3583f5d178f75d300)
+- [Individual List Purchase Enhancements & App Icon](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/1fdc4ed0f948a83287a79af2ced36e796b7c346c)
+- [Added Glyphs](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/c4688c1235d5e53451a59aab1daa9d40173f6181)
+- [Implemented Red Theme](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/db7dbce0a26b16a97bb59f0fc6740424ad1950f1)
+- [Added Reset List Functionality](https://github.com/ECS189E/Can-I-graduate-already-LLC/commit/f70cc6b65572fdeb2f7d27fce66cd00dacb12505)
+
 
 ## Mark Nickerson
 ### Accomplishments
